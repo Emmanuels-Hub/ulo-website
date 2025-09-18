@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>ULO AI - Best Academic Learning App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .sidebar {
+            transition: transform 0.3s ease-out;
+            transform: translateX(100%);
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.5);
+            transition: opacity 0.3s ease-out;
+        }
+
+        .overlay.hidden {
+            display: none;
+            opacity: 0;
+        }
+
+        @keyframes bounce-slow {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .animate-bounce-slow {
+            animation: bounce-slow 5s infinite;
+        }
+
+        .animate-spin-slow {
+            animation: spin 12s linear infinite;
+        }
+
+        .clip-triangle {
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-900">
+
+    <!-- NAVBAR -->
+    <header id="navbar" class="fixed w-full top-0 left-0 z-50 bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-8 flex items-center justify-between py-4">
+
+            <!-- Logo -->
+            <div class="flex items-center space-x-2">
+                <img src="./img/cropped.png" alt="ULO Logo" class="w-20" />
+            </div>
+
+            <!-- Links (Desktop) -->
+            <nav class="hidden md:flex space-x-8 text-gray-800 font-medium">
+                <a href="#" class="hover:text-yellow-400 text-yellow-400">Home</a>
+                <a href="#features" class="hover:text-yellow-400">Features</a>
+                <a href="#pricing" class="hover:text-yellow-400">Pricing</a>
+                <a href="#about" class="hover:text-yellow-400">About Us</a>
+                <a href="#contact" class="hover:text-yellow-400">Contact</a>
+                <a href="#policy" class="hover:text-yellow-400">Privacy Policy</a>
+            </nav>
+
+            <!-- Right -->
+            <div class="flex items-center space-x-8">
+                <div class="hidden lg:block text-right">
+                    <p class="text-sm text-gray-500">For Support</p>
+                    <a href="tel:+18881234567" class="text-yellow-400 font-semibold">+1 (888) 123-4567</a>
+                </div>
+                <a href="#signup"
+                    class="hidden md:block bg-yellow-400 text-white px-5 py-2 rounded-full font-medium hover:bg-purple-700">
+                    Sign Up Free
+                </a>
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-800">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="relative bg-white py-20 pt-40" id="home">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+            <div>
+                <div class="flex items-center space-x-4 mb-4">
+                    <span class="text-lg font-bold text-purple-700">#1</span>
+                    <span class="text-gray-700">Academic Software</span>
+                </div>
+                <h1 class="text-5xl font-extrabold leading-tight mb-6">
+                    AI-Powered <span class="text-yellow-400">Learning</span> App
+                </h1>
+                <p class="text-gray-600 mb-8">
+                    ULO AI is your personalized academic companion. With AI chat tutoring,
+                    question generation, and exam simulations, it transforms the way
+                    students learn and prepare.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-4 mb-6">
+                    <a href="#download"
+                        class="bg-yellow-400 hover:bg-purple-700 text-white px-6 py-3 rounded-lg shadow-lg font-medium flex items-center space-x-2">
+                        <span>Download Free</span>
+                        <i class="fa fa-arrow-right"></i>
+                    </a>
+                    <span class="text-gray-500 text-sm cursor-pointer">Learn More →</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <i class="fa fa-star text-yellow-400"></i>
+                    <span class="text-gray-700">4.4 Rated App</span>
+                </div>
+            </div>
+            <div class="relative">
+                <img src="https://apptek.radiantthemes.com/wp-content/uploads/2022/12/mobile-device-banner.png"
+                    class="w-full max-w-lg mx-auto" alt="ULO App" />
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black text-white py-10">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <img src="./img/cropped.png" alt="ULO Logo" class="w-20 mb-4" />
+                <p class="text-gray-400">ULO AI is designed to empower students with AI-driven tools for smarter
+                    learning.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-3">Quick Links</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#features" class="hover:text-yellow-400">Features</a></li>
+                    <li><a href="#pricing" class="hover:text-yellow-400">Pricing</a></li>
+                    <li><a href="#about" class="hover:text-yellow-400">About Us</a></li>
+                    <li><a href="#contact" class="hover:text-yellow-400">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-3">Contact</h4>
+                <p class="text-gray-400">Email: support@uloai.com</p>
+                <p class="text-gray-400">Phone: +1 (888) 123-4567</p>
+                <div class="flex space-x-4 mt-4">
+                    <a href="#" class="text-yellow-400"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-yellow-400"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-yellow-400"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8 text-center text-gray-500 text-sm">
+            © 2025 ULO AI. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- JS for mobile menu -->
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const sidebar = document.getElementById('mobile-sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const closeBtn = document.getElementById('close-sidebar-button');
+
+        menuBtn?.addEventListener('click', () => {
+            sidebar.classList.add('open');
+            overlay.classList.remove('hidden');
+        });
+
+        closeBtn?.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.add('hidden');
+        });
+    </script>
+
+</body>
+
+</html>

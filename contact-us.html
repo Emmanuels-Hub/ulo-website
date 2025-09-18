@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - ULO AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        xintegrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Responsive Sidebar Menu */
+        .sidebar {
+            transition: transform 0.3s ease-out;
+            transform: translateX(100%);
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.5);
+            transition: opacity 0.3s ease-out;
+        }
+
+        .overlay.hidden {
+            display: none;
+            opacity: 0;
+        }
+
+        @keyframes bounce-slow {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .animate-bounce-slow {
+            animation: bounce-slow 5s infinite;
+        }
+
+        .animate-spin-slow {
+            animation: spin 12s linear infinite;
+        }
+
+        .clip-triangle {
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Simple animation for elements fading in */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        /* Staggered animation delay */
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-5 {
+            animation-delay: 0.5s;
+        }
+    </style>
+
+</head>
+
+<body class="bg-white text-gray-800">
+
+    <!-- Navbar -->
+    <header id="navbar" class="fixed w-full top-0 left-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-8 flex items-center justify-between py-4">
+
+            <!-- Logo -->
+            <div class="flex items-center space-x-2">
+                <h1 class="text-2xl font-bold text-gray-900">
+                </h1>
+                <div>
+                    <img src="./img/cropped.png" class="w-20" />
+                </div>
+            </div>
+
+            <!-- Nav Links (Desktop Only) -->
+            <nav class="hidden md:flex space-x-8 text-gray-800 font-medium">
+                <a href="home.html" class="hover:text-yellow-300 text-[#ffde59] transition">Home</a>
+                <a href="pricing.html" class="hover:text-yellow-300 transition">Pricing</a>
+                <a href="#" class="hover:text-yellow-300 transition">About Us</a>
+                <a href="#" class="hover:text-yellow-300 transition">Contact</a>
+                <a href="#" class="hover:text-yellow-300 transition">Privacy Policy / Terms</a>
+            </nav>
+
+            <!-- Right Section -->
+            <div class="flex items-center space-x-8">
+                <!-- Support Info (hidden on tablet, visible on desktop) -->
+                <div class="hidden lg:block text-right">
+                    <p class="text-sm text-gray-500">For Support</p>
+                    <a href="tel:+18881234567" class="text-yellow-300 font-semibold">+1 (888) 123-4567</a>
+                </div>
+
+                <!-- Button (Desktop Only) -->
+                <a href="#signup"
+                    class="hidden md:block bg-yellow-300 text-white px-5 py-2 rounded-full font-medium hover:bg-purple-800 transition">
+                    Sign Up Free
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-800 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Sidebar Menu -->
+    <div id="sidebar-overlay" class="fixed inset-0 z-40 bg-black bg-opacity-50 hidden"></div>
+    <div id="mobile-sidebar"
+        class="sidebar fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 p-6 flex flex-col space-y-4">
+        <button id="close-sidebar-button" class="self-start text-gray-800 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <nav class="flex flex-col space-y-4 font-medium text-gray-800">
+            <a href="home.html" class="hover:text-yellow-300 transition">Home</a>
+            <a href="pricing.html" class="hover:text-yellow-300 transition">Pricing</a>
+            <a href="#" class="hover:text-yellow-300 transition">About Us</a>
+            <a href="#" class="hover:text-yellow-300 transition">Contact</a>
+            <a href="#" class="hover:text-yellow-300 transition">Privacy Policy / Terms</a>
+            <a href="#signup"
+                class="bg-yellow-300 text-white px-5 py-2 rounded-full font-medium hover:bg-purple-800 transition text-center">
+                Sign Up Free
+            </a>
+        </nav>
+    </div>
+
+    <section class="relative py-20 bg-gradient-to-r from-yellow-300 via-purple-200 to-yellow-100 text-gray-900 ">
+        <div class="container mx-auto px-6 relative z-10">
+            <!-- Heading -->
+            <div class="text-center mb-16 mt-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Contact Us</h2>
+                <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+                    Have questions, feedback, or want to partner with us?
+                    We'd love to hear from you!
+                </p>
+            </div>
+
+            <!-- Grid Layout -->
+            <div class="grid md:grid-cols-2 gap-10">
+
+                <!-- Contact Form -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg">
+                    <h3 class="text-2xl font-semibold mb-6 text-gray-900">Send us a message</h3>
+                    <form action="#" method="POST" class="space-y-5">
+                        <div>
+                            <label class="block text-left text-sm font-medium text-gray-700">Name</label>
+                            <input type="text" name="name" placeholder="Your full name"
+                                class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none" />
+                        </div>
+                        <div>
+                            <label class="block text-left text-sm font-medium text-gray-700">Email</label>
+                            <input type="email" name="email" placeholder="Your email address"
+                                class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none" />
+                        </div>
+                        <div>
+                            <label class="block text-left text-sm font-medium text-gray-700">Message</label>
+                            <textarea name="message" rows="5" placeholder="Write your message here..."
+                                class="w-full mt-2 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none"></textarea>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-yellow-400 text-gray-900 font-semibold py-3 rounded-lg shadow-md hover:bg-yellow-300 hover:shadow-xl transition transform hover:scale-105">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Details -->
+                <div class="flex flex-col justify-center space-y-6">
+                    <div class="p-6 bg-white rounded-2xl shadow flex items-center space-x-4">
+                        <div class="bg-yellow-300 p-3 rounded-full text-white">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Phone</h4>
+                            <p class="text-gray-700">+1 (888) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-white rounded-2xl shadow flex items-center space-x-4">
+                        <div class="bg-purple-400 p-3 rounded-full text-white">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Email</h4>
+                            <p class="text-gray-700">support@uloai.com</p>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-white rounded-2xl shadow flex items-center space-x-4">
+                        <div class="bg-yellow-400 p-3 rounded-full text-white">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Address</h4>
+                            <p class="text-gray-700">123 Learning Lane, Innovation City</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Decorative Bubbles -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute w-72 h-72 bg-purple-200/40 rounded-full -top-10 -left-20 blur-3xl"></div>
+            <div class="absolute w-80 h-80 bg-yellow-300/30 rounded-full -bottom-20 -right-20 blur-3xl"></div>
+        </div>
+    </section>
+
+    <footer class="bg-gradient-to-r from-yellow-100 to-purple-100 py-10">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+
+            <!-- Logo & Text -->
+            <div>
+                <img src="./img/ulo removed bg.png" alt="Ulo Logo" class="w-28 mx-auto md:mx-0">
+                <p class="mt-3 text-gray-600 text-sm">
+                    Smart tools for teams and businesses. Organize, plan, and grow with ease.
+                </p>
+
+                <!-- Social Icons -->
+                <div class="flex justify-center md:justify-start gap-4 mt-5">
+                    <a href="#"
+                        class="p-2 border-2 border-yellow-300 rounded-full text-yellow-300 hover:bg-yellow-300 hover:text-white transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#"
+                        class="p-2 border-2 border-yellow-300 rounded-full text-yellow-300 hover:bg-yellow-300 hover:text-white transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#"
+                        class="p-2 border-2 border-yellow-300 rounded-full text-yellow-300 hover:bg-yellow-300 hover:text-white transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Pages</h3>
+                <ul class="space-y-2 text-gray-600">
+                    <li><a href="home.html" class="hover:text-yellow-300 transition">Home</a></li>
+                    <li><a href="pricing.html" class="hover:text-yellow-300 transition">Pricing</a></li>
+                    <li><a href="#" class="hover:text-yellow-300 transition">About Us</a></li>
+                    <li><a href="#" class="hover:text-yellow-300 transition">Contact</a></li>
+                    <li><a href="#" class="hover:text-yellow-300 transition">Privacy Policy / Terms</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Get In Touch</h3>
+                <p class="flex items-center justify-center md:justify-start gap-2 text-gray-600">
+                    <i class="fas fa-phone-alt text-yellow-300"></i>
+                    +234 800 123 4567
+                </p>
+                <p class="flex items-center justify-center md:justify-start gap-2 text-gray-600 mt-2">
+                    <i class="fas fa-envelope text-yellow-300"></i>
+                    support@ulo.com
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- Back To Top Button -->
+    <button id="backToTopBtn"
+        class="hidden fixed bottom-6 right-6 z-50 bg-yellow-300 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-pink-700 transition">
+        ↑
+    </button>
+    <!-- done from up here -->
+
+</body>
+<script>
+    // Show/Hide Button on Scroll
+    const backToTopBtn = document.getElementById("backToTopBtn");
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.remove("hidden");
+        } else {
+            backToTopBtn.classList.add("hidden");
+        }
+    });
+
+    // Scroll Smooth to Top
+    backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+
+    // Navbar Shadow on Scroll
+    const navbar = document.getElementById("navbar");
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add("bg-white", "shadow");
+        } else {
+            navbar.classList.remove("bg-white", "shadow");
+        }
+    });
+
+    // Sidebar Menu Logic
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileSidebar = document.getElementById('mobile-sidebar');
+    const closeSidebarButton = document.getElementById('close-sidebar-button');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileSidebar.classList.add('open');
+        sidebarOverlay.classList.remove('hidden');
+    });
+
+    closeSidebarButton.addEventListener('click', () => {
+        mobileSidebar.classList.remove('open');
+        sidebarOverlay.classList.add('hidden');
+    });
+
+    sidebarOverlay.addEventListener('click', () => {
+        mobileSidebar.classList.remove('open');
+        sidebarOverlay.classList.add('hidden');
+    });
+</script>
+
+</html>

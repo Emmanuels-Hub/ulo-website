@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - ULO AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        xintegrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Responsive Sidebar Menu */
+        .sidebar {
+            transition: transform 0.3s ease-out;
+            transform: translateX(100%);
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.5);
+            transition: opacity 0.3s ease-out;
+        }
+
+        .overlay.hidden {
+            display: none;
+            opacity: 0;
+        }
+
+        @keyframes bounce-slow {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .animate-bounce-slow {
+            animation: bounce-slow 5s infinite;
+        }
+
+        .animate-spin-slow {
+            animation: spin 12s linear infinite;
+        }
+
+        .clip-triangle {
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Simple animation for elements fading in */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        /* Staggered animation delay */
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-5 {
+            animation-delay: 0.5s;
+        }
+    </style>
+
+</head>
+
+<body class="bg-white text-gray-800">
+
+    <!-- Navbar -->
+    <header id="navbar" class="fixed w-full top-0 left-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-8 flex items-center justify-between py-4">
+
+            <!-- Logo -->
+            <div class="flex items-center space-x-2">
+                <h1 class="text-2xl font-bold text-gray-900">
+                </h1>
+                <div>
+                    <img src="./img/cropped.png" class="w-20" />
+                </div>
+            </div>
+
+            <!-- Nav Links (Desktop Only) -->
+            <nav class="hidden md:flex space-x-8 text-gray-800 font-medium">
+                <a href="home.html" class="hover:text-yellow-300 text-[#ffde59] transition">Home</a>
+                <a href="pricing.html" class="hover:text-yellow-300 transition">Pricing</a>
+                <a href="#" class="hover:text-yellow-300 transition">About Us</a>
+                <a href="#" class="hover:text-yellow-300 transition">Contact</a>
+                <a href="#" class="hover:text-yellow-300 transition">Privacy Policy / Terms</a>
+            </nav>
+
+            <!-- Right Section -->
+            <div class="flex items-center space-x-8">
+                <!-- Support Info (hidden on tablet, visible on desktop) -->
+                <div class="hidden lg:block text-right">
+                    <p class="text-sm text-gray-500">For Support</p>
+                    <a href="tel:+18881234567" class="text-yellow-300 font-semibold">+1 (888) 123-4567</a>
+                </div>
+
+                <!-- Button (Desktop Only) -->
+                <a href="#signup"
+                    class="hidden md:block bg-yellow-300 text-white px-5 py-2 rounded-full font-medium hover:bg-purple-800 transition">
+                    Sign Up Free
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-800 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Sidebar Menu -->
+    <div id="sidebar-overlay" class="fixed inset-0 z-40 bg-black bg-opacity-50 hidden"></div>
+    <div id="mobile-sidebar"
+        class="sidebar fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 p-6 flex flex-col space-y-4">
+        <button id="close-sidebar-button" class="self-start text-gray-800 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <nav class="flex flex-col space-y-4 font-medium text-gray-800">
+            <a href="home.html" class="hover:text-yellow-300 transition">Home</a>
+            <a href="pricing.html" class="hover:text-yellow-300 transition">Pricing</a>
+            <a href="#" class="hover:text-yellow-300 transition">About Us</a>
+            <a href="#" class="hover:text-yellow-300 transition">Contact</a>
+            <a href="#" class="hover:text-yellow-300 transition">Privacy Policy / Terms</a>
+            <a href="#signup"
+                class="bg-yellow-300 text-white px-5 py-2 rounded-full font-medium hover:bg-purple-800 transition text-center">
+                Sign Up Free
+            </a>
+        </nav>
+    </div>
+
+
+    <!-- Hero Section -->
+    <section class="relative text-black pt-40 py-32 overflow-hidden">
+        <!-- Decorative bubbles -->
+        <div
+            class="absolute top-10 left-10 w-40 h-40 bg-purple-200 rounded-full mix-blend-multiply filter blur-2xl opacity-60 animate-pulse">
+        </div>
+        <div
+            class="absolute bottom-10 right-20 w-56 h-56 bg-yellow-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-ping">
+        </div>
+        <div
+            class="absolute top-1/2 left-1/3 w-32 h-32 bg-pink-200 rounded-full mix-blend-multiply filter blur-2xl opacity-60">
+        </div>
+
+        <!-- Content -->
+        <div class="relative container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 relative z-10">About ULO AI</h1>
+            <p class="max-w-2xl mx-auto text-lg relative z-10">
+                Empowering students, teachers, and schools with the next generation of AI-driven academic tools.
+            </p>
+        </div>
+    </section>
+
+
+    <section class="container mx-auto px-6 py-16 md:py-24">
+        <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+
+            <!-- Left Column: Text Content -->
+            <div class="space-y-10">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 fade-in">
+                    About <span class="text-yellow-300">Ulo</span>
+                </h2>
+
+
+                <!-- Mission -->
+                <div class="flex items-start space-x-5 fade-in delay-1 opacity-0">
+                    <!-- Icon Bubble -->
+                    <div class="flex-shrink-0">
+                        <div
+                            class="bg-gradient-to-r from-yellow-300 to-purple-200 text-yellow-900 rounded-full p-3 shadow-md">
+                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 21a9.004 9.004 0 008.25-6.316a9.004 9.004 0 00-8.25-6.316a9.004 9.004 0 00-8.25 6.316a9.004 9.004 0 008.25 6.316z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 12a3 3 0 100-6 3 3 0 000 6z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M19.5 12c0-4.006-3.03-7.25-6.75-7.25S6 7.994 6 12s3.03 7.25 6.75 7.25S19.5 16.006 19.5 12z" />
+                            </svg>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Text -->
+                    <div>
+                        <p class="text-gray-700 leading-relaxed">
+                            <strong class="text-gray-900">Our Mission</strong> is to
+                            revolutionize the learning experience by equipping students with
+                            intelligent, affordable, and accessible AI-powered tools that
+                            support them <span class="text-yellow-500 font-semibold">anytime</span> and
+                            <span class="text-purple-500 font-semibold">anywhere</span>.
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- Vision -->
+                <div class="flex items-start space-x-5 fade-in delay-2 opacity-0">
+                    <div class="flex-shrink-0">
+                        <div class="bg-yellow-300 text-yellow-800 rounded-full p-3">
+                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M2.036 12.322a1.012 1.012 0 010-.639l7.5-10.5a1.012 1.012 0 011.634.214l2.122 3.292a1.012 1.012 0 001.087 1.087l3.292 2.122a1.012 1.012 0 01.214 1.634l-10.5 7.5a1.012 1.012 0 01-.639 0L2.036 12.322z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-gray-700 leading-relaxed">
+                            <strong class="text-gray-900">Our Vision</strong> is to become the leading
+                            AI-powered education companion in Africa and beyond, ensuring that every learner
+                            — regardless of location or background — has access to personalized academic support.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Info -->
+                <div class="flex items-start space-x-5 fade-in delay-3 opacity-0">
+                    <div class="flex-shrink-0">
+                        <div class="bg-yellow-300 text-yellow-800 rounded-full p-3">
+                            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-gray-700 leading-relaxed">
+                            ULO AI is currently headquartered in Nigeria and is building its reach across Africa,
+                            aiming to empower millions of students through digital learning innovation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Image -->
+            <div class="flex items-center justify-center fade-in delay-4 opacity-0">
+                <div class="relative w-full max-w-md lg:max-w-lg">
+                    <!-- Decorative shapes -->
+                    <div class="absolute -top-8 -left-8 w-24 h-24 bg-yellow-100 rounded-full opacity-50">
+                    </div>
+                    <div class="absolute -bottom-8 -right-8 w-32 h-32 bg-purple-100 rounded-full opacity-50">
+                    </div>
+                    <div class="absolute top-1/2 -right-12 w-16 h-16 bg-pink-100 rounded-full opacity-50">
+                    </div>
+
+                    <!-- Actual image -->
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2000&auto=format&fit=crop"
+                        alt="People booking services on mobile devices"
+                        class="rounded-2xl shadow-2xl w-full h-auto object-cover relative z-10" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission -->
+    <section class="py-20 bg-white text-gray-800">
+        <div class="container mx-auto px-6 text-center">
+            <!-- Title -->
+            <h2 class="text-4xl font-bold mb-6">Our Mission</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-yellow-400 to-purple-400 mx-auto mb-12 rounded"></div>
+
+            <!-- Grid -->
+            <div class="grid md:grid-cols-3 gap-12 text-center">
+                <!-- Vision -->
+                <div class="p-6 bg-gray-50 rounded-2xl shadow-md hover:shadow-xl transition duration-300">
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-purple-100 text-purple-600 p-4 rounded-full">
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 4.5c2.485 0 4.5 2.015 4.5 4.5S14.485 13.5 12 13.5 7.5 11.485 7.5 9 9.515 4.5 12 4.5z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M19.5 12c0 4.418-3.582 8-8 8s-8-3.582-8-8" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Vision</h3>
+                    <p class="text-gray-600">To create the most trusted AI-powered academic ecosystem that empowers
+                        students, teachers, and schools worldwide.</p>
+                </div>
+
+                <!-- Mission -->
+                <div class="p-6 bg-gray-50 rounded-2xl shadow-md hover:shadow-xl transition duration-300">
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-yellow-100 text-yellow-600 p-4 rounded-full">
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 21a9 9 0 100-18 9 9 0 000 18z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75l2.25 2.25" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Mission</h3>
+                    <p class="text-gray-600">To revolutionize learning by making AI-driven academic tools affordable,
+                        accessible, and intelligent for every student.</p>
+                </div>
+
+                <!-- Goal -->
+                <div class="p-6 bg-gray-50 rounded-2xl shadow-md hover:shadow-xl transition duration-300">
+                    <div class="flex justify-center mb-4">
+                        <div class="bg-red-100 text-red-600 p-4 rounded-full">
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Goal</h3>
+                    <p class="text-gray-600">To become the #1 go-to platform for smart academic support, enhancing
+                        productivity and success for learners worldwide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Values -->
+
+
+    <section class="relative bg-gradient-to-r from-purple-50 via-white to-yellow-50 py-20">
+        <div class="container mx-auto px-6">
+            <!-- Title -->
+            <h2 class="text-4xl font-bold text-center text-gray-900 mb-4">Our Core Values</h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-yellow-400 to-purple-500 mx-auto mb-12 rounded"></div>
+
+            <!-- Grid -->
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Innovation -->
+                <div
+                    class="group p-8 bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 border border-transparent hover:border-purple-200">
+                    <div class="flex justify-center mb-5">
+                        <div
+                            class="bg-gradient-to-r from-purple-100 to-yellow-100 text-purple-600 p-4 rounded-full group-hover:scale-110 transition transform">
+                            <!-- Lightbulb = Innovation -->
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 3c3.314 0 6 2.686 6 6 0 2.007-.992 3.78-2.497 4.864A3.987 3.987 0 0115 17h-6c0-1.306.627-2.47 1.497-3.136A5.985 5.985 0 016 9c0-3.314 2.686-6 6-6z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 21h6m-3-4v4" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Innovation</h3>
+                    <p class="text-gray-600">We push boundaries with <span class="font-medium text-gray-900">AI-driven
+                            solutions</span> that transform learning and teaching in schools.</p>
+                </div>
+
+                <!-- Accessibility -->
+                <div
+                    class="group p-8 bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 border border-transparent hover:border-yellow-200">
+                    <div class="flex justify-center mb-5">
+                        <div
+                            class="bg-gradient-to-r from-yellow-100 to-purple-100 text-yellow-600 p-4 rounded-full group-hover:scale-110 transition transform">
+                            <!-- Globe = Accessibility -->
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 2.25c5.385 0 9.75 4.365 9.75 9.75S17.385 21.75 12 21.75 2.25 17.385 2.25 12 6.615 2.25 12 2.25z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 2.25c3.728 0 6.75 4.365 6.75 9.75s-3.022 9.75-6.75 9.75S5.25 17.385 5.25 12 8.272 2.25 12 2.25z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Accessibility</h3>
+                    <p class="text-gray-600">Our tools are <span class="font-medium text-gray-900">inclusive, simple,
+                            and affordable</span>, ensuring every school can benefit from ULO AI.</p>
+                </div>
+
+                <!-- Excellence -->
+                <div
+                    class="group p-8 bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 border border-transparent hover:border-red-200">
+                    <div class="flex justify-center mb-5">
+                        <div
+                            class="bg-gradient-to-r from-red-100 to-purple-100 text-red-600 p-4 rounded-full group-hover:scale-110 transition transform">
+                            <!-- Trophy = Excellence -->
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="1.5">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M8 21h8m-4 0v-4m7-13h-3v5a5 5 0 01-10 0V4H5a2 2 0 00-2 2v1a7 7 0 007 7h4a7 7 0 007-7V6a2 2 0 00-2-2z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Excellence</h3>
+                    <p class="text-gray-600">We deliver <span class="font-medium text-gray-900">high-quality, reliable
+                            AI tools</span> that support both students and educators worldwide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Team -->
+
+
+    <section class="py-20 bg-gradient-to-b from-gray-50 to-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-12 text-gray-800">
+                Meet Our Team
+            </h2>
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-10">
+
+                <!-- CEO -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 hover:scale-105 transform transition">
+                    <img src="https://www.bing.com/th/id/OIP.14_720PYM0ABAuacMCqdxwHaLH?w=160&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2"
+                        alt="Jane Doe"
+                        class="w-28 h-28 mx-auto mb-4 rounded-full border-4 border-indigo-200 object-cover">
+                    <h3 class="text-xl font-semibold text-gray-800">Emmanuel Audu</h3>
+                    <p class="text-sm text-gray-600">CEO & Founder</p>
+                </div>
+
+                <!-- CTO Optimus Prime -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 hover:scale-105 transform transition">
+                    <img src="https://www.bing.com/th/id/OIP.4kIRdvf-1FEJyiMqSioMNQHaEK?w=245&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2"
+                        alt="Optimus Prime"
+                        class="w-28 h-28 mx-auto mb-4 rounded-full border-4 border-indigo-200 object-cover">
+                    <h3 class="text-xl font-semibold text-gray-800">Emmanuel Audu</h3>
+                    <p class="text-sm text-gray-600">CTO</p>
+                </div>
+
+                <!-- Head of Product -->
+                <div class="bg-white rounded-2xl shadow-lg p-6 hover:scale-105 transform transition">
+                    <img src="https://www.bing.com/th/id/OIP.oWYpekgW0mnImOgzRmwaDAHaEo?w=240&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2"
+                        alt="Amaka Chukwu"
+                        class="w-28 h-28 mx-auto mb-4 rounded-full border-4 border-indigo-200 object-cover">
+                    <h3 class="text-xl font-semibold text-gray-800">Crane</h3>
+                    <p class="text-sm text-gray-600">Head of Product</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CTA -->
+    <section class=" text-black py-16">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-4">Join the Future of Learning</h2>
+            <p class="mb-6">Be part of the movement to reshape education with AI-powered tools.</p>
+            <a href="/contact"
+                class="bg-white text-indigo-600 px-6 py-3 rounded-lg font-semibold shadow hover:bg-gray-100 transition">Contact
+                Us</a>
+        </div>
+    </section>
+
+    <section class="relative py-20 bg-gradient-to-r from-yellow-300 via-purple-200 to-yellow-200 text-gray-900">
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                Join the Future of Learning
+            </h2>
+            <p class="text-lg max-w-2xl mx-auto mb-8 text-gray-700">
+                Be part of the movement to reshape education with AI-powered tools built for students, teachers, and
+                schools.
+            </p>
+            <a href="/contact-us"
+                class="inline-block bg-yellow-400 text-gray-900 px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:bg-yellow-300 transition transform hover:scale-105">
+                Contact Us
+            </a>
+        </div>
+
+        <!-- Decorative bubbles -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute w-72 h-72 bg-purple-200/40 rounded-full -top-10 -left-20 blur-3xl"></div>
+            <div class="absolute w-80 h-80 bg-yellow-300/30 rounded-full -bottom-20 -right-20 blur-3xl"></div>
+        </div>
+    </section>
+
+
+    <footer class="bg-gradient-to-r from-yellow-100 to-purple-100 py-10">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+
+            <!-- Logo & Text -->
+            <div>
+                <img src="./img/ulo removed bg.png" alt="Ulo Logo" class="w-28 mx-auto md:mx-0">
+                <p class="mt-3 text-gray-600 text-sm">
+                    Smart tools for teams and businesses. Organize, plan, and grow with ease.
+                </p>
+
+                <!-- Social Icons -->
+                <div class="flex justify-center md:justify-start gap-4 mt-5">
+                    <a href="#"
+                        class="p-2 border-2 border-yellow-300 rounded-full text-yellow-300 hover:bg-yellow-300 hover:text-white transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#"
+                        class="p-2 border-2 border-yellow-300 rounded-full text-yellow-300 hover:bg-yellow-300 hover:text-white transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#"
+                        class="p-2 border-2 border-yellow-300 rounded-full text-yellow-300 hover:bg-yellow-300 hover:text-white transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Pages</h3>
+                <ul class="space-y-2 text-gray-600">
+                    <li><a href="home.html" class="hover:text-yellow-300 transition">Home</a></li>
+                    <li><a href="pricing.html" class="hover:text-yellow-300 transition">Pricing</a></li>
+                    <li><a href="#" class="hover:text-yellow-300 transition">About Us</a></li>
+                    <li><a href="#" class="hover:text-yellow-300 transition">Contact</a></li>
+                    <li><a href="#" class="hover:text-yellow-300 transition">Privacy Policy / Terms</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Get In Touch</h3>
+                <p class="flex items-center justify-center md:justify-start gap-2 text-gray-600">
+                    <i class="fas fa-phone-alt text-yellow-300"></i>
+                    +234 800 123 4567
+                </p>
+                <p class="flex items-center justify-center md:justify-start gap-2 text-gray-600 mt-2">
+                    <i class="fas fa-envelope text-yellow-300"></i>
+                    support@ulo.com
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- Back To Top Button -->
+    <button id="backToTopBtn"
+        class="hidden fixed bottom-6 right-6 z-50 bg-yellow-300 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-pink-700 transition">
+        ↑
+    </button>
+    <!-- done from up here -->
+
+</body>
+<script>
+    // Show/Hide Button on Scroll
+    const backToTopBtn = document.getElementById("backToTopBtn");
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.remove("hidden");
+        } else {
+            backToTopBtn.classList.add("hidden");
+        }
+    });
+
+    // Scroll Smooth to Top
+    backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+
+    // Navbar Shadow on Scroll
+    const navbar = document.getElementById("navbar");
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add("bg-white", "shadow");
+        } else {
+            navbar.classList.remove("bg-white", "shadow");
+        }
+    });
+
+    // Sidebar Menu Logic
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileSidebar = document.getElementById('mobile-sidebar');
+    const closeSidebarButton = document.getElementById('close-sidebar-button');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileSidebar.classList.add('open');
+        sidebarOverlay.classList.remove('hidden');
+    });
+
+    closeSidebarButton.addEventListener('click', () => {
+        mobileSidebar.classList.remove('open');
+        sidebarOverlay.classList.add('hidden');
+    });
+
+    sidebarOverlay.addEventListener('click', () => {
+        mobileSidebar.classList.remove('open');
+        sidebarOverlay.classList.add('hidden');
+    });
+</script>
+
+</html>

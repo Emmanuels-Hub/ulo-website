@@ -1,0 +1,834 @@
+<DOCTYPE html />
+<html>
+
+<head>
+    <title>Appttek - Best Mobile Management Software</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        xintegrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Responsive Sidebar Menu */
+        .sidebar {
+            transition: transform 0.3s ease-out;
+            transform: translateX(100%);
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.5);
+            transition: opacity 0.3s ease-out;
+        }
+
+        .overlay.hidden {
+            display: none;
+            opacity: 0;
+        }
+
+        @keyframes bounce-slow {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .animate-bounce-slow {
+            animation: bounce-slow 5s infinite;
+        }
+
+        .animate-spin-slow {
+            animation: spin 12s linear infinite;
+        }
+
+        .clip-triangle {
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <header id="navbar" class="fixed w-full top-0 left-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-8 flex items-center justify-between py-4">
+
+            <!-- Logo -->
+            <div class="flex items-center space-x-2">
+                <h1 class="text-2xl font-bold text-gray-900">
+                </h1>
+                <div>
+                    <img src="./img/cropped.png" class="w-20" />
+                </div>
+            </div>
+
+            <!-- Nav Links (Desktop Only) -->
+            <nav class="hidden md:flex space-x-8 text-gray-800 font-medium">
+                <a href="home.html" class="hover:text-yellow-300 text-[#ffde59] transition">Home</a>
+                <a href="pricing.html" class="hover:text-yellow-300 transition">Pricing</a>
+                <a href="#" class="hover:text-yellow-300 transition">About Us</a>
+                <a href="#" class="hover:text-yellow-300 transition">Contact</a>
+                <a href="#" class="hover:text-yellow-300 transition">Privacy Policy / Terms</a>
+            </nav>
+
+            <!-- Right Section -->
+            <div class="flex items-center space-x-8">
+                <!-- Support Info (hidden on tablet, visible on desktop) -->
+                <div class="hidden lg:block text-right">
+                    <p class="text-sm text-gray-500">For Support</p>
+                    <a href="tel:+18881234567" class="text-yellow-300 font-semibold">+1 (888) 123-4567</a>
+                </div>
+
+                <!-- Button (Desktop Only) -->
+                <a href="#signup"
+                    class="hidden md:block bg-yellow-300 text-white px-5 py-2 rounded-full font-medium hover:bg-purple-800 transition">
+                    Sign Up Free
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-800 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Sidebar Menu -->
+    <div id="sidebar-overlay" class="fixed inset-0 z-40 bg-black bg-opacity-50 hidden"></div>
+    <div id="mobile-sidebar"
+        class="sidebar fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 p-6 flex flex-col space-y-4">
+        <button id="close-sidebar-button" class="self-start text-gray-800 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <nav class="flex flex-col space-y-4 font-medium text-gray-800">
+            <a href="home.html" class="hover:text-yellow-300 transition">Home</a>
+            <a href="pricing.html" class="hover:text-yellow-300 transition">Pricing</a>
+            <a href="#" class="hover:text-yellow-300 transition">About Us</a>
+            <a href="#" class="hover:text-yellow-300 transition">Contact</a>
+            <a href="#" class="hover:text-yellow-300 transition">Privacy Policy / Terms</a>
+            <a href="#signup"
+                class="bg-yellow-300 text-white px-5 py-2 rounded-full font-medium hover:bg-purple-800 transition text-center">
+                Sign Up Free
+            </a>
+        </nav>
+    </div>
+
+    <!-- Section 1 -->
+    <section class="relative bg-white py-20 pt-40">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+            <!-- Left Column -->
+            <div>
+                <!-- #1 + Software Technology -->
+                <div class="flex items-center space-x-6 mb-4">
+                    <span class="text-lg font-bold"># 1</span>
+                    <span class="text-gray-700">Software Technology </span>
+                </div>
+
+                <!-- Heading -->
+                <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6">
+                    AI-Powered <span class="text-yellow-300">Learning</span>
+                    <span class="text-gray-900"> App. </span>
+                </h1>
+
+                <!-- Paragraph -->
+                <p class="text-gray-600 mb-8">
+                    ULO AI is an innovative mobile application designed to transform the way students learn, revise, and
+                    prepare for examinations. The app combines the power of artificial intelligence with user-centric
+                    educational tools to serve as a personalized learning companion for students at various academic
+                    levels.
+                </p>
+
+                <!-- Button + App Version -->
+                <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-6">
+                    <a href="#"
+                        class="bg-yellow-300 hover:bg-purple-800 text-white px-6 py-3 rounded-lg shadow-lg font-medium flex items-center space-x-2">
+                        <span>Download for Free</span>
+                        <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 9L5 5L1 1" stroke="white" stroke-linecap="round" />
+                        </svg>
+                    </a>
+                    <span class="text-gray-500 text-sm cursor-pointer">Learn More →</span>
+                </div>
+
+                <!-- Rating -->
+                <div class="flex items-center space-x-3">
+                    <img src="https://apptek.radiantthemes.com/wp-content/uploads/elementor/thumbs/star-pvk8bx89f4hp9f90urwexeusitt6lv6kbnntvmpttg.png"
+                        alt="Rating" class="h-5" />
+                    <span class="text-gray-700">4.4 Rated App On Reviews</span>
+                </div>
+            </div>
+
+            <!-- Right Column (Image + Shapes) -->
+            <div class="relative mt-8 md:mt-0">
+                <img src="https://apptek.radiantthemes.com/wp-content/uploads/2022/12/mobile-device-banner.png"
+                    alt="Mobile device banner" class="w-full max-w-lg mx-auto" />
+
+                <!-- Purple Circle -->
+                <div class="absolute top-8 left-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 17 17" fill="none">
+                        <circle cx="8.5" cy="8.5" r="7.5" stroke="#8E34CF" stroke-width="2"></circle>
+                    </svg>
+                </div>
+
+                <!-- Blue Triangle -->
+                <div class="absolute bottom-12 right-8">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 17 17" fill="none">
+                        <path d="M0.895349 16.0828L2.89501 0.933223L16.1098 14.658L0.895349 16.0828Z" fill="#24ABF5">
+                        </path>
+                    </svg>
+                </div>
+
+                <!-- Pink Circle -->
+                <div class="absolute top-1/2 left-1/3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 11 11" fill="none">
+                        <circle cx="5.5" cy="5.5" r="5.5" fill="#E64671"></circle>
+                    </svg>
+                </div>
+
+                <!-- Wavy Vector Background -->
+                <div class="absolute -bottom-6 right-0 w-full">
+                    <img src="https://apptek.radiantthemes.com/wp-content/uploads/2022/08/Vector-625.png"
+                        alt="Decorative wave" class="w-72 opacity-90" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 items-center gap-16">
+                <!-- Steps -->
+                <div class="flex flex-col md:flex-row gap-8 md:gap-12">
+                    <!-- Step 1 -->
+                    <div class="text-center md:text-left">
+                        <div class="flex items-center space-x-4 mb-3 justify-center md:justify-start">
+                            <div class="w-12 h-12">
+                                <img src="https://apptek.radiantthemes.com/wp-content/uploads/2022/08/One.png"
+                                    alt="Step One" class="w-full h-full object-contain">
+                            </div>
+                            <h3 class="text-xl md:text-xl font-bold">Download the App</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Get started by downloading the ULO AI mobile app from your preferred app store </p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="text-center md:text-left">
+                        <div class="flex items-center space-x-4 mb-3 justify-center md:justify-start">
+                            <div class="w-12 h-12">
+                                <img src="https://apptek.radiantthemes.com/wp-content/uploads/2022/08/Two.png"
+                                    alt="Step Two" class="w-full h-full object-contain">
+                            </div>
+                            <h3 class="text-xl md:text-xl font-bold">Sign Up & Create Your Profile.</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Create your personalized learning profile to access our suite of tools, including the AI
+                            Chat Tutor and Exam Simulator.
+                        </p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="text-center md:text-left">
+                        <div class="flex items-center space-x-4 mb-3 justify-center md:justify-start">
+                            <div class="w-12 h-12">
+                                <img src="https://apptek.radiantthemes.com/wp-content/uploads/2022/08/Three.png"
+                                    alt="Step Three" class="w-full h-full object-contain">
+                            </div>
+                            <h3 class="text-xl md:text-xl font-bold"> Start Your Learning Journey.</h3>
+                        </div>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Instantly generate questions from your documents or simulate real exam conditions to prepare
+                            effectively.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative py-20 bg-white">
+        <!-- Background overlay -->
+        <div class="absolute inset-0 bg-black/10 pointer-events-none"></div>
+
+        <div class="relative container mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <!-- Left: Image -->
+            <div class="flex justify-center">
+                <a href="#">
+                    <img src="https://apptek.radiantthemes.com/wp-content/uploads/2022/11/installed-app-img.webp"
+                        alt="Mobile Device Management" class="w-full max-w-[600px] " />
+                </a>
+            </div>
+
+            <!-- Right: Text Content -->
+            <div class="space-y-6 text-center md:text-left">
+                <!-- Top Rated Apps -->
+                <div class="grid grid-cols-2 gap-4 text-lg font-semibold">
+                    <div class="text-gray-800">TOP</div>
+                    <div class="text-gray-800">Rated Apps</div>
+                </div>
+
+                <!-- Heading -->
+                <h2 class="text-3xl lg:text-4xl font-bold leading-snug">
+                    Your Ultimate
+                    <span class="text-yellow-300"> Academic </span>
+                    <span class="block lg:inline text-gray-800">Assistant</span>
+                </h2>
+
+                <!-- Description -->
+                <p class="text-gray-600 leading-relaxed">
+                    makes me feel so much more prepared and less anxious before my exams. And the best part is that it's
+                    designed to be an affordable alternative to private tutoring.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gradient-to-b from-pink-50 to-white">
+        <div class="container mx-auto max-w-7xl px-6">
+
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-snug">
+                    What ULO AI Can Do For Your <br />
+                    <span class="relative inline-block">
+                        <span class="text-yellow-300">Academic Success</span>
+                        <span class="absolute left-0 bottom-0 w-full h-1 bg-yellow-300"></span>
+                    </span>
+                </h2>
+            </div>
+
+            <!-- Services Grid -->
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-gray-200">
+
+                <!-- Service 1 -->
+                <div class="flex flex-col items-center px-6 py-6">
+                    <!-- Top Icon + Text -->
+                    <div class="flex flex-col items-center mb-6 space-y-3">
+                        <img src="https://apptek.radiantthemes.com/wp-content/uploads/2022/08/Our-Section-Icon-Ones.png"
+                            alt="Analysis Icon" class="w-10 h-10">
+                        <div class="text-center">
+                            <h3 class="font-semibold text-gray-900">AI Chat Assistance</h3>
+                            <p class="text-gray-500 text-sm">This is your 24/7 personal tutor. It provides instant,
+                                accurate answers to academic questions and can break down complex topics into simpler
+                                explanations, helping students learn on their own.</p>
+                        </div>
+                    </div>
+                    <!-- Circle Image -->
+                    <img src="https://img.freepik.com/free-photo/portrait-smiling-young-woman_23-2148859448.jpg"
+                        alt="Analysis" class="rounded-full object-cover w-48 h-48 shadow-md">
+                </div>
+
+                <!-- Service 2 -->
+                <div class="flex flex-col items-center px-6 py-6">
+                    <div class="flex flex-col items-center mb-6 space-y-3">
+                        <img src="https://apptek.radiantthemes.com/wp-content/uploads/2022/08/Our-Section-Icon-Twos.png"
+                            alt="Strategy Icon" class="w-10 h-10">
+                        <div class="text-center">
+                            <h3 class="font-semibold text-gray-900">AI-Powered Question Generation</h3>
+                            <p class="text-gray-500 text-sm">You can upload any document—like a textbook or notes—and
+                                ULO AI will automatically generate exam-style questions from it. This saves students and
+                                teachers hours of manual work and creates targeted revision materials.</p>
+                        </div>
+                    </div>
+                    <img src="https://img.freepik.com/free-photo/chess-concept-business-strategy-leadership-success_53876-12038.jpg"
+                        alt="Strategy" class="rounded-full object-cover w-48 h-48 shadow-md">
+                </div>
+
+                <!-- Service 3 -->
+                <div class="flex flex-col items-center px-6 py-6">
+                    <div class="flex flex-col items-center mb-6 space-y-3">
+                        <img src="https://apptek.radiantthemes.com/wp-content/uploads/2022/08/Our-Section-Icon-Threes.png"
+                            alt="Features Icon" class="w-10 h-10">
+                        <div class="text-center">
+                            <h3 class="font-semibold text-gray-900">Exam Simulator</h3>
+                            <p class="text-gray-500 text-sm">This feature allows students to practice under realistic,
+                                timed conditions to prepare for major exams like WAEC and JAMB. It helps reduce exam
+                                anxiety and improves time management skills.</p>
+                        </div>
+                    </div>
+                    <img src="https://img.freepik.com/free-photo/excited-woman-using-smartphone_23-2148859475.jpg"
+                        alt="Features" class="rounded-full object-cover w-48 h-48 shadow-md">
+                </div>
+
+                <!-- Service 4 -->
+                <div class="flex flex-col items-center px-6 py-6">
+                    <div class="flex flex-col items-center mb-6 space-y-3">
+                        <img src="https://apptek.radiantthemes.com/wp-content/uploads/2022/08/Our-Section-Icon-Fours.png"
+                            alt="Solutions Icon" class="w-10 h-10">
+                        <div class="text-center">
+                            <h3 class="font-semibold text-gray-900">Personalized Performance Dashboard</h3>
+                            <p class="text-gray-500 text-sm">The app tracks a student's progress and performance over
+                                time, showing them their strengths and weaknesses. This gives them actionable insights
+                                to help them study smarter and improve.</p>
+                        </div>
+                    </div>
+                    <img src="https://img.freepik.com/free-photo/excited-businessman-laptop_23-2148859432.jpg"
+                        alt="Solutions" class="rounded-full object-cover w-48 h-48 shadow-md">
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <section class="relative py-20 bg-gradient-to-br from-pink-50 to-purple-50">
+        <div class="container mx-auto px-6 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+                <!-- LEFT: Feature Cards -->
+                <div class="space-y-6 relative">
+                    <!-- background blob -->
+                    <div
+                        class="absolute -top-10 -left-10 w-96 h-96 bg-gradient-to-tr from-pink-200 to-purple-200 rounded-full opacity-30 blur-3xl hidden md:block">
+                    </div>
+
+                    <!-- Card 1 -->
+                    <div
+                        class="relative bg-white rounded-2xl shadow-lg p-6 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 z-10">
+                        <div
+                            class="w-12 h-12 flex items-center justify-center rounded-full bg-pink-100 text-yellow-300">
+                            🔄
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg">AI Chat Assistance</h3>
+                            <p class="text-gray-500 text-sm">Get instant, personalized academic support 24/7 for any
+                                subject, reducing the need for expensive private tutors.</p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div
+                        class="relative bg-white rounded-2xl shadow-lg p-6 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 z-10">
+                        <div
+                            class="w-12 h-12 flex items-center justify-center rounded-full bg-yellow-100 text-yellow-500">
+                            📱
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg"> Exam Simulator</h3>
+                            <p class="text-gray-500 text-sm">Practice with realistic, timed conditions to reduce exam
+                                anxiety and prepare for tests like WAEC and JAMB.
+
+
+
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div
+                        class="relative bg-white rounded-2xl shadow-lg p-6 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 z-10">
+                        <div
+                            class="w-12 h-12 flex items-center justify-center rounded-full bg-purple-100 text-purple-500">
+                            ⚙️
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg">AI-Powered Question Generation</h3>
+                            <p class="text-gray-500 text-sm">Simply upload your study notes or textbook and instantly
+                                receive custom practice questions.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Text + Feature List -->
+                <div class="space-y-6 text-center lg:text-left">
+                    <span class="text-yellow-300 font-semibold">Our Features</span>
+                    <h2 class="text-3xl md:text-5xl font-extrabold leading-tight">
+                        Core Features That <br class="hidden md:inline" />
+                        Empower Your Learning
+                    </h2>
+                    <p class="text-gray-600">
+                        ULO AI is designed to solve major academic challenges by providing intelligent and accessible
+                        tools right on your mobile phone. Each feature is built to help you learn better, save time, and
+                        build confidence.
+                    </p>
+
+                    <ul class="space-y-4 flex flex-col items-center lg:items-start">
+                        <li class="flex items-center space-x-3">
+                            <span
+                                class="flex items-center justify-center w-8 h-8 rounded-full border border-pink-400 text-yellow-300 text-sm font-bold">1</span>
+                            <div>
+
+                                <span class="font-semibold">AI Chat Assistant: </span>Get instant, personalized academic
+                                support
+                                24/7 for any subject.
+                            </div>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span
+                                class="flex items-center justify-center w-8 h-8 rounded-full border border-pink-400 text-yellow-300 text-sm font-bold">2</span>
+                            <div>
+
+                                <span class="font-semibold">Exam Simulator: </span>
+                                Practice under realistic, timed conditions to reduce exam anxiety and prepare for tests
+                                like
+                                WAEC and JAMB.
+                                <!-- <span class="ml-2 px-2 py-0.5 text-xs bg-yellow-300 text-white rounded">Big Update</span> -->
+                            </div>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span
+                                class="flex items-center justify-center w-8 h-8 rounded-full border border-pink-400 text-yellow-300 text-sm font-bold">3</span>
+                            <div>
+
+                                <span class="font-semibold">AI-Powered Question Generation:</span>
+                                Simply upload your study notes or textbook and instantly receive custom practice
+                                questions.
+                            </div>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <span
+                                class="flex items-center justify-center w-8 h-8 rounded-full border border-pink-400 text-yellow-300 text-sm font-bold">4</span>
+                            <div>
+
+                                <span class="font-semibold">Performance Dashboard:</span>
+                                Track your progress over time with detailed analytics to see your strengths and
+                                weaknesses
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="relative py-20 bg-black overflow-hidden">
+        <div class="container mx-auto px-6 lg:px-12 text-center relative z-10 ">
+
+            <!-- Small Top Text -->
+            <p class="text-yellow-300 font-semibold mb-3">Try For Free Application</p>
+
+            <!-- Big Heading -->
+            <h2 class="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-6">
+                Start Your
+                <span class="text-yellow-300">Academic Journey</span>
+                <span class="text-white">Today</span>
+            </h2>
+
+            <!-- Sub Description -->
+            <p class=" max-w-2xl mx-auto mb-10 text-white">
+                The ULO AI mobile app is your all-in-one learning assistant, designed to meet your academic needs on
+                your own terms. It offers the flexibility of a personalized tutor and the efficiency of advanced AI
+                tools to help you succeed in your studies.
+            </p>
+
+            <!-- Store Buttons -->
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="#" class="w-full sm:w-auto">
+                    <img src="https://apptek.radiantthemes.com/wp-content/uploads/elementor/thumbs/google-play-store-pwcc9vet25ql6m0rulsxpn6xtss3n2nb1azqs929s8.png"
+                        alt="Google Play" class="h-14 hover:scale-105 transition-transform mx-auto" />
+                </a>
+                <a href="#" class="w-full sm:w-auto">
+                    <img src="https://apptek.radiantthemes.com/wp-content/uploads/elementor/thumbs/app-store-pwcc9ugyvbpav02503eb55fh8ewqfdjkp6c9az3nyg.png"
+                        alt="App Store" class="h-14 hover:scale-105 transition-transform mx-auto" />
+                </a>
+            </div>
+        </div>
+
+        <!-- Floating Background Shapes -->
+        <div class="absolute top-10 left-10 w-12 h-12 border-4 border-yellow-400 rounded-full animate-spin-slow"></div>
+        <div class="absolute bottom-20 right-20 w-4 h-4 bg-orange-400 rounded-full animate-bounce"></div>
+        <div class="absolute top-1/2 left-1/4 w-6 h-6 bg-green-400 clip-triangle animate-pulse"></div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6 lg:px-12 text-center">
+
+            <!-- Small Heading -->
+            <p class="text-yellow-300 font-semibold mb-3">Our Features</p>
+
+            <!-- Big Custom Heading -->
+            <h2 class="text-3xl md:text-5xl font-extrabold leading-tight mb-6">
+                Core Features That Empower Your
+                <span class="text-yellow-300 relative inline-block">
+                    Learning
+                    <span class="absolute left-0 bottom-0 w-full h-[2px] bg-black"></span>
+                </span>
+                <!-- <span class="text-gray-800"> you don’t.</span> -->
+            </h2>
+
+            <!-- Sub Text -->
+            <p class="text-gray-500 max-w-2xl mx-auto mb-16">
+                ULO AI is designed to solve major academic challenges by providing intelligent and accessible tools
+                right on your mobile phone. Each feature is built to help you learn better, save time, and build
+                confidence.
+            </p>
+
+            <!-- Features Grid -->
+            <div class="grid gap-10 md:grid-cols-3">
+
+                <!-- Feature 1 -->
+                <div class="p-8 rounded-2xl shadow-lg hover:shadow-xl transition bg-white text-center">
+                    <div class="flex justify-center mb-6">
+                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-pink-100">
+                            <!-- SVG Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" viewBox="0 0 80 70" fill="none">
+                                <circle cx="35" cy="35" r="35" fill="#FFD7E1" />
+                                <path d="M66.9 9.3C65.8 10 65.8..." fill="#FC346A" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">AI Chat Assistant:</h3>
+                    <p class="text-gray-500 mb-6">
+                        Get instant, personalized academic support 24/7 for any subject.
+                    </p>
+                    <a href="#" class="inline-flex items-center font-medium text-yellow-300 hover:text-pink-700">
+                        Learn More →
+                    </a>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="p-8 rounded-2xl shadow-lg hover:shadow-xl transition bg-white text-center">
+                    <div class="flex justify-center mb-6">
+                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-yellow-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" viewBox="0 0 72 70" fill="none">
+                                <circle cx="35" cy="35" r="35" fill="#FFF0C6" fill-opacity="0.17" />
+                                <path d="M50.2 9.1C49.5 9.3..." fill="#FDBE0C" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Exam Simulator</h3>
+                    <p class="text-gray-500 mb-6">
+                        Practice under realistic, timed conditions to reduce exam anxiety and prepare for tests like
+                        WAEC and JAMB. </p>
+                    <a href="#" class="inline-flex items-center font-medium text-yellow-600 hover:text-yellow-700">
+                        Learn More →
+                    </a>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="p-8 rounded-2xl shadow-lg hover:shadow-xl transition bg-white text-center">
+                    <div class="flex justify-center mb-6">
+                        <div class="w-20 h-20 flex items-center justify-center rounded-full bg-indigo-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" viewBox="0 0 76 70" fill="none">
+                                <circle cx="35" cy="35" r="35" fill="#EFEFFF" />
+                                <path d="M41.4 6.4C35.3 9.9..." fill="#A0A0FF" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">AI-Powered Question Generation: </h3>
+                    <p class="text-gray-500 mb-6">
+                        Simply upload your study notes or textbook and instantly receive custom practice questions. </p>
+                    <a href="#" class="inline-flex items-center font-medium text-indigo-600 hover:text-indigo-700">
+                        Learn More →
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-12 items-center">
+
+            <!-- Left Content -->
+            <div>
+                <!-- Small Tagline -->
+                <p class="text-yellow-300 font-semibold mb-4"># No 1 &nbsp; Best Performance</p>
+
+                <!-- Main Heading -->
+                <h2 class="text-3xl md:text-2xl font-extrabold leading-tight mb-6">
+                    Overcome Exam Anxiety and Master Your Preparation
+                </h2>
+
+                <!-- Description -->
+                <p class="text-gray-600 mb-10">
+                    Students often go into exams without proper practice of the format, time pressure, or question
+                    structure, which leads to high levels of anxiety and poor performance. ULO AI is designed to help
+                    students feel more prepared and confident by providing a tool that mimics real exam conditions.
+                </p>
+
+                <!-- Feature 1 -->
+                <div class="flex flex-col sm:flex-row items-start mb-8">
+                    <img src="img/tick.png" alt="Right Icon" class="w-7 h-7 mt-1 mr-4">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Realistic Practice: </h3>
+                        <p class="text-gray-600 text-sm">
+                            The Exam Simulator allows you to practice under timed, realistic conditions to build your
+                            time management and question-solving skills.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="flex flex-col sm:flex-row items-start">
+                    <img src="img/tick.png" alt="Right Icon" class="w-7 h-7 mt-1 mr-4">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Performance Tracking: </h3>
+                        <p class="text-gray-600 text-sm">
+                            Our dashboard tracks your progress over time, so you can see your strengths and weaknesses
+                            and know exactly what to study to improve.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Image -->
+            <div class="relative">
+                <img src="https://apptek.radiantthemes.com/wp-content/uploads/2022/11/image-section-3.webp"
+                    alt="App Dashboard Illustration" class="w-full max-w-lg mx-auto lg:mx-0 animate-bounce-slow">
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Back To Top Button -->
+    <button id="backToTopBtn"
+        class="hidden fixed bottom-6 right-6 z-50 bg-yellow-300 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-pink-700 transition">
+        &uarr;
+    </button>
+    <!-- done from up here -->
+
+
+
+
+
+
+
+
+
+
+    <!-- Ulo Footer -->
+    <footer class="bg-gradient-to-r from-yellow-100 to-purple-100 py-10">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+
+            <!-- Logo & Text -->
+            <div>
+                <img src="./img/ulo removed bg.png" alt="Ulo Logo" class="w-28 mx-auto md:mx-0">
+                <p class="mt-3 text-gray-600 text-sm">
+                    Smart tools for teams and businesses. Organize, plan, and grow with ease.
+                </p>
+
+                <!-- Social Icons -->
+                <div class="flex justify-center md:justify-start gap-4 mt-5">
+                    <a href="#"
+                        class="p-2 border-2 border-yellow-300 rounded-full text-yellow-300 hover:bg-yellow-300 hover:text-white transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#"
+                        class="p-2 border-2 border-yellow-300 rounded-full text-yellow-300 hover:bg-yellow-300 hover:text-white transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#"
+                        class="p-2 border-2 border-yellow-300 rounded-full text-yellow-300 hover:bg-yellow-300 hover:text-white transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Pages</h3>
+                <ul class="space-y-2 text-gray-600">
+                    <li><a href="home.html" class="hover:text-yellow-300 transition">Home</a></li>
+                    <li><a href="pricing.html" class="hover:text-yellow-300 transition">Pricing</a></li>
+                    <li><a href="#" class="hover:text-yellow-300 transition">About Us</a></li>
+                    <li><a href="#" class="hover:text-yellow-300 transition">Contact</a></li>
+                    <li><a href="#" class="hover:text-yellow-300 transition">Privacy Policy / Terms</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Get In Touch</h3>
+                <p class="flex items-center justify-center md:justify-start gap-2 text-gray-600">
+                    <i class="fas fa-phone-alt text-yellow-300"></i>
+                    +234 800 123 4567
+                </p>
+                <p class="flex items-center justify-center md:justify-start gap-2 text-gray-600 mt-2">
+                    <i class="fas fa-envelope text-yellow-300"></i>
+                    support@ulo.com
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- FontAwesome (for icons) -->
+
+
+
+    <!-- test code end -->
+
+
+
+
+
+
+
+</body>
+
+<script>
+    // Show/Hide Button on Scroll
+    const backToTopBtn = document.getElementById("backToTopBtn");
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.remove("hidden");
+        } else {
+            backToTopBtn.classList.add("hidden");
+        }
+    });
+
+    // Scroll Smooth to Top
+    backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+
+    // Navbar Shadow on Scroll
+    const navbar = document.getElementById("navbar");
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add("bg-white", "shadow");
+        } else {
+            navbar.classList.remove("bg-white", "shadow");
+        }
+    });
+
+    // Sidebar Menu Logic
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileSidebar = document.getElementById('mobile-sidebar');
+    const closeSidebarButton = document.getElementById('close-sidebar-button');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+    mobileMenuButton.addEventListener('click', () => {
+        mobileSidebar.classList.add('open');
+        sidebarOverlay.classList.remove('hidden');
+    });
+
+    closeSidebarButton.addEventListener('click', () => {
+        mobileSidebar.classList.remove('open');
+        sidebarOverlay.classList.add('hidden');
+    });
+
+    sidebarOverlay.addEventListener('click', () => {
+        mobileSidebar.classList.remove('open');
+        sidebarOverlay.classList.add('hidden');
+    });
+</script>
+
+
+</html>

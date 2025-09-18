@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator & Scanner</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            flex: 1 1 300px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        #qr-reader {
+            width: 100%;
+            margin-top: 1rem;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        #qrcode {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>QR Code Generator & Scanner</h1>
+
+    <div class="container">
+        <!-- QR Code Generator -->
+        <div class="card">
+            <h2>Generate QR Code</h2>
+            <input type="text" id="qr-input" placeholder="Type anything...">
+            <div id="qrcode"></div>
+        </div>
+
+        <!-- QR Code Scanner -->
+        <div class="card">
+            <h2>Scan QR Code</h2>
+            <div id="qr-reader"></div>
+            <p>Scanned Result: <span id="qr-result">None</span></p>
+        </div>
+    </div>
+
+    <div class="footer">Made with ❤️ using HTML, CSS & JS</div>
+
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"
+        integrity="sha512-r6rDA7W6ZeQhvl8S7yRVQUKVHdexq+GAlNkNNqVC7YyIV+NwqCTJe2hDWCiffTyRNOeGEzRRJ9ifvRm/HCzGYg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+
+    <script defer>
+        window.addEventListener('load', () => {
+
+            // --- QR Code Generator ---
+            const qrInput = document.getElementById('qr-input');
+            const qrContainer = document.getElementById('qrcode');
+
+            qrInput.addEventListener('input', () => {
+                const value = qrInput.value.trim();
+                qrContainer.innerHTML = '';
+                if (value) {
+                    QRCode.toCanvas(document.createElement('canvas'), value, { width: 200 }, (err, canvas) => {
+                        if (err) console.error(err);
+                        qrContainer.appendChild(canvas);
+                    });
+                }
+            });
+
+            // --- QR Code Scanner ---
+            const qrResult = document.getElementById('qr-result');
+            const html5QrCode = new Html5Qrcode("qr-reader");
+            const qrConfig = { fps: 10, qrbox: false }; // scan full frame for laptops/phones
+
+            Html5Qrcode.getCameras().then(cameras => {
+                if (cameras.length === 0) {
+                    alert("No cameras found on this device.");
+                    return;
+                }
+
+                // Try to pick the rear/back camera automatically
+                const rearCamera = cameras.find(cam => cam.label.toLowerCase().includes('back')) || cameras[0];
+                startScanner(rearCamera.id);
+            }).catch(err => {
+                console.error(err);
+                alert("Error accessing cameras: " + err);
+            });
+
+            function startScanner(cameraId) {
+                html5QrCode.start(
+                    { deviceId: { exact: cameraId } },
+                    qrConfig,
+                    decodedText => { qrResult.textContent = decodedText; },
+                    errorMessage => { } // ignore decode errors
+                ).catch(err => console.error("QR scan start failed:", err));
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>

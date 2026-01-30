@@ -1,2 +1,0 @@
-# ulo-website
-Ulo Website

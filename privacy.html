@@ -4,97 +4,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy & Terms</title>
+    <title>Privacy Policy & Terms - ULO AI</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            yellow: '#ffde59',
+                            purple: '#6b21a8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
+    </style>
 </head>
 
 <body class="bg-gray-50 text-gray-700">
 
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-purple-600 to-yellow-400 text-white py-20">
-        <div class="max-w-4xl mx-auto text-center px-6">
-            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Privacy Policy & Terms</h1>
-            <p class="text-lg opacity-90">
-                Understand how we protect your data and the rules for using our services.
+   <div id="header"></div>
+
+    <section class="relative pt-32 pb-16 bg-gradient-to-br from-brand-purple via-purple-700 to-indigo-900 text-white">
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
+            <div class="absolute w-72 h-72 bg-yellow-400 rounded-full blur-3xl -top-20 -left-20"></div>
+            <div class="absolute w-96 h-96 bg-pink-500 rounded-full blur-3xl bottom-0 right-0"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto text-center px-6 relative z-10">
+            <span class="inline-block bg-white/20 backdrop-blur-md px-4 py-1 rounded-full text-xs font-semibold tracking-wider uppercase mb-4 border border-white/10">
+                Last Updated: January 25, 2024
+            </span>
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">Privacy Policy & Terms</h1>
+            <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto font-light">
+                We believe in transparency. Here’s how we protect your data and the rules for using our platform.
             </p>
         </div>
     </section>
 
-    <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-6 py-12 space-y-16">
+    <div class="max-w-7xl mx-auto px-6 py-16">
+        <div class="flex flex-col lg:flex-row gap-12">
+            
+            <aside class="hidden lg:block w-1/4">
+                <div class="sticky top-28 space-y-2">
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">On this page</p>
+                    <a href="#privacy" class="block p-3 rounded-lg text-gray-700 hover:bg-purple-50 hover:text-brand-purple transition font-medium border-l-4 border-transparent hover:border-brand-purple">
+                        Privacy Policy
+                    </a>
+                    <a href="#terms" class="block p-3 rounded-lg text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 transition font-medium border-l-4 border-transparent hover:border-brand-yellow">
+                        Terms & Conditions
+                    </a>
+                    <a href="#contact" class="block p-3 rounded-lg text-gray-500 hover:text-gray-900 transition text-sm">
+                        Have questions?
+                    </a>
+                </div>
+            </aside>
 
-        <!-- Privacy Policy -->
-        <section>
-            <h2 class="text-2xl font-bold text-gray-900 mb-4">Privacy Policy</h2>
-            <p class="mb-4">
-                We value your trust and are committed to protecting your personal information. This Privacy Policy
-                explains how we collect, use, disclose, and safeguard your data when you use our platform.
-            </p>
+            <main class="lg:w-3/4 space-y-16">
+                
+                <section id="privacy" class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 scroll-mt-28">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-brand-purple">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900">Privacy Policy</h2>
+                    </div>
+                    
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        We value your trust and are committed to protecting your personal information. This Privacy Policy
+                        explains how we collect, use, disclose, and safeguard your data when you use ULO AI.
+                    </p>
 
-            <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">1. Information We Collect</h3>
-            <p class="mb-4">
-                We may collect personal details such as your name, email address, phone number, and payment information,
-                as well as non-personal data such as device information, browser type, and usage statistics.
-            </p>
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">1. Information We Collect</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                We may collect personal details such as your name, email address, phone number, and payment information,
+                                as well as non-personal data such as device information, browser type, and usage statistics to ensure proper functionality of our apps.
+                            </p>
+                        </div>
 
-            <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">2. How We Use Your Information</h3>
-            <ul class="list-disc list-inside space-y-2">
-                <li>To provide and maintain our services.</li>
-                <li>To improve user experience and personalize content.</li>
-                <li>To process transactions and send confirmations.</li>
-                <li>To communicate updates, offers, and security alerts.</li>
-            </ul>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">2. How We Use Your Information</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-600 ml-2">
+                                <li>To provide, operate, and maintain our services.</li>
+                                <li>To improve user experience and personalize content.</li>
+                                <li>To process transactions and send confirmations.</li>
+                                <li>To communicate updates, security alerts, and support messages.</li>
+                            </ul>
+                        </div>
 
-            <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">3. Data Protection</h3>
-            <p>
-                We implement industry-standard security measures to protect your data from unauthorized access,
-                disclosure, or destruction. However, no method of transmission over the Internet is 100% secure.
-            </p>
-        </section>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">3. Data Protection</h3>
+                            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                                <p class="text-sm text-blue-800">
+                                    <strong>Note:</strong> We implement industry-standard security measures (SSL, Encryption) to protect your data. 
+                                    However, no method of transmission over the Internet is 100% secure.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
-        <!-- Terms & Conditions -->
-        <section>
-            <h2 class="text-2xl font-bold text-gray-900 mb-4">Terms & Conditions</h2>
-            <p class="mb-4">
-                By accessing or using our services, you agree to be bound by these Terms & Conditions. Please read
-                them carefully.
-            </p>
+                <section id="terms" class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 scroll-mt-28">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <h2 class="text-3xl font-bold text-gray-900">Terms & Conditions</h2>
+                    </div>
 
-            <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">1. Acceptance of Terms</h3>
-            <p class="mb-4">
-                By using our services, you acknowledge that you have read, understood, and agree to comply with these
-                Terms & Conditions.
-            </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        By accessing or using our services, you agree to be bound by these Terms & Conditions. Please read them carefully before using our platform.
+                    </p>
 
-            <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">2. User Responsibilities</h3>
-            <ul class="list-disc list-inside space-y-2">
-                <li>You agree not to misuse our services.</li>
-                <li>You are responsible for maintaining the confidentiality of your account.</li>
-                <li>You must provide accurate and up-to-date information when using our services.</li>
-            </ul>
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">1. Acceptance of Terms</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                By using ULO AI, you acknowledge that you have read, understood, and agree to comply with these
+                                Terms & Conditions. If you do not agree, you should not use our services.
+                            </p>
+                        </div>
 
-            <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">3. Limitation of Liability</h3>
-            <p class="mb-4">
-                We are not responsible for damages resulting from the use or inability to use our services.
-                Our liability is limited to the maximum extent permitted by law.
-            </p>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">2. User Responsibilities</h3>
+                            <ul class="space-y-3 text-gray-600">
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-check text-green-500 mt-1"></i>
+                                    <span>You agree not to misuse our services for illegal activities.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-check text-green-500 mt-1"></i>
+                                    <span>You are responsible for maintaining the confidentiality of your account password.</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-check text-green-500 mt-1"></i>
+                                    <span>You must provide accurate and up-to-date information during registration.</span>
+                                </li>
+                            </ul>
+                        </div>
 
-            <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">4. Changes to Terms</h3>
-            <p>
-                We may update these Terms & Conditions from time to time. Continued use of our services means you accept
-                the updated terms.
-            </p>
-        </section>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">3. Limitation of Liability</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                We are not responsible for indirect or consequential damages resulting from the use or inability to use our services.
+                                Our liability is limited to the maximum extent permitted by applicable law.
+                            </p>
+                        </div>
 
-    </main>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">4. Changes to Terms</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                We may update these Terms & Conditions from time to time. Continued use of our services after any changes means you accept the updated terms.
+                            </p>
+                        </div>
+                    </div>
+                </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <p class="text-sm">&copy; 2025 PurpleKida. All rights reserved.</p>
+                <div id="contact" class="text-center py-8">
+                    <p class="text-gray-500">Still have questions about our policies?</p>
+                    <a href="contact.html" class="text-brand-purple font-semibold hover:underline mt-1 inline-block">Contact our Support Team &rarr;</a>
+                </div>
+
+            </main>
         </div>
-    </footer>
+    </div>
 
+   <div id="footer"></div>
+
+    <script src="js/script.js"></script>
 </body>
-
 </html>

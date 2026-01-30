@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGOs & Foundations - ULO AI</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            yellow: '#ffde59',
+                            purple: '#6b21a8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; }
+        html { scroll-behavior: smooth; }
+        /* Soft pattern for background */
+        .bg-dots {
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-700">
+
+    <div id="header"></div>
+    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-green-50 via-white to-brand-yellow/10"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+                    <i class="fas fa-globe-africa"></i> Social Impact
+                </div>
+                <h1 class="text-4xl lg:text-6xl font-extrabold leading-tight text-gray-900">
+                    Transforming Education for <span class="text-brand-purple">Every Learner</span>
+                </h1>
+                <p class="text-lg text-gray-600 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+                    Partner with ULO AI to deliver accessible, AI-driven learning solutions to underserved communities across Africa. Bridge the digital divide with technology that scales.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                    <a href="#partner-form" class="bg-brand-purple text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-purple-800 hover:scale-105 transition shadow-lg">
+                        Collaborate With Us
+                    </a>
+                    <a href="#impact" class="px-8 py-4 rounded-full border border-gray-300 font-semibold hover:border-brand-purple hover:text-brand-purple transition">
+                        See Impact
+                    </a>
+                </div>
+            </div>
+
+            <div class="relative">
+                <div class="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                    <img src="https://placehold.co/800x600/16a34a/FFF?text=Community+Learning+Initiative" alt="Students using ULO AI" class="w-full h-auto object-cover hover:scale-105 transition duration-700">
+                    
+                    <div class="absolute bottom-6 left-6 bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-lg border-l-4 border-brand-yellow max-w-xs">
+                        <p class="text-xs text-gray-500 uppercase font-bold mb-1">Real-time Impact</p>
+                        <p class="text-gray-800 text-sm font-semibold">"This tool has doubled our student engagement in rural districts."</p>
+                    </div>
+                </div>
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-brand-yellow rounded-full mix-blend-multiply filter blur-2xl opacity-50"></div>
+                <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-brand-purple rounded-full mix-blend-multiply filter blur-2xl opacity-50"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why NGOs Choose ULO AI</h2>
+                <p class="text-gray-600">We build technology specifically designed to solve the challenges of educational access and quality.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:shadow-lg transition text-center group">
+                    <div class="w-14 h-14 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-2xl mb-4 mx-auto group-hover:scale-110 transition">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Expand Access</h3>
+                    <p class="text-sm text-gray-600">Bring world-class AI tutoring to students who lack access to qualified teachers.</p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:shadow-lg transition text-center group">
+                    <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-2xl mb-4 mx-auto group-hover:scale-110 transition">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Data-Driven Impact</h3>
+                    <p class="text-sm text-gray-600">Generate automated reports on student progress to satisfy donor requirements.</p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:shadow-lg transition text-center group">
+                    <div class="w-14 h-14 bg-purple-100 text-brand-purple rounded-full flex items-center justify-center text-2xl mb-4 mx-auto group-hover:scale-110 transition">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Low Bandwidth</h3>
+                    <p class="text-sm text-gray-600">Optimized for areas with poor connectivity. Works offline and syncs when online.</p>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-gray-50 border border-gray-100 hover:shadow-lg transition text-center group">
+                    <div class="w-14 h-14 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-2xl mb-4 mx-auto group-hover:scale-110 transition">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Scalable</h3>
+                    <p class="text-sm text-gray-600">Deploy to 50 or 50,000 students instantly. The platform grows with your program.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gray-900 text-white relative">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="text-brand-yellow font-bold uppercase tracking-widest text-sm mb-2 block">Collaboration Model</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">How We Work Together</h2>
+                    <p class="text-gray-300 mb-8 text-lg">We don't just provide software; we act as your technology partner from pilot to full-scale deployment.</p>
+                    
+                    <div class="space-y-8">
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-yellow text-gray-900 flex items-center justify-center font-bold shrink-0">1</div>
+                            <div>
+                                <h4 class="font-bold text-lg">Co-Design</h4>
+                                <p class="text-sm text-gray-400">We align our AI tools with your specific curriculum goals and regional languages.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-purple border border-white/20 text-white flex items-center justify-center font-bold shrink-0">2</div>
+                            <div>
+                                <h4 class="font-bold text-lg">Deploy & Train</h4>
+                                <p class="text-sm text-gray-400">We provide onboarding for local facilitators and set up student accounts.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-purple border border-white/20 text-white flex items-center justify-center font-bold shrink-0">3</div>
+                            <div>
+                                <h4 class="font-bold text-lg">Monitor & Measure</h4>
+                                <p class="text-sm text-gray-400">Access real-time dashboards to track usage, improvements, and outcomes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/10">
+                    <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                        <i class="fas fa-file-invoice text-brand-yellow"></i> Impact Report Example
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Literacy Improvement</span>
+                                <span class="text-green-400 font-bold">+34%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Student Engagement</span>
+                                <span class="text-brand-yellow font-bold">92%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-brand-yellow h-2 rounded-full" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Assignments Completed</span>
+                                <span class="text-blue-400 font-bold">15,400+</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-dots">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900">Partnership Opportunities</h2>
+                <p class="text-gray-600">Flexible models to suit your funding structure and timeline.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border-t-4 border-gray-400 hover:-translate-y-1 transition duration-300">
+                    <h3 class="text-xl font-bold mb-4">Pilot Program</h3>
+                    <p class="text-gray-600 text-sm mb-6 min-h-[60px]">Test ULO AI in a single community or school cluster to validate impact before scaling.</p>
+                    <ul class="text-sm space-y-3 mb-6">
+                        <li class="flex gap-2"><i class="fas fa-check text-green-500"></i> Up to 500 students</li>
+                        <li class="flex gap-2"><i class="fas fa-check text-green-500"></i> 3-6 month duration</li>
+                        <li class="flex gap-2"><i class="fas fa-check text-green-500"></i> Basic reporting</li>
+                    </ul>
+                    <a href="#partner-form" class="text-brand-purple font-bold text-sm hover:underline">Start a Pilot &rarr;</a>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-xl border-t-4 border-brand-yellow transform scale-105 relative z-10">
+                    <div class="absolute top-0 right-0 bg-brand-yellow text-xs font-bold px-2 py-1 uppercase rounded-bl-lg">Most Common</div>
+                    <h3 class="text-xl font-bold mb-4">Grant / CSR Initiative</h3>
+                    <p class="text-gray-600 text-sm mb-6 min-h-[60px]">Jointly funded programs designed for measurable educational outcomes over a fiscal year.</p>
+                    <ul class="text-sm space-y-3 mb-6">
+                        <li class="flex gap-2"><i class="fas fa-check text-green-500"></i> 1,000+ students</li>
+                        <li class="flex gap-2"><i class="fas fa-check text-green-500"></i> Co-branded interface</li>
+                        <li class="flex gap-2"><i class="fas fa-check text-green-500"></i> Detailed impact analytics</li>
+                    </ul>
+                    <a href="#partner-form" class="bg-brand-purple text-white px-6 py-2 rounded-lg font-bold text-sm block text-center hover:bg-purple-800 transition">Collaborate</a>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border-t-4 border-brand-purple hover:-translate-y-1 transition duration-300">
+                    <h3 class="text-xl font-bold mb-4">Regional Scale</h3>
+                    <p class="text-gray-600 text-sm mb-6 min-h-[60px]">Full deployment across a state, region, or entire beneficiary network.</p>
+                    <ul class="text-sm space-y-3 mb-6">
+                        <li class="flex gap-2"><i class="fas fa-check text-green-500"></i> Unlimited students</li>
+                        <li class="flex gap-2"><i class="fas fa-check text-green-500"></i> Custom curriculum dev</li>
+                        <li class="flex gap-2"><i class="fas fa-check text-green-500"></i> API integration</li>
+                    </ul>
+                    <a href="#partner-form" class="text-brand-purple font-bold text-sm hover:underline">Discuss Scaling &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="partner-form" class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="bg-brand-purple rounded-3xl overflow-hidden shadow-2xl flex flex-col lg:flex-row">
+                
+                <div class="lg:w-1/2 p-12 text-white flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-4">Let's make a difference.</h2>
+                        <p class="text-purple-200 mb-8">Fill out the form to schedule a consultation with our social impact team. We reply within 24 hours.</p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="bg-white/10 p-3 rounded-lg"><i class="fas fa-envelope"></i></div>
+                                <div>
+                                    <p class="text-sm text-purple-200 uppercase font-bold">Email Us</p>
+                                    <p class="font-semibold">impact@uloai.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="bg-white/10 p-3 rounded-lg"><i class="fas fa-map-marker-alt"></i></div>
+                                <div>
+                                    <p class="text-sm text-purple-200 uppercase font-bold">Headquarters</p>
+                                    <p class="font-semibold">Lagos, Nigeria</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 bg-white p-12">
+                    <form class="space-y-5">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Name</label>
+                                <input type="text" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-purple transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Organization</label>
+                                <input type="text" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-purple transition">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Email Address</label>
+                            <input type="email" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-purple transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Partnership Interest</label>
+                            <select class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-purple transition">
+                                <option>Grant / CSR Project</option>
+                                <option>Pilot Program</option>
+                                <option>Technical Integration</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Tell us about your goals</label>
+                            <textarea rows="3" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-purple transition"></textarea>
+                        </div>
+
+                        <button class="w-full bg-brand-yellow text-gray-900 font-bold py-4 rounded-lg hover:bg-yellow-400 transition shadow-md">
+                            Submit Inquiry
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-2xl font-bold text-center mb-10 text-gray-900">Questions NGOs Ask</h2>
+            
+            <div class="space-y-4">
+                <details class="group bg-white rounded-lg shadow-sm p-4 cursor-pointer">
+                    <summary class="flex justify-between items-center font-semibold text-gray-800 list-none">
+                        Can ULO AI work without internet?
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down text-sm"></i></span>
+                    </summary>
+                    <p class="text-gray-600 mt-3 text-sm leading-relaxed">
+                        Yes. We have low-bandwidth modes and offline-sync capabilities specifically designed for rural deployments. Students can complete assignments offline, and data syncs when connectivity is restored.
+                    </p>
+                </details>
+
+                <details class="group bg-white rounded-lg shadow-sm p-4 cursor-pointer">
+                    <summary class="flex justify-between items-center font-semibold text-gray-800 list-none">
+                        How do we measure impact?
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down text-sm"></i></span>
+                    </summary>
+                    <p class="text-gray-600 mt-3 text-sm leading-relaxed">
+                        We provide a Partner Dashboard that tracks granular metrics: time spent learning, quiz scores, improvement over time, and completion rates. These can be exported for donor reports.
+                    </p>
+                </details>
+
+                <details class="group bg-white rounded-lg shadow-sm p-4 cursor-pointer">
+                    <summary class="flex justify-between items-center font-semibold text-gray-800 list-none">
+                        Can the content be localized?
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down text-sm"></i></span>
+                    </summary>
+                    <p class="text-gray-600 mt-3 text-sm leading-relaxed">
+                        Absolutely. ULO AI supports multiple curricula (WAEC, JAMB, Cambridge, etc.) and can be adapted to include local languages or specific programmatic content provided by the NGO.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer"></div>
+    <script src="js/script.js"></script>
+
+</body>
+</html>

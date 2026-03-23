@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+/* ─── Custom Brand Colors ─────────────────────────── */
+@theme {
+  --color-brand-yellow: #ffde59;
+  --color-brand-purple: #6b21a8;
+  --font-family-heading: "Montserrat", sans-serif;
+  --font-family-sans: "Inter", sans-serif;
+}
+
+/* ─── Global Base ─────────────────────────────────── */
+body {
+  font-family: "Montserrat", sans-serif;
+  overflow-x: hidden;
+}
+
+/* ─── Keyframes ───────────────────────────────────── */
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Custom Utilities ────────────────────────────── */
+@layer utilities {
+  /* Float animations */
+  .animate-float-slow {
+    animation: float-y 6s ease-in-out infinite;
+  }
+  .animate-float-medium {
+    animation: float-y 4s ease-in-out infinite;
+  }
+  .animate-float-fast {
+    animation: float-y 3s ease-in-out infinite;
+  }
+
+  /* Fade-in-up (page load) */
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+  }
+
+  /* Animation delays */
+  .anim-delay-100 {
+    animation-delay: 0.1s;
+  }
+  .anim-delay-200 {
+    animation-delay: 0.2s;
+  }
+  .anim-delay-300 {
+    animation-delay: 0.3s;
+  }
+}

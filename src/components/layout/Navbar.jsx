@@ -106,7 +106,7 @@ const Navbar = () => {
             <NavLink to="/about" className={navLinkClass}>
               About Us
             </NavLink>
-            <NavLink to="/quiz-competition" className={navLinkClass}>
+            <NavLink to="/competition" className={navLinkClass}>
               Quiz Competition
             </NavLink>
             <NavLink to="/contact" className={navLinkClass}>
@@ -263,7 +263,7 @@ const Navbar = () => {
             About Us
           </NavLink>
           <NavLink
-            to="/quiz-competition"
+            to="/competition"
             onClick={closeMobile}
             className="hover:text-yellow-400 transition"
           >

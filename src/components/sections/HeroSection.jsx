@@ -43,7 +43,7 @@ const HeroSection = () => {
           {/* CTA Buttons */}
           <div className="fade-in-up anim-delay-300 flex flex-col sm:flex-row items-center gap-4 mb-8">
             <a
-              href="#"
+              href="https://play.google.com/store/apps/details?id=com.axogenesis.ulo_ai"
               className="w-full sm:w-auto bg-purple-900 hover:bg-purple-800 text-white px-8 py-3.5 rounded-xl shadow-lg font-bold transition flex justify-center items-center gap-3"
             >
               <span>Download App</span>

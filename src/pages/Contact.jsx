@@ -40,7 +40,11 @@ const Contact = () => {
     e.preventDefault();
     setStatus("sending");
     try {
-      const res = await fetch("http://127.0.0.1:8080/web/contact", {
+      // Get API URL from environment variable
+      const apiUrl = import.meta.env.VITE_API_URL;
+      console.log(apiUrl);
+      // Send data to API endpoint
+      const res = await fetch(`${apiUrl}/web/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

@@ -59,7 +59,10 @@ const QuizRegistrationForm = () => {
 
     try {
       // Send data to API endpoint
-      const response = await fetch("https://ulo-upgrade.onrender.com/quiz-registration", {
+    //  get api from env variable
+    const apiUrl = import.meta.env.VITE_API_URL;
+    console.log(apiUrl);
+      const response = await fetch(`${apiUrl}/quiz-registration`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

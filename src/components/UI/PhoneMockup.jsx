@@ -17,7 +17,11 @@ const PhoneMockup = ({ className = "" }) => (
     <div className="overflow-hidden rounded-[2.1rem] bg-paper">
       {/* app bar */}
       <div className="flex items-center gap-3 bg-brand-400 px-4 pt-8 pb-4">
-        <img src="/img/cropped.png" alt="" className="h-9 w-9 rounded-xl border-2 border-ink-900 bg-paper object-contain p-1" />
+        <img
+          src="/img/cropped.png"
+          alt=""
+          className="h-9 w-9 rounded-xl border-2 border-ink-900 bg-paper object-contain p-1"
+        />
         <div className="leading-tight">
           <p className="text-sm font-extrabold text-ink-900">ULO Tutor</p>
           <p className="text-[11px] font-medium text-ink-700">Online · Biology</p>

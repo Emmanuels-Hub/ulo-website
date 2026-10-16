@@ -27,9 +27,21 @@ const StoreButtons = ({ tone = "dark", className = "" }) => {
 
   return (
     <div className={`flex flex-wrap gap-3 ${className}`}>
-      <StoreButton href={general.playStoreUrl} Icon={FaGooglePlay} small="Get it on" big="Google Play" styles={styles} />
+      <StoreButton
+        href={general.playStoreUrl}
+        Icon={FaGooglePlay}
+        small="Get it on"
+        big="Google Play"
+        styles={styles}
+      />
       {general.appStoreUrl && (
-        <StoreButton href={general.appStoreUrl} Icon={FaApple} small="Download on the" big="App Store" styles={styles} />
+        <StoreButton
+          href={general.appStoreUrl}
+          Icon={FaApple}
+          small="Download on the"
+          big="App Store"
+          styles={styles}
+        />
       )}
     </div>
   );

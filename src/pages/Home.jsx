@@ -22,16 +22,16 @@ const Home = () => {
   const { faqs } = useSiteContent();
 
   return (
-  <>
-    <Seo jsonLd={faqs.items?.length ? faqJsonLd(faqs.items) : undefined} />
-    <HomeHero />
-    <FeatureCards />
-    <HowItWorks />
-    <ConfidenceSection />
-    <Testimonials />
-    <HomeFaq />
-    <CtaBand />
-  </>
+    <>
+      <Seo jsonLd={faqs.items?.length ? faqJsonLd(faqs.items) : undefined} />
+      <HomeHero />
+      <FeatureCards />
+      <HowItWorks />
+      <ConfidenceSection />
+      <Testimonials />
+      <HomeFaq />
+      <CtaBand />
+    </>
   );
 };
 

@@ -57,8 +57,8 @@ const Footer = () => {
               <img src="/img/cropped.png" alt="ULO AI" className="h-12 w-auto" />
             </Link>
             <p className="mt-5 max-w-xs leading-relaxed text-ink-600">
-              Your friendly AI study buddy — helping Nigerian students prepare smarter and walk into every exam
-              with confidence.
+              Your friendly AI study buddy — helping Nigerian students prepare smarter and walk into every exam with
+              confidence.
             </p>
             <StoreButtons className="mt-6" />
 
@@ -113,7 +113,10 @@ const Footer = () => {
               <h2 className="mb-4 text-sm font-extrabold tracking-wider text-ink-900 uppercase">Talk to us</h2>
               <ul className="space-y-4 text-[15px]">
                 <li>
-                  <a href={`mailto:${general.email}`} className="group flex items-center gap-3 text-ink-700 hover:text-ink-900">
+                  <a
+                    href={`mailto:${general.email}`}
+                    className="group flex items-center gap-3 text-ink-700 hover:text-ink-900"
+                  >
                     <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-100 group-hover:bg-brand-400">
                       <LuMail className="h-4 w-4" aria-hidden="true" />
                     </span>
@@ -150,7 +153,7 @@ const Footer = () => {
           <p>
             &copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.
           </p>
-          <p>Made with care for students in Nigeria 🇳🇬</p>
+          <p>Made with care for students in Nigeria 💛</p>
         </div>
       </div>
     </footer>

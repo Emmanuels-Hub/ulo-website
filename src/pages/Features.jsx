@@ -1,222 +1,215 @@
-const featureSections = [
+import { Link } from "react-router-dom";
+import {
+  LuArrowRight,
+  LuCheck,
+  LuChartLine,
+  LuCloudOff,
+  LuFileText,
+  LuGraduationCap,
+  LuLayers,
+  LuMessageCircle,
+  LuSchool,
+  LuSmartphone,
+  LuTimer,
+  LuTrophy,
+  LuWandSparkles,
+} from "react-icons/lu";
+import Seo from "../components/Seo";
+import CtaBand from "../components/home/CtaBand";
+import { ChatMock, GeneratorMock, ProgressMock, SimulatorMock } from "../components/features/FeatureMocks";
+import Reveal from "../components/UI/Reveal";
+import SectionHeading from "../components/UI/SectionHeading";
+import { EXAMS } from "../config/site";
+
+const features = [
   {
-    icon: "fas fa-brain",
-    iconBg: "bg-purple-100",
-    iconColor: "text-purple-700",
-    glowFrom: "from-yellow-300",
-    glowTo: "to-orange-300",
-    title: "AI-Powered Insights",
-    body: "Stop guessing and start knowing. ULO analyzes your workflow patterns to suggest optimisations, predict bottlenecks, and automate mundane tasks.",
-    bullets: [
-      "Smart Task Prioritization",
-      "Automated Reporting",
-      "Workflow Suggestions",
+    id: "ai-tutor",
+    icon: LuMessageCircle,
+    eyebrow: "AI Chat Tutor",
+    title: "A patient tutor who's always awake",
+    body: "Stuck at midnight before a test? Ask ULO. It breaks hard topics into small, friendly steps and keeps explaining until it clicks — no question is too basic.",
+    points: [
+      "Covers your school subjects",
+      "Step-by-step working, not just answers",
+      "Ask follow-ups in your own words",
     ],
-    img: "https://placehold.co/600x400/white/e2e8f0?text=AI+Feature+Screenshot",
-    imgAlt: "AI Features",
-    reverse: false,
-    bg: "bg-white",
+    Mock: ChatMock,
   },
   {
-    icon: "fas fa-users-cog",
-    iconBg: "bg-yellow-100",
-    iconColor: "text-yellow-600",
-    glowFrom: "from-purple-600",
-    glowTo: "to-blue-500",
-    title: "Seamless Collaboration",
-    body: "Keep everyone on the same page. Whether your team is in the office or remote, ULO provides real-time updates, chat, and file sharing in one place.",
-    learnMore: "#",
-    img: "https://placehold.co/600x400/white/e2e8f0?text=Collaboration+Screenshot",
-    imgAlt: "Collaboration Features",
-    reverse: true,
-    bg: "bg-gray-50",
+    id: "question-generator",
+    icon: LuFileText,
+    eyebrow: "Question Generator",
+    title: "Turn your notes into a personal quiz",
+    body: "Snap a photo of your notebook or upload a PDF or Word document. ULO reads it and creates exam-style questions on exactly what you studied.",
+    points: ["Photos, PDFs and Word documents", "Exam-style questions in seconds", "Check your answers instantly"],
+    Mock: GeneratorMock,
   },
   {
-    icon: "fas fa-mobile-alt",
-    iconBg: "bg-green-100",
-    iconColor: "text-green-600",
-    glowFrom: "from-pink-400",
-    glowTo: "to-yellow-300",
-    title: "Mobile Freedom",
-    body: "Work doesn't stop when you leave your desk. Our mobile app gives you full access to your projects, tasks, and team communications on the go.",
-    img: "https://placehold.co/600x400/white/e2e8f0?text=Mobile+App+Screenshot",
-    imgAlt: "Mobile App",
-    reverse: false,
-    bg: "bg-white",
+    id: "exam-simulator",
+    icon: LuTimer,
+    eyebrow: "Exam Simulator",
+    title: "Rehearse the real exam before exam day",
+    body: "Practise with the format, the timer and the pressure of WAEC, JAMB and NECO. By the time you sit the real thing, it already feels familiar.",
+    points: ["Timed like the real exam", "Realistic question styles", "Practise offline once downloaded"],
+    Mock: SimulatorMock,
+  },
+  {
+    id: "progress",
+    icon: LuChartLine,
+    eyebrow: "Progress Tracker",
+    title: "Know exactly what to study next",
+    body: "ULO keeps track of every test you take, shows your strong and weak topics, and points you to where a little practice will make the biggest difference.",
+    points: ["Scores by subject and topic", "Spot weak areas at a glance", "See your improvement over time"],
+    Mock: ProgressMock,
   },
 ];
 
-const scaleCards = [
+const extras = [
   {
-    icon: "fas fa-lock",
-    bg: "bg-yellow-400",
-    text: "text-gray-900",
-    title: "Enterprise Security",
-    desc: "Bank-level encryption to keep your company data safe and compliant.",
+    icon: LuSmartphone,
+    title: "Made for your phone",
+    desc: "Everything works from the app — study on the bus, at break or at home.",
   },
   {
-    icon: "fas fa-bolt",
-    bg: "bg-purple-700",
-    text: "text-white",
-    title: "Instant Sync",
-    desc: "Changes made on one device appear everywhere instantly.",
+    icon: LuCloudOff,
+    title: "Offline practice",
+    desc: "Download practice exams and take them without data. They sync when you're back online.",
   },
   {
-    icon: "fas fa-plug",
-    bg: "bg-blue-500",
-    text: "text-white",
-    title: "200+ Integrations",
-    desc: "Connect with Slack, Google Drive, Zoom, and more.",
+    icon: LuTrophy,
+    title: "Monthly quiz competition",
+    desc: "Test yourself against students across Nigeria and win cash prizes.",
+    to: "/competition",
+  },
+  {
+    icon: LuLayers,
+    title: "Free to start",
+    desc: "Core tools are free. Upgrade to Premium for unlimited questions and deeper analytics.",
+  },
+  {
+    icon: LuGraduationCap,
+    title: "Every major exam",
+    desc: `${EXAMS.slice(0, 3).join(", ")}, Post-UTME and university entrance tests.`,
+  },
+  {
+    icon: LuSchool,
+    title: "For schools too",
+    desc: "Teachers and institutions can manage students, exams and results in one place.",
+    to: "/institutional-partners",
   },
 ];
 
 const Features = () => (
   <>
-    {/* ─── Hero ─── */}
-    <section className="pt-32 pb-20 bg-gradient-to-br from-yellow-50 via-white to-purple-50">
-      <div className="max-w-7xl mx-auto px-6 text-center">
-        <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6 leading-tight fade-in-up">
-          More than just a tool.
-          <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-800 to-purple-600">
-            It's your Intelligent Partner.
-          </span>
-        </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-10 fade-in-up anim-delay-100">
-          Discover the features that make ULO AI the ultimate platform for
-          organising your team, automating workflows, and boosting productivity.
-        </p>
-        <div className="flex flex-col sm:flex-row justify-center gap-4 fade-in-up anim-delay-200">
-          <a
-            href="#signup"
-            className="bg-yellow-400 text-gray-900 px-8 py-3 rounded-full font-bold shadow-lg hover:shadow-xl hover:-translate-y-1 transition transform"
-          >
-            Try for Free
-          </a>
-          <a
-            href="#demo"
-            className="px-8 py-3 rounded-full border border-gray-300 font-semibold hover:border-purple-700 hover:text-purple-700 transition"
-          >
-            Watch Demo
-          </a>
-        </div>
+    <Seo
+      title="Features"
+      description="See everything ULO AI can do: a 24/7 AI chat tutor, a question generator that turns your notes into quizzes, realistic WAEC/JAMB/NECO exam simulations and progress tracking."
+    />
 
-        {/* Mock browser frame */}
-        <div className="mt-16 fade-in-up anim-delay-300">
-          <div className="relative mx-auto border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[260px] md:h-[500px] w-[90%] md:w-[80%] shadow-2xl overflow-hidden">
-            <div className="rounded-[2rem] overflow-hidden w-full h-full bg-white">
-              <img
-                src="https://placehold.co/1200x800/EEE/31343C?text=Main+App+Dashboard+Screenshot"
-                className="w-full h-full object-cover"
-                alt="App Dashboard"
-              />
-            </div>
-          </div>
-        </div>
+    {/* Hero */}
+    <section className="relative overflow-hidden py-16 md:py-24">
+      <div
+        aria-hidden="true"
+        className="absolute -top-24 left-1/2 h-[26rem] w-[26rem] -translate-x-1/2 rounded-full bg-brand-100"
+      />
+      <div className="container-page relative text-center">
+        <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-300 bg-brand-50 px-4 py-1.5 text-sm font-semibold">
+          <LuWandSparkles className="h-4 w-4" aria-hidden="true" /> Features
+        </p>
+        <h1 className="mx-auto max-w-4xl text-[2.5rem] leading-[1.08] font-extrabold tracking-tight text-balance sm:text-6xl">
+          One app. Every tool you need to <span className="highlight">ace your exams.</span>
+        </h1>
+        <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 md:text-xl">
+          Learn it, practise it, rehearse it, track it. ULO brings your tutor, your question bank and your exam hall
+          together in your pocket.
+        </p>
+
+        <nav aria-label="Jump to feature" className="mt-10 flex flex-wrap justify-center gap-3">
+          {features.map(({ id, icon: Icon, eyebrow }) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              className="inline-flex items-center gap-2 rounded-full border-2 border-ink-900 bg-white px-5 py-2.5 font-bold transition hover:-translate-y-0.5 hover:bg-brand-400 hover:shadow-press"
+            >
+              <Icon className="h-5 w-5" aria-hidden="true" /> {eyebrow}
+            </a>
+          ))}
+        </nav>
       </div>
     </section>
 
-    {/* ─── Alternating feature sections ─── */}
-    {featureSections.map((f) => (
-      <section key={f.title} className={`py-20 overflow-hidden ${f.bg}`}>
-        <div
-          className={`max-w-7xl mx-auto px-6 flex flex-col ${f.reverse ? "md:flex-row-reverse" : "md:flex-row"} items-center gap-16`}
-        >
-          <div className="md:w-1/2 space-y-6">
-            <div
-              className={`w-12 h-12 ${f.iconBg} ${f.iconColor} rounded-xl flex items-center justify-center text-2xl`}
-            >
-              <i className={f.icon} />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-              {f.title}
+    {/* Feature deep-dives */}
+    {features.map(({ id, icon: Icon, eyebrow, title, body, points, Mock }, i) => (
+      <section key={id} id={id} className={`scroll-mt-24 py-16 md:py-24 ${i % 2 ? "bg-white" : "bg-brand-50"}`}>
+        <div className="container-page grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+          <Reveal className={i % 2 ? "lg:order-2" : ""}>
+            <span className="mb-5 inline-flex items-center gap-2 rounded-full bg-ink-900 px-4 py-1.5 text-sm font-bold text-brand-400">
+              <Icon className="h-4 w-4" aria-hidden="true" /> {eyebrow}
+            </span>
+            <h2 className="text-3xl leading-tight font-extrabold tracking-tight text-balance md:text-[2.75rem]">
+              {title}
             </h2>
-            <p className="text-lg text-gray-600 leading-relaxed">{f.body}</p>
-            {f.bullets && (
-              <ul className="space-y-3 text-gray-600">
-                {f.bullets.map((b) => (
-                  <li key={b} className="flex items-center gap-3">
-                    <i className="fas fa-check-circle text-yellow-400" /> {b}
-                  </li>
-                ))}
-              </ul>
-            )}
-            {f.learnMore && (
-              <a
-                href={f.learnMore}
-                className="text-purple-700 font-bold hover:underline"
-              >
-                See how it works →
-              </a>
-            )}
-          </div>
-
-          <div className="md:w-1/2 relative">
-            <div
-              className={`absolute -inset-4 bg-gradient-to-r ${f.glowFrom} ${f.glowTo} rounded-2xl blur-lg opacity-30`}
-            />
-            <img
-              src={f.img}
-              alt={f.imgAlt}
-              className="relative rounded-2xl shadow-2xl border border-gray-100 transform hover:scale-[1.02] transition duration-500"
-            />
-          </div>
+            <p className="mt-5 text-lg leading-relaxed text-ink-600">{body}</p>
+            <ul className="mt-7 space-y-3">
+              {points.map((p) => (
+                <li key={p} className="flex items-center gap-3 font-semibold">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-400">
+                    <LuCheck className="h-4 w-4" strokeWidth={3} aria-hidden="true" />
+                  </span>
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal delay={120} className={`flex justify-center ${i % 2 ? "lg:order-1" : ""}`}>
+            <Mock />
+          </Reveal>
         </div>
       </section>
     ))}
 
-    {/* ─── Scale grid ─── */}
-    <section className="py-20 bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-6 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-16">
-          Everything you need to scale
-        </h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {scaleCards.map((c) => (
-            <div
-              key={c.title}
-              className="p-6 bg-gray-800 rounded-2xl hover:bg-gray-700 transition"
-            >
-              <div
-                className={`w-12 h-12 ${c.bg} ${c.text} rounded-full flex items-center justify-center mx-auto mb-4 text-xl`}
-              >
-                <i className={c.icon} />
-              </div>
-              <h3 className="text-xl font-bold mb-2">{c.title}</h3>
-              <p className="text-gray-400 text-sm">{c.desc}</p>
-            </div>
-          ))}
+    {/* Extras */}
+    <section className="py-20 md:py-28">
+      <div className="container-page">
+        <SectionHeading eyebrow="And there's more" icon={LuLayers} title="Little things that make a big difference" />
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {extras.map(({ icon: Icon, title, desc, to }, i) => {
+            const inner = (
+              <>
+                <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-100 transition-colors group-hover:bg-brand-400">
+                  <Icon className="h-6 w-6" aria-hidden="true" />
+                </span>
+                <h3 className="flex items-center gap-2 text-lg font-extrabold">
+                  {title}
+                  {to && (
+                    <LuArrowRight
+                      className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                      aria-hidden="true"
+                    />
+                  )}
+                </h3>
+                <p className="mt-2 leading-relaxed text-ink-600">{desc}</p>
+              </>
+            );
+            const cls =
+              "group block h-full rounded-[2rem] border border-ink-200 bg-white p-7 transition hover:-translate-y-1 hover:border-ink-900";
+            return (
+              <Reveal key={title} delay={(i % 3) * 80}>
+                {to ? (
+                  <Link to={to} className={cls}>
+                    {inner}
+                  </Link>
+                ) : (
+                  <div className={cls}>{inner}</div>
+                )}
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
 
-    {/* ─── CTA Banner ─── */}
-    <section className="py-24 bg-yellow-400 relative overflow-hidden">
-      <div
-        className="absolute inset-0 opacity-10 pointer-events-none"
-        style={{
-          backgroundImage: "radial-gradient(#000 1px, transparent 1px)",
-          backgroundSize: "20px 20px",
-        }}
-      />
-      <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-        <h2 className="text-4xl font-extrabold text-gray-900 mb-6">
-          Ready to transform your workflow?
-        </h2>
-        <p className="text-xl text-gray-800 mb-10">
-          Join 10,000+ teams using ULO AI to work smarter, not harder.
-        </p>
-        <a
-          href="#signup"
-          className="bg-gray-900 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-purple-900 hover:scale-105 transition transform shadow-xl"
-        >
-          Start Your Free Trial
-        </a>
-        <p className="mt-4 text-sm text-gray-700">
-          No credit card required. 14-day free trial.
-        </p>
-      </div>
-    </section>
+    <CtaBand />
   </>
 );
 

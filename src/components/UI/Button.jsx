@@ -10,8 +10,7 @@ const variants = {
   /* Ink — strong action on yellow or light surfaces */
   dark: "bg-ink-900 text-white hover:-translate-y-0.5 hover:bg-ink-800 active:translate-y-0",
   /* Outline — secondary action */
-  outline:
-    "border-2 border-ink-900 text-ink-900 hover:bg-ink-900 hover:text-white",
+  outline: "border-2 border-ink-900 text-ink-900 hover:bg-ink-900 hover:text-white",
   /* Soft — quiet secondary on light backgrounds */
   soft: "bg-brand-100 text-ink-900 hover:bg-brand-200",
   /* Ghost — text-like */
@@ -42,12 +41,7 @@ const Button = ({ variant = "primary", size = "md", to, href, className = "", ch
   if (href) {
     const external = href.startsWith("http");
     return (
-      <a
-        href={href}
-        className={classes}
-        {...(external && { target: "_blank", rel: "noopener noreferrer" })}
-        {...props}
-      >
+      <a href={href} className={classes} {...(external && { target: "_blank", rel: "noopener noreferrer" })} {...props}>
         {children}
       </a>
     );

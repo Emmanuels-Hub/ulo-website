@@ -33,7 +33,5 @@ export async function fetchCollection(collection, { signal } = {}) {
   if (!res.ok) throw new Error(`Firestore ${collection}: HTTP ${res.status}`);
   const json = await res.json();
 
-  return Object.fromEntries(
-    (json.documents || []).map((d) => [d.name.split("/").pop(), decodeFields(d.fields)]),
-  );
+  return Object.fromEntries((json.documents || []).map((d) => [d.name.split("/").pop(), decodeFields(d.fields)]));
 }

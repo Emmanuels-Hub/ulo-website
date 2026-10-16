@@ -31,6 +31,9 @@ export const DEFAULT_CONTENT = {
     summary:
       "A friendly academic challenge for secondary school and university students. Compete across three rounds, climb the leaderboard and win cash prizes.",
     entryFee: 1000,
+    /** Shown under the registration button — tell students what happens next (payment, links…) */
+    registrationNote:
+      "After you register, join our WhatsApp channel for payment details, round reminders and quiz links.",
     startDate: "",
     registrationDeadline: "",
     resultsDate: "",
@@ -53,7 +56,11 @@ export const DEFAULT_CONTENT = {
     ],
     optionalCount: 2,
     prizes: [
-      { place: "1st Place", amount: 100000, perks: ["Cash reward", "Certificate of excellence", "Leaderboard spotlight", "ULO AI merch"] },
+      {
+        place: "1st Place",
+        amount: 100000,
+        perks: ["Cash reward", "Certificate of excellence", "Leaderboard spotlight", "ULO AI merch"],
+      },
       { place: "2nd Place", amount: 50000, perks: ["Cash reward", "Recognition certificate", "Leaderboard feature"] },
       { place: "3rd Place", amount: 20000, perks: ["Cash reward", "Participation certificate", "Leaderboard listing"] },
     ],

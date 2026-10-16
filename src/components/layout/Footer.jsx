@@ -58,7 +58,7 @@ const Footer = () => {
               <img src="/img/cropped.png" alt="ULO AI" className="h-12 w-auto" />
             </Link>
             <p className="mt-5 max-w-xs leading-relaxed text-ink-600">
-              Your friendly AI study buddy — helping Nigerian students prepare smarter and walk into every exam with
+              Your friendly study buddy — helping Nigerian students prepare smarter and walk into every exam with
               confidence.
             </p>
             <StoreButtons className="mt-6" />

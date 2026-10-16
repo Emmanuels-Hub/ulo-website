@@ -16,7 +16,7 @@ const config = {
   seo: {
     title: "For Schools & Universities",
     description:
-      "Bring ULO AI to your school or university: an AI study companion for every student, plus a portal to enrol students, set exams and quizzes, print papers and track results.",
+      "Bring ULO AI to your school or university: exam practice and quiz competitions for every student, plus a portal to enrol students, set exams and quizzes, print papers and track results.",
   },
   hero: {
     icon: LuSchool,

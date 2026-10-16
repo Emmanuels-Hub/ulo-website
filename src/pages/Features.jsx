@@ -143,10 +143,12 @@ const Features = () => (
       <section key={id} id={id} className={`scroll-mt-24 py-16 md:py-24 ${i % 2 ? "bg-white" : "bg-brand-50"}`}>
         <div className="container-page grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <Reveal className={i % 2 ? "lg:order-2" : ""}>
-            <span className="mb-5 inline-flex items-center gap-2 rounded-full bg-ink-900 px-4 py-1.5 text-sm font-bold text-brand-400">
-              <Icon className="h-4 w-4" aria-hidden="true" /> {eyebrow}
-            </span>
-            {adult && <AgeTag className="mb-5 ml-2 align-top" />}
+            <div className="mb-5 flex items-center gap-2">
+              <span className="inline-flex items-center gap-2 rounded-full bg-ink-900 px-4 py-1.5 text-sm font-bold text-brand-400">
+                <Icon className="h-4 w-4" aria-hidden="true" /> {eyebrow}
+              </span>
+              {adult && <AgeTag className="py-1.5" />}
+            </div>
             <h2 className="text-3xl leading-tight font-extrabold tracking-tight text-balance md:text-[2.75rem]">
               {title}
             </h2>

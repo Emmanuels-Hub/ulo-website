@@ -1,30 +1,37 @@
-import HeroSection from "../components/sections/HeroSection";
-import ProcessSection from "../components/sections/ProcessSection";
-import TestimonialBanner from "../components/sections/TestimonialBanner";
-import FeaturesGrid from "../components/sections/FeaturesGrid";
-import WhyChooseSection from "../components/sections/WhyChooseSection";
-import CTASection from "../components/sections/CTASection";
-import FeaturesDetailSection from "../components/sections/FeaturesDetailSection";
-import JoinMovementSection from "../components/sections/JoinMovementSection";
-import ExamAnxietySection from "../components/sections/ExamAnxietySection";
-import StudentTestimonials from "../components/sections/StudentTestimonials";
-import FAQSection from "../components/sections/FAQSection";
+import Seo from "../components/Seo";
+import HomeHero from "../components/home/HomeHero";
+import FeatureCards from "../components/home/FeatureCards";
+import HowItWorks from "../components/home/HowItWorks";
+import ConfidenceSection from "../components/home/ConfidenceSection";
+import Testimonials from "../components/home/Testimonials";
+import HomeFaq from "../components/home/HomeFaq";
+import CtaBand from "../components/home/CtaBand";
+import { useSiteContent } from "../content/context";
+
+const faqJsonLd = (items) => ({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: items.map(({ q, a }) => ({
+    "@type": "Question",
+    name: q,
+    acceptedAnswer: { "@type": "Answer", text: a },
+  })),
+});
 
 const Home = () => {
+  const { faqs } = useSiteContent();
+
   return (
-    <>
-      <HeroSection />
-      <ProcessSection />
-      <TestimonialBanner />
-      <FeaturesGrid />
-      <WhyChooseSection />
-      <CTASection />
-      <FeaturesDetailSection />
-      <JoinMovementSection />
-      <ExamAnxietySection />
-      <StudentTestimonials />
-      <FAQSection />
-    </>
+  <>
+    <Seo jsonLd={faqs.items?.length ? faqJsonLd(faqs.items) : undefined} />
+    <HomeHero />
+    <FeatureCards />
+    <HowItWorks />
+    <ConfidenceSection />
+    <Testimonials />
+    <HomeFaq />
+    <CtaBand />
+  </>
   );
 };
 

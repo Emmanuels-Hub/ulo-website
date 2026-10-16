@@ -202,7 +202,28 @@ const Privacy = () => {
 
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    4. Changes to Terms
+                    4. AI Features
+                  </h3>
+                  <ul className="space-y-3 text-gray-600">
+                    {[
+                      "The AI tutor, voice tutor and Image Studio are powered by Google's Gemini models through Google Firebase. What you type, say or upload to these features is sent to Google to produce a response.",
+                      "You must be 18 years of age or older to use the AI features.",
+                      "Do not share personal or sensitive information (such as passwords, ID numbers or health details) with the AI features.",
+                      "AI answers can be wrong. Check important information, and do not use the AI to cheat in exams or assessments.",
+                      "You must not use the AI features to create harmful, sexual, hateful, violent or illegal content, or to try to get around their safety filters. We may limit or suspend access for misuse.",
+                      "Use of the AI features is also subject to Google's Generative AI Prohibited Use Policy.",
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-3">
+                        <i className="fas fa-check text-green-500 mt-1" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    5. Changes to Terms
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
                     We may update these Terms &amp; Conditions from time to

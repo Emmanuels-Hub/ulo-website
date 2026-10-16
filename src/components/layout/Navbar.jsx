@@ -1,44 +1,89 @@
-import { useState, useRef, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import {
+  LuBriefcase,
+  LuBookOpen,
+  LuChevronDown,
+  LuGraduationCap,
+  LuHeartHandshake,
+  LuMegaphone,
+  LuMenu,
+  LuSchool,
+  LuX,
+} from "react-icons/lu";
+import { PARTNER_LINKS } from "../../config/site";
+import { useSiteContent } from "../../content/context";
+import Button from "../UI/Button";
 
-const partnerLinks = [
-  { to: "/institutional-partners", label: "Institutional Partners" },
-  { to: "/content-partners", label: "Content & EdTech Partners" },
-  { to: "/ngos", label: "NGOs & Foundations" },
-  { to: "/corporate-learning", label: "Corporate Learning Partners" },
-  { to: "/campus-ambassadors", label: "Campus Ambassadors" },
+const partnerIcons = {
+  "/institutional-partners": LuSchool,
+  "/content-partners": LuBookOpen,
+  "/ngos": LuHeartHandshake,
+  "/corporate-learning": LuBriefcase,
+  "/campus-ambassadors": LuMegaphone,
+};
+
+const mainLinks = [
+  { to: "/features", label: "Features" },
+  { to: "/competition", label: "Quiz Competition" },
+  { to: "/about", label: "About" },
+  { to: "/help", label: "Help" },
+  { to: "/contact", label: "Contact" },
 ];
 
-const navLinkClass = ({ isActive }) =>
-  isActive
-    ? "text-yellow-400 transition-colors font-semibold"
-    : "hover:text-yellow-400 transition-colors font-semibold";
+const linkClass = ({ isActive }) =>
+  `relative rounded-full px-3.5 py-2 text-[15px] font-semibold transition-colors ${
+    isActive ? "bg-brand-100 text-ink-900" : "text-ink-700 hover:bg-ink-100 hover:text-ink-900"
+  }`;
 
 const Navbar = () => {
+  const { pathname } = useLocation();
+  const { general } = useSiteContent();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [supportDropdownOpen, setSupportDropdownOpen] = useState(false);
-  const [partnerMobileOpen, setPartnerMobileOpen] = useState(false);
-  const [supportMobileOpen, setSupportMobileOpen] = useState(false);
-
+  const [partnersOpen, setPartnersOpen] = useState(false);
+  const [mobilePartnersOpen, setMobilePartnersOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const dropdownRef = useRef(null);
-  const supportDropdownRef = useRef(null);
 
-  /* Close dropdown on outside click */
+  const [lastPath, setLastPath] = useState(pathname);
+
+  const partnersActive = PARTNER_LINKS.some((l) => l.to === pathname);
+
+  /* Close everything when the route changes */
+  if (pathname !== lastPath) {
+    setLastPath(pathname);
+    setMobileOpen(false);
+    setPartnersOpen(false);
+  }
+
+  /* Elevate header once the page scrolls */
   useEffect(() => {
-    const handler = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setDropdownOpen(false);
-      }
-      if (supportDropdownRef.current && !supportDropdownRef.current.contains(e.target)) {
-        setSupportDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* Lock body scroll when mobile menu is open */
+  /* Outside click + Escape close the dropdown / drawer */
+  useEffect(() => {
+    const onDown = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) setPartnersOpen(false);
+    };
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        setPartnersOpen(false);
+        setMobileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, []);
+
+  /* Lock body scroll while the drawer is open */
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => {
@@ -46,281 +91,210 @@ const Navbar = () => {
     };
   }, [mobileOpen]);
 
-  const closeMobile = () => setMobileOpen(false);
-
-  // Notice the empty <> fragment wrapping the return
   return (
     <>
-      <header className="fixed w-full top-0 left-0 z-30 bg-white/90 backdrop-blur-md shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between py-4">
-          {/* ── Logo ── */}
-          <NavLink to="/" className="flex items-center gap-2">
-            <img
-              src="/img/cropped.png"
-              alt="ULO AI"
-              className="w-20 object-contain"
-            />
-          </NavLink>
+      <header
+        className={`sticky top-0 z-40 border-b transition duration-300 ${
+          scrolled ? "border-ink-200 bg-paper/90 shadow-soft backdrop-blur-md" : "border-transparent bg-paper"
+        }`}
+      >
+        <div className="container-page flex h-[4.5rem] items-center justify-between gap-6">
+          <Link to="/" className="shrink-0" aria-label="ULO AI home">
+            <img src="/img/cropped.png" alt="ULO AI" width="72" height="44" className="h-10 w-auto" />
+          </Link>
 
-          {/* ── Desktop Nav ── */}
-          <nav className="hidden md:flex items-center gap-8 text-gray-700">
-            <NavLink to="/" className={navLinkClass}>
-              Home
-            </NavLink>
-            <NavLink to="/features" className={navLinkClass}>
+          {/* Desktop nav */}
+          <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
+            <NavLink to="/features" className={linkClass}>
               Features
             </NavLink>
-
-            {/* Partner dropdown */}
-            <div className="relative" ref={dropdownRef}>
-              <button
-                onClick={() => setDropdownOpen((prev) => !prev)}
-                className="flex items-center gap-1 py-6 font-semibold hover:text-yellow-400 transition-colors focus:outline-none"
-              >
-                Partner
-                <i
-                  className={`fas fa-chevron-down text-xs mt-0.5 ml-1 transition-transform duration-200 ${
-                    dropdownOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-
-              {dropdownOpen && (
-                <div className="absolute top-full left-0 w-64 bg-white rounded-xl shadow-2xl border border-gray-100 z-50">
-                  <div className="py-2">
-                    {partnerLinks.map((link) => (
-                      <NavLink
-                        key={link.to}
-                        to={link.to}
-                        onClick={() => setDropdownOpen(false)}
-                        className="block px-5 py-3 text-sm text-gray-600 hover:bg-yellow-50 hover:text-purple-700 transition-colors"
-                      >
-                        {link.label}
-                      </NavLink>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <NavLink to="/about" className={navLinkClass}>
-              About Us
-            </NavLink>
-            <NavLink to="/competition" className={navLinkClass}>
+            <NavLink to="/competition" className={linkClass}>
               Quiz Competition
             </NavLink>
-            <NavLink to="/contact" className={navLinkClass}>
-              Contact
-            </NavLink>
 
-            {/* Support Dropdown */}
-            <div className="relative" ref={supportDropdownRef}>
+            <div className="relative" ref={dropdownRef}>
               <button
-                onClick={() => setSupportDropdownOpen((prev) => !prev)}
-                className="flex items-center gap-1 py-6 font-semibold hover:text-yellow-400 transition-colors focus:outline-none"
+                type="button"
+                aria-expanded={partnersOpen}
+                aria-controls="partners-menu"
+                onClick={() => setPartnersOpen((v) => !v)}
+                className={`flex items-center gap-1 rounded-full px-3.5 py-2 text-[15px] font-semibold transition-colors ${
+                  partnersActive || partnersOpen
+                    ? "bg-brand-100 text-ink-900"
+                    : "text-ink-700 hover:bg-ink-100 hover:text-ink-900"
+                }`}
               >
-                Support
-                <i
-                  className={`fas fa-chevron-down text-xs mt-0.5 ml-1 transition-transform duration-200 ${
-                    supportDropdownOpen ? "rotate-180" : ""
-                  }`}
+                Partners
+                <LuChevronDown
+                  className={`h-4 w-4 transition-transform duration-200 ${partnersOpen ? "rotate-180" : ""}`}
+                  aria-hidden="true"
                 />
               </button>
 
-              {supportDropdownOpen && (
-                <div className="absolute top-full left-0 w-48 bg-white rounded-xl shadow-2xl border border-gray-100 z-50">
-                  <div className="py-2">
-                    <NavLink
-                      to="/help"
-                      onClick={() => setSupportDropdownOpen(false)}
-                      className="block px-5 py-3 text-sm text-gray-600 hover:bg-yellow-50 hover:text-purple-700 transition-colors"
-                    >
-                      Help & Support
-                    </NavLink>
-                    <NavLink
-                      to="/privacy"
-                      onClick={() => setSupportDropdownOpen(false)}
-                      className="block px-5 py-3 text-sm text-gray-600 hover:bg-yellow-50 hover:text-purple-700 transition-colors"
-                    >
-                      Privacy
-                    </NavLink>
-                  </div>
+              {partnersOpen && (
+                <div
+                  id="partners-menu"
+                  className="absolute top-full left-1/2 mt-3 w-80 -translate-x-1/2 rounded-3xl border border-ink-200 bg-white p-2 shadow-lift"
+                >
+                  {PARTNER_LINKS.map(({ to, label, blurb }) => {
+                    const Icon = partnerIcons[to];
+                    return (
+                      <NavLink
+                        key={to}
+                        to={to}
+                        className={({ isActive }) =>
+                          `group flex items-center gap-3 rounded-2xl p-3 transition-colors ${
+                            isActive ? "bg-brand-50" : "hover:bg-brand-50"
+                          }`
+                        }
+                      >
+                        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-100 text-ink-900 transition-colors group-hover:bg-brand-400">
+                          <Icon className="h-5 w-5" aria-hidden="true" />
+                        </span>
+                        <span>
+                          <span className="block text-sm font-bold text-ink-900">{label}</span>
+                          <span className="block text-xs text-ink-500">{blurb}</span>
+                        </span>
+                      </NavLink>
+                    );
+                  })}
                 </div>
               )}
             </div>
+
+            {mainLinks.slice(2).map((l) => (
+              <NavLink key={l.to} to={l.to} className={linkClass}>
+                {l.label}
+              </NavLink>
+            ))}
           </nav>
 
-          {/* ── Right Section ── */}
-          <div className="flex items-center space-x-6">
-            <div className="hidden lg:block text-right">
-              <p className="text-xs text-gray-400 font-medium uppercase tracking-wide">
-                For Support
-              </p>
-              <a
-                href="tel:+2349061616524"
-                className="text-yellow-500 font-bold hover:text-purple-700 transition"
-              >
-                +234 906 161 6524
-              </a>
-            </div>
-
+          <div className="flex items-center gap-2">
             <a
-                href="https://portal.uloai.tech/portal"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden md:block bg-yellow-400 text-purple-900 px-6 py-2.5 rounded-full font-bold shadow-md hover:bg-purple-800 hover:text-white transition transform hover:-translate-y-0.5"
-              >
-                Sign up
-              </a>
-
-            {/* Hamburger */}
-            <button
-              onClick={() => setMobileOpen(true)}
-              className="md:hidden text-gray-800 focus:outline-none p-2"
-              aria-label="Open menu"
+              href={general.portalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden rounded-full px-4 py-2 text-[15px] font-semibold text-ink-700 transition-colors hover:bg-ink-100 hover:text-ink-900 sm:inline-flex"
             >
-              <i className="fas fa-bars text-2xl" />
+              Sign up
+            </a>
+            <Button href={general.playStoreUrl} size="sm" className="hidden sm:inline-flex">
+              <LuGraduationCap className="h-4 w-4" aria-hidden="true" />
+              Get the app
+            </Button>
+            <button
+              type="button"
+              onClick={() => setMobileOpen(true)}
+              aria-label="Open menu"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
+              className="flex h-11 w-11 items-center justify-center rounded-full text-ink-900 hover:bg-ink-100 lg:hidden"
+            >
+              <LuMenu className="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
         </div>
       </header>
 
-      {/* ── Mobile Overlay (Moved Outside Header) ── */}
-      {mobileOpen && (
-        <div
-          onClick={closeMobile}
-          className="fixed inset-0 z-40 bg-black/50 md:hidden"
-        />
-      )}
-
-      {/* ── Mobile Sidebar (Moved Outside Header & Added flex flex-col) ── */}
+      {/* Mobile drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-72 bg-white z-50 shadow-2xl p-6 transform transition-transform duration-300 md:hidden flex flex-col ${
+        onClick={() => setMobileOpen(false)}
+        className={`fixed inset-0 z-50 bg-ink-900/40 transition-opacity duration-300 lg:hidden ${
+          mobileOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        aria-hidden="true"
+      />
+      <div
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+        inert={!mobileOpen}
+        className={`fixed top-0 right-0 z-50 flex h-full w-[85%] max-w-sm flex-col bg-paper shadow-lift transition-transform duration-300 ease-out lg:hidden ${
           mobileOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex justify-between items-center mb-8">
-          <img src="/img/cropped.png" className="w-16" alt="ULO AI" />
+        <div className="flex items-center justify-between border-b border-ink-100 px-5 py-4">
+          <img src="/img/cropped.png" alt="ULO AI" className="h-9 w-auto" />
           <button
-            onClick={closeMobile}
-            className="text-gray-500 hover:text-red-500 transition focus:outline-none"
+            type="button"
+            onClick={() => setMobileOpen(false)}
             aria-label="Close menu"
+            className="flex h-11 w-11 items-center justify-center rounded-full text-ink-900 hover:bg-ink-100"
           >
-            <i className="fas fa-times text-2xl" />
+            <LuX className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
 
-        <nav className="flex flex-col space-y-6 font-semibold text-gray-700 text-lg overflow-y-auto">
-          <NavLink
-            to="/"
-            onClick={closeMobile}
-            className="hover:text-yellow-400 transition"
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/features"
-            onClick={closeMobile}
-            className="hover:text-yellow-400 transition"
-          >
-            Features
-          </NavLink>
-
-          {/* Partner accordion */}
-          <div>
-            <button
-              onClick={() => setPartnerMobileOpen((prev) => !prev)}
-              className="flex justify-between items-center w-full hover:text-yellow-400 transition"
+        <nav aria-label="Mobile" className="flex-1 space-y-1 overflow-y-auto px-3 py-4 text-lg font-semibold">
+          {[{ to: "/", label: "Home" }, ...mainLinks.slice(0, 2)].map((l) => (
+            <NavLink
+              key={l.to}
+              to={l.to}
+              end
+              className={({ isActive }) =>
+                `block rounded-2xl px-4 py-3 ${isActive ? "bg-brand-100" : "hover:bg-ink-100"}`
+              }
             >
-              Partner
-              <i
-                className={`fas fa-chevron-down text-sm transition-transform duration-200 ${
-                  partnerMobileOpen ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-            {partnerMobileOpen && (
-              <div className="mt-3 ml-2 flex flex-col space-y-3 border-l-2 border-gray-100 pl-4 text-base font-medium text-gray-600">
-                {partnerLinks.map((link) => (
+              {l.label}
+            </NavLink>
+          ))}
+
+          <button
+            type="button"
+            aria-expanded={mobilePartnersOpen}
+            onClick={() => setMobilePartnersOpen((v) => !v)}
+            className="flex w-full items-center justify-between rounded-2xl px-4 py-3 hover:bg-ink-100"
+          >
+            Partners
+            <LuChevronDown
+              className={`h-5 w-5 transition-transform ${mobilePartnersOpen ? "rotate-180" : ""}`}
+              aria-hidden="true"
+            />
+          </button>
+          {mobilePartnersOpen && (
+            <div className="space-y-1 pb-2 pl-3">
+              {PARTNER_LINKS.map(({ to, label }) => {
+                const Icon = partnerIcons[to];
+                return (
                   <NavLink
-                    key={link.to}
-                    to={link.to}
-                    onClick={closeMobile}
-                    className="hover:text-purple-700 transition"
+                    key={to}
+                    to={to}
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 rounded-2xl px-4 py-2.5 text-base ${
+                        isActive ? "bg-brand-100" : "text-ink-700 hover:bg-ink-100"
+                      }`
+                    }
                   >
-                    {link.label}
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                    {label}
                   </NavLink>
-                ))}
-              </div>
-            )}
-          </div>
+                );
+              })}
+            </div>
+          )}
 
-          <NavLink
-            to="/about"
-            onClick={closeMobile}
-            className="hover:text-yellow-400 transition"
-          >
-            About Us
-          </NavLink>
-          <NavLink
-            to="/competition"
-            onClick={closeMobile}
-            className="hover:text-yellow-400 transition"
-          >
-            Quiz Competition
-          </NavLink>
-          <NavLink
-            to="/contact"
-            onClick={closeMobile}
-            className="hover:text-yellow-400 transition"
-          >
-            Contact
-          </NavLink>
-
-          {/* Support accordion */}
-          <div>
-            <button
-              onClick={() => setSupportMobileOpen((prev) => !prev)}
-              className="flex justify-between items-center w-full hover:text-yellow-400 transition"
+          {mainLinks.slice(2).map((l) => (
+            <NavLink
+              key={l.to}
+              to={l.to}
+              className={({ isActive }) =>
+                `block rounded-2xl px-4 py-3 ${isActive ? "bg-brand-100" : "hover:bg-ink-100"}`
+              }
             >
-              Support
-              <i
-                className={`fas fa-chevron-down text-sm transition-transform duration-200 ${
-                  supportMobileOpen ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-            {supportMobileOpen && (
-              <div className="mt-3 ml-2 flex flex-col space-y-3 border-l-2 border-gray-100 pl-4 text-base font-medium text-gray-600">
-                <NavLink
-                  to="/help"
-                  onClick={closeMobile}
-                  className="hover:text-purple-700 transition"
-                >
-                  Help & Support
-                </NavLink>
-                <NavLink
-                  to="/privacy"
-                  onClick={closeMobile}
-                  className="hover:text-purple-700 transition"
-                >
-                  Privacy
-                </NavLink>
-              </div>
-            )}
-          </div>
+              {l.label}
+            </NavLink>
+          ))}
         </nav>
 
-        <div className="mt-auto pt-6">
-          <a
-              href="https://portal.uloai.tech/portal"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={closeMobile}
-              className="block w-full bg-yellow-400 text-purple-900 py-3 rounded-xl font-bold text-center hover:bg-purple-800 hover:text-white transition shadow-md"
-            >
-              Sign UP
-            </a>
+        <div className="space-y-3 border-t border-ink-100 p-5">
+          <Button href={general.playStoreUrl} className="w-full">
+            <LuGraduationCap className="h-5 w-5" aria-hidden="true" />
+            Get the app
+          </Button>
+          <Button href={general.portalUrl} variant="outline" className="w-full">
+            Sign up
+          </Button>
         </div>
       </div>
     </>

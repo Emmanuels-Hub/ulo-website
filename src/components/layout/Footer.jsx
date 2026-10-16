@@ -1,273 +1,156 @@
 import { Link } from "react-router-dom";
+import { LuMail, LuPhone } from "react-icons/lu";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTiktok, FaWhatsapp, FaXTwitter, FaYoutube } from "react-icons/fa6";
+import { PARTNER_LINKS, SITE } from "../../config/site";
+import { useSiteContent } from "../../content/context";
+import StoreButtons from "../UI/StoreButtons";
+
+const socialIcons = {
+  facebook: { Icon: FaFacebookF, label: "Facebook" },
+  x: { Icon: FaXTwitter, label: "X (Twitter)" },
+  instagram: { Icon: FaInstagram, label: "Instagram" },
+  linkedin: { Icon: FaLinkedinIn, label: "LinkedIn" },
+  tiktok: { Icon: FaTiktok, label: "TikTok" },
+  youtube: { Icon: FaYoutube, label: "YouTube" },
+};
+
+const buildColumns = (general) => [
+  {
+    title: "Product",
+    links: [
+      { to: "/features", label: "Features" },
+      { to: "/competition", label: "Quiz Competition" },
+      { href: general.playStoreUrl, label: "Download the app" },
+      { href: general.portalUrl, label: "Sign up" },
+    ],
+  },
+  {
+    title: "Partners",
+    links: PARTNER_LINKS.map(({ to, label }) => ({ to, label })),
+  },
+  {
+    title: "Company",
+    links: [
+      { to: "/about", label: "About us" },
+      { to: "/contact", label: "Contact" },
+      { to: "/help", label: "Help & FAQs" },
+      { to: "/privacy", label: "Privacy policy" },
+    ],
+  },
+];
+
+const linkStyle = "text-ink-600 transition-colors hover:text-ink-900 hover:underline underline-offset-4";
 
 const Footer = () => {
-  const year = new Date().getFullYear();
+  const { general } = useSiteContent();
+  const columns = buildColumns(general);
+  const socials = Object.entries(general.socials || {}).filter(([key, url]) => url && socialIcons[key]);
+  const phoneHref = `tel:${general.phone.replace(/[^\d+]/g, "")}`;
 
   return (
-    <footer className="relative bg-gray-900 text-white pt-20 pb-10 overflow-hidden font-sans">
-      {/* Top gradient line */}
-      <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-pink-500 via-purple-500 to-yellow-400" />
-
-      {/* Background glow */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-purple-900 rounded-full mix-blend-screen blur-[100px] opacity-20 pointer-events-none" />
-
-      <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        {/* ── Top row: Brand + Newsletter ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 border-b border-gray-800 pb-12 mb-12">
+    <footer className="border-t border-brand-200 bg-brand-50">
+      <div className="container-page py-16">
+        <div className="grid gap-12 lg:grid-cols-12">
           {/* Brand */}
-          <div className="lg:col-span-1 space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg">
-                U
-              </div>
-              <h2 className="text-3xl font-bold tracking-tight text-white">
-                ULO AI
-              </h2>
-            </div>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
-              Building powerful educational tools with simplicity and elegance.
-              We empower students to achieve academic success through AI
-              technology.
-            </p>
-            <div className="flex gap-4 pt-2">
-              <a
-                href="#"
-                aria-label="Facebook"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-pink-600   hover:text-white transition-all duration-300 transform hover:-translate-y-1"
-              >
-                <i className="fab fa-facebook-f" />
-              </a>
-              <a
-                href="#"
-                aria-label="Twitter"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-sky-500     hover:text-white transition-all duration-300 transform hover:-translate-y-1"
-              >
-                <i className="fab fa-twitter" />
-              </a>
-              <a
-                href="#"
-                aria-label="Instagram"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-yellow-500  hover:text-white transition-all duration-300 transform hover:-translate-y-1"
-              >
-                <i className="fab fa-instagram" />
-              </a>
-              <a
-                href="#"
-                aria-label="LinkedIn"
-                className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 text-gray-400 hover:bg-blue-600   hover:text-white transition-all duration-300 transform hover:-translate-y-1"
-              >
-                <i className="fab fa-linkedin-in" />
-              </a>
-            </div>
-          </div>
-
-          {/* Newsletter */}
-          <div className="lg:col-span-2 flex flex-col justify-center lg:items-end">
-            <div className="bg-gray-800/50 p-6 rounded-2xl border border-gray-700 w-full max-w-xl">
-              <h3 className="text-lg font-semibold text-white mb-2">
-                Subscribe to our Newsletter
-              </h3>
-              <p className="text-gray-400 text-sm mb-4">
-                Get the latest study tips, AI updates, and exam strategies
-                delivered to your inbox.
-              </p>
-              <form
-                className="flex flex-col sm:flex-row gap-3"
-                onSubmit={(e) => e.preventDefault()}
-              >
-                <input
-                  type="email"
-                  placeholder="Enter your email address"
-                  className="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-600 text-white placeholder-gray-500 focus:outline-none focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition"
-                />
-                <button
-                  type="submit"
-                  className="px-6 py-3 rounded-lg bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold hover:from-yellow-300 hover:to-yellow-400 transition-all shadow-lg whitespace-nowrap"
-                >
-                  Subscribe Now
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        {/* ── Links Grid ── */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-          <div>
-            <h3 className="text-yellow-400 font-bold uppercase tracking-wider text-sm mb-6">
-              Product
-            </h3>
-            <ul className="space-y-4 text-gray-400 text-sm">
-              <li>
-                <Link
-                  to="/features"
-                  className="hover:text-white transition-colors"
-                >
-                  Features
-                </Link>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Exam Simulator
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Question Generator
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Pricing Plans
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-white transition-colors flex items-center gap-2"
-                >
-                  Download App{" "}
-                  <span className="text-xs bg-purple-600 text-white px-2 py-0.5 rounded-full">
-                    Free
-                  </span>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-yellow-400 font-bold uppercase tracking-wider text-sm mb-6">
-              Company
-            </h3>
-            <ul className="space-y-4 text-gray-400 text-sm">
-              <li>
-                <Link
-                  to="/about"
-                  className="hover:text-white transition-colors"
-                >
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Our Mission
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Careers
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Blog / News
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  Partners
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-yellow-400 font-bold uppercase tracking-wider text-sm mb-6">
-              Support
-            </h3>
-            <ul className="space-y-4 text-gray-400 text-sm">
-              <li>
-                <Link
-                  to="/help"
-                  className="hover:text-white transition-colors"
-                >
-                  Help Center
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/help"
-                  className="hover:text-white transition-colors"
-                >
-                  FAQs
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/contact"
-                  className="hover:text-white transition-colors"
-                >
-                  Contact Support
-                </Link>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white transition-colors">
-                  System Status
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-yellow-400 font-bold uppercase tracking-wider text-sm mb-6">
-              Contact Us
-            </h3>
-            <ul className="space-y-4 text-gray-400 text-sm">
-              <li className="flex items-start gap-3">
-                <i className="fas fa-map-marker-alt mt-1 text-purple-500" />
-                <span>
-                  123 Innovation Dr,
-                  <br />
-                  Lagos, Nigeria
-                </span>
-              </li>
-              <li className="flex items-center gap-3">
-                <i className="fas fa-envelope text-purple-500" />
-                <a
-                  href="mailto:hello@uloai.com"
-                  className="hover:text-white transition-colors"
-                >
-                  hello@uloai.com
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <i className="fas fa-phone text-purple-500" />
-                <a
-                  href="tel:+2349061616524"
-                  className="hover:text-white transition-colors"
-                >
-                  +234 906 161 6524
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* ── Bottom Bar ── */}
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-gray-500 text-sm text-center">
-            &copy; {year} ULO AI. All rights reserved.
-          </p>
-          <div className="flex gap-6">
-            <Link
-              to="/privacy"
-              className="text-gray-500 hover:text-white text-sm transition-colors"
-            >
-              Privacy Policy
+          <div className="lg:col-span-4">
+            <Link to="/" aria-label="ULO AI home">
+              <img src="/img/cropped.png" alt="ULO AI" className="h-12 w-auto" />
             </Link>
-            <a
-              href="#"
-              className="text-gray-500 hover:text-white text-sm transition-colors"
-            >
-              Terms of Service
-            </a>
-            <a
-              href="#"
-              className="text-gray-500 hover:text-white text-sm transition-colors"
-            >
-              Cookie Policy
-            </a>
+            <p className="mt-5 max-w-xs leading-relaxed text-ink-600">
+              Your friendly AI study buddy — helping Nigerian students prepare smarter and walk into every exam
+              with confidence.
+            </p>
+            <StoreButtons className="mt-6" />
+
+            {socials.length > 0 && (
+              <div className="mt-6 flex gap-2">
+                {socials.map(([key, url]) => {
+                  const { Icon, label } = socialIcons[key];
+                  return (
+                    <a
+                      key={key}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-ink-200 bg-white text-ink-700 transition hover:-translate-y-0.5 hover:border-ink-900 hover:bg-brand-400 hover:text-ink-900"
+                    >
+                      <Icon className="h-4 w-4" aria-hidden="true" />
+                    </a>
+                  );
+                })}
+              </div>
+            )}
           </div>
+
+          {/* Link columns */}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-5">
+            {columns.map((col) => (
+              <div key={col.title}>
+                <h2 className="mb-4 text-sm font-extrabold tracking-wider text-ink-900 uppercase">{col.title}</h2>
+                <ul className="space-y-3 text-[15px]">
+                  {col.links.map((l) => (
+                    <li key={l.label}>
+                      {l.to ? (
+                        <Link to={l.to} className={linkStyle}>
+                          {l.label}
+                        </Link>
+                      ) : (
+                        <a href={l.href} target="_blank" rel="noopener noreferrer" className={linkStyle}>
+                          {l.label}
+                        </a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          {/* Contact card */}
+          <div className="lg:col-span-3">
+            <div className="rounded-3xl border border-brand-200 bg-white p-6">
+              <h2 className="mb-4 text-sm font-extrabold tracking-wider text-ink-900 uppercase">Talk to us</h2>
+              <ul className="space-y-4 text-[15px]">
+                <li>
+                  <a href={`mailto:${general.email}`} className="group flex items-center gap-3 text-ink-700 hover:text-ink-900">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-100 group-hover:bg-brand-400">
+                      <LuMail className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                    {general.email}
+                  </a>
+                </li>
+                <li>
+                  <a href={phoneHref} className="group flex items-center gap-3 text-ink-700 hover:text-ink-900">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-100 group-hover:bg-brand-400">
+                      <LuPhone className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                    {general.phone}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={general.whatsappChannel}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-3 text-ink-700 hover:text-ink-900"
+                  >
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-100 group-hover:bg-brand-400">
+                      <FaWhatsapp className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                    Join our WhatsApp channel
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-brand-200 pt-8 text-sm text-ink-500 sm:flex-row">
+          <p>
+            &copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.
+          </p>
+          <p>Made with care for students in Nigeria 🇳🇬</p>
         </div>
       </div>
     </footer>

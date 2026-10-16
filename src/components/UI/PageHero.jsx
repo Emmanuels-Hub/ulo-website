@@ -1,82 +1,32 @@
 /**
- * PageHero — consistent hero banner used across all inner pages.
- *
- * Props:
- *  eyebrow   – small label above title
- *  title     – JSX or string headline
- *  subtitle  – paragraph text
- *  bg        – Tailwind bg class (default 'bg-white')
- *  dark      – boolean; set true for dark background (inverts text)
- *  primaryCta   – { label, href }
- *  secondaryCta – { label, href }
+ * PageHero — consistent intro for inner pages.
+ *   eyebrow / icon : small pill above the title
+ *   title          : h1 (string or JSX — use <span className="highlight"> for emphasis)
+ *   intro          : supporting paragraph
+ *   children       : optional CTAs or extras under the intro
  */
-const PageHero = ({
-  eyebrow,
-  title,
-  subtitle,
-  bg = "bg-white",
-  dark = false,
-  primaryCta,
-  secondaryCta,
-  children,
-}) => {
-  const textBase = dark ? "text-white" : "text-gray-900";
-  const textSub = dark ? "text-gray-300" : "text-gray-600";
-
-  return (
-    <section
-      className={`relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden ${bg}`}
-    >
-      {/* decorative blobs */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full filter blur-3xl opacity-60 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-yellow-300/10 rounded-full filter blur-3xl opacity-60 pointer-events-none" />
-
-      <div className="container mx-auto px-6 lg:px-12 text-center relative z-10">
-        {eyebrow && (
-          <span className="text-purple-500 font-bold tracking-wider uppercase text-sm mb-4 block">
-            {eyebrow}
-          </span>
-        )}
-
-        <h1
-          className={`text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6 ${textBase}`}
-        >
-          {title}
-        </h1>
-
-        {subtitle && (
-          <p
-            className={`text-lg max-w-2xl mx-auto mb-10 leading-relaxed ${textSub}`}
-          >
-            {subtitle}
-          </p>
-        )}
-
-        {(primaryCta || secondaryCta) && (
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            {primaryCta && (
-              <a
-                href={primaryCta.href}
-                className="bg-yellow-400 text-purple-900 px-8 py-3.5 rounded-full font-bold shadow-lg hover:bg-purple-900 hover:text-white transition transform hover:-translate-y-0.5"
-              >
-                {primaryCta.label}
-              </a>
-            )}
-            {secondaryCta && (
-              <a
-                href={secondaryCta.href}
-                className="px-8 py-3.5 rounded-full border border-gray-300 font-semibold hover:border-purple-700 hover:text-purple-700 transition"
-              >
-                {secondaryCta.label}
-              </a>
-            )}
-          </div>
-        )}
-
-        {children}
-      </div>
-    </section>
-  );
-};
+const PageHero = ({ eyebrow, icon: Icon, title, intro, children }) => (
+  <section className="relative overflow-hidden py-16 md:py-24">
+    <div
+      aria-hidden="true"
+      className="absolute -top-24 left-1/2 h-[26rem] w-[26rem] -translate-x-1/2 rounded-full bg-brand-100"
+    />
+    <div className="container-page relative text-center">
+      {eyebrow && (
+        <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-300 bg-brand-50 px-4 py-1.5 text-sm font-semibold">
+          {Icon && <Icon className="h-4 w-4" aria-hidden="true" />}
+          {eyebrow}
+        </p>
+      )}
+      <h1 className="mx-auto max-w-4xl text-[2.5rem] leading-[1.08] font-extrabold tracking-tight text-balance sm:text-6xl">
+        {title}
+      </h1>
+      {intro && (
+        <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-pretty text-ink-600 md:text-xl">{intro}</p>
+      )}
+      {children && <div className="mt-10">{children}</div>}
+    </div>
+  </section>
+);
 
 export default PageHero;

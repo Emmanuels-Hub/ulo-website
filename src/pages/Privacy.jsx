@@ -1,251 +1,228 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { LuArrowRight, LuCheck, LuGavel, LuInfo, LuMessagesSquare, LuShieldCheck } from "react-icons/lu";
+import Seo from "../components/Seo";
+import PageHero from "../components/UI/PageHero";
+
+/* ⚠️ Legal text — change wording only with care, and bump LAST_UPDATED when you do. */
+const LAST_UPDATED = "January 25, 2024";
+
+const privacy = {
+  id: "privacy",
+  icon: LuShieldCheck,
+  title: "Privacy Policy",
+  intro:
+    "We value your trust and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your data when you use ULO AI.",
+  sections: [
+    {
+      title: "Information We Collect",
+      body: "We may collect personal details such as your name, email address, phone number, and payment information, as well as non-personal data such as device information, browser type, and usage statistics to ensure proper functionality of our apps.",
+    },
+    {
+      title: "How We Use Your Information",
+      list: [
+        "To provide, operate, and maintain our services.",
+        "To improve user experience and personalize content.",
+        "To process transactions and send confirmations.",
+        "To communicate updates, security alerts, and support messages.",
+      ],
+    },
+    {
+      title: "Data Protection",
+      note: "We implement industry-standard security measures (SSL, Encryption) to protect your data. However, no method of transmission over the Internet is 100% secure.",
+    },
+  ],
+};
+
+const terms = {
+  id: "terms",
+  icon: LuGavel,
+  title: "Terms & Conditions",
+  intro:
+    "By accessing or using our services, you agree to be bound by these Terms & Conditions. Please read them carefully before using our platform.",
+  sections: [
+    {
+      title: "Acceptance of Terms",
+      body: "By using ULO AI, you acknowledge that you have read, understood, and agree to comply with these Terms & Conditions. If you do not agree, you should not use our services.",
+    },
+    {
+      title: "User Responsibilities",
+      checks: [
+        "You agree not to misuse our services for illegal activities.",
+        "You are responsible for maintaining the confidentiality of your account password.",
+        "You must provide accurate and up-to-date information during registration.",
+      ],
+    },
+    {
+      title: "Limitation of Liability",
+      body: "We are not responsible for indirect or consequential damages resulting from the use or inability to use our services. Our liability is limited to the maximum extent permitted by applicable law.",
+    },
+    {
+      title: "AI Features",
+      checks: [
+        "The AI tutor, voice tutor and Image Studio are powered by Google's Gemini models through Google Firebase. What you type, say or upload to these features is sent to Google to produce a response.",
+        "You must be 18 years of age or older to use the AI features.",
+        "Do not share personal or sensitive information (such as passwords, ID numbers or health details) with the AI features.",
+        "AI answers can be wrong. Check important information, and do not use the AI to cheat in exams or assessments.",
+        "You must not use the AI features to create harmful, sexual, hateful, violent or illegal content, or to try to get around their safety filters. We may limit or suspend access for misuse.",
+        "Use of the AI features is also subject to Google's Generative AI Prohibited Use Policy.",
+      ],
+    },
+    {
+      title: "Changes to Terms",
+      body: "We may update these Terms & Conditions from time to time. Continued use of our services after any changes means you accept the updated terms.",
+    },
+  ],
+};
+
+const DOCS = [privacy, terms];
+
+const Doc = ({ doc }) => {
+  const Icon = doc.icon;
+  return (
+    <section id={doc.id} aria-labelledby={`${doc.id}-title`} className="scroll-mt-28">
+      <div className="mb-6 flex items-center gap-4">
+        <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-400">
+          <Icon className="h-7 w-7" aria-hidden="true" />
+        </span>
+        <h2 id={`${doc.id}-title`} className="text-3xl font-extrabold tracking-tight md:text-4xl">
+          {doc.title}
+        </h2>
+      </div>
+      <p className="mb-10 text-lg leading-relaxed text-ink-700">{doc.intro}</p>
+
+      <ol className="space-y-6">
+        {doc.sections.map((s, i) => (
+          <li
+            key={s.title}
+            id={`${doc.id}-${i + 1}`}
+            className="scroll-mt-28 rounded-[2rem] border border-ink-200 bg-white p-6 md:p-8"
+          >
+            <h3 className="mb-4 flex items-center gap-3 text-xl font-extrabold">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ink-900 text-sm text-brand-400">
+                {i + 1}
+              </span>
+              {s.title}
+            </h3>
+            {s.body && <p className="leading-relaxed text-ink-700">{s.body}</p>}
+            {s.list && (
+              <ul className="list-disc space-y-2 pl-6 leading-relaxed text-ink-700 marker:text-brand-600">
+                {s.list.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            )}
+            {s.checks && (
+              <ul className="space-y-3">
+                {s.checks.map((item) => (
+                  <li key={item} className="flex items-start gap-3 leading-relaxed text-ink-700">
+                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-400">
+                      <LuCheck className="h-3.5 w-3.5" strokeWidth={3} aria-hidden="true" />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {s.note && (
+              <p className="flex items-start gap-3 rounded-2xl bg-brand-50 p-4 leading-relaxed text-ink-800">
+                <LuInfo className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
+                <span>
+                  <b>Note:</b> {s.note}
+                </span>
+              </p>
+            )}
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+};
 
 const Privacy = () => {
-  const [active, setActive] = useState("privacy");
+  const [current, setCurrent] = useState("privacy");
 
-  const scrollTo = (id) => {
-    setActive(id);
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+  /* Highlight the section currently in view */
+  useEffect(() => {
+    const els = DOCS.map((d) => document.getElementById(d.id)).filter(Boolean);
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setCurrent(e.target.id)),
+      { rootMargin: "-30% 0px -60% 0px" },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
 
   return (
     <>
-      {/* ─── Hero ─── */}
-      <section className="relative pt-32 pb-16 bg-gradient-to-br from-purple-800 via-purple-700 to-indigo-900 text-white overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
-          <div className="absolute w-72 h-72 bg-yellow-400 rounded-full blur-3xl -top-20 -left-20" />
-          <div className="absolute w-96 h-96 bg-pink-500 rounded-full blur-3xl bottom-0 right-0" />
-        </div>
+      <Seo
+        title="Privacy Policy & Terms"
+        description="How ULO AI collects, uses and protects your information, and the terms for using our app, website and AI features."
+      />
 
-        <div className="max-w-4xl mx-auto text-center px-6 relative z-10">
-          <span className="inline-block bg-white/20 backdrop-blur-md px-4 py-1 rounded-full text-xs font-semibold tracking-wider uppercase mb-4 border border-white/10">
-            Last Updated: January 25, 2024
-          </span>
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
-            Privacy Policy &amp; Terms
-          </h1>
-          <p className="text-lg text-gray-200 max-w-2xl mx-auto font-light">
-            We believe in transparency. Here's how we protect your data and the
-            rules for using our platform.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={`Last updated: ${LAST_UPDATED}`}
+        icon={LuShieldCheck}
+        title={
+          <>
+            Privacy policy <span className="highlight">&amp; terms</span>
+          </>
+        }
+        intro="We believe in transparency. Here's how we protect your data and the rules for using our platform."
+      />
 
-      {/* ─── Body ─── */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
-        <div className="flex flex-col lg:flex-row gap-12">
-          {/* sticky sidebar */}
-          <aside className="hidden lg:block w-1/4">
-            <div className="sticky top-28 space-y-2">
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">
-                On this page
-              </p>
-              <button
-                onClick={() => scrollTo("privacy")}
-                className={`block w-full text-left p-3 rounded-lg transition font-medium border-l-4 ${
-                  active === "privacy"
-                    ? "bg-purple-50 text-purple-700 border-purple-700"
-                    : "text-gray-700 hover:bg-purple-50 hover:text-purple-700 border-transparent hover:border-purple-700"
-                }`}
-              >
-                Privacy Policy
-              </button>
-              <button
-                onClick={() => scrollTo("terms")}
-                className={`block w-full text-left p-3 rounded-lg transition font-medium border-l-4 ${
-                  active === "terms"
-                    ? "bg-yellow-50 text-yellow-600 border-yellow-400"
-                    : "text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 border-transparent hover:border-yellow-400"
-                }`}
-              >
-                Terms &amp; Conditions
-              </button>
-              <button
-                onClick={() => scrollTo("contact-note")}
-                className="block w-full text-left p-3 rounded-lg text-gray-500 hover:text-gray-900 transition text-sm"
-              >
-                Have questions?
-              </button>
-            </div>
-          </aside>
-
-          <main className="lg:w-3/4 space-y-16">
-            {/* ── Privacy Policy ── */}
-            <section
-              id="privacy"
-              className="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 scroll-mt-28"
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-700">
-                  <i className="fas fa-shield-alt" />
-                </div>
-                <h2 className="text-3xl font-bold text-gray-900">
-                  Privacy Policy
-                </h2>
-              </div>
-
-              <p className="text-gray-600 mb-8 leading-relaxed">
-                We value your trust and are committed to protecting your
-                personal information. This Privacy Policy explains how we
-                collect, use, disclose, and safeguard your data when you use ULO
-                AI.
-              </p>
-
-              <div className="space-y-8">
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    1. Information We Collect
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    We may collect personal details such as your name, email
-                    address, phone number, and payment information, as well as
-                    non-personal data such as device information, browser type,
-                    and usage statistics to ensure proper functionality of our
-                    apps.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    2. How We Use Your Information
-                  </h3>
-                  <ul className="list-disc list-inside space-y-2 text-gray-600 ml-2">
-                    <li>To provide, operate, and maintain our services.</li>
-                    <li>To improve user experience and personalize content.</li>
-                    <li>To process transactions and send confirmations.</li>
-                    <li>
-                      To communicate updates, security alerts, and support
-                      messages.
-                    </li>
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    3. Data Protection
-                  </h3>
-                  <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
-                    <p className="text-sm text-blue-800">
-                      <strong>Note:</strong> We implement industry-standard
-                      security measures (SSL, Encryption) to protect your data.
-                      However, no method of transmission over the Internet is
-                      100% secure.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* ── Terms & Conditions ── */}
-            <section
-              id="terms"
-              className="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100 scroll-mt-28"
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600">
-                  <i className="fas fa-gavel" />
-                </div>
-                <h2 className="text-3xl font-bold text-gray-900">
-                  Terms &amp; Conditions
-                </h2>
-              </div>
-
-              <p className="text-gray-600 mb-8 leading-relaxed">
-                By accessing or using our services, you agree to be bound by
-                these Terms &amp; Conditions. Please read them carefully before
-                using our platform.
-              </p>
-
-              <div className="space-y-8">
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    1. Acceptance of Terms
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    By using ULO AI, you acknowledge that you have read,
-                    understood, and agree to comply with these Terms &amp;
-                    Conditions. If you do not agree, you should not use our
-                    services.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    2. User Responsibilities
-                  </h3>
-                  <ul className="space-y-3 text-gray-600">
-                    {[
-                      "You agree not to misuse our services for illegal activities.",
-                      "You are responsible for maintaining the confidentiality of your account password.",
-                      "You must provide accurate and up-to-date information during registration.",
-                    ].map((item) => (
-                      <li key={item} className="flex items-start gap-3">
-                        <i className="fas fa-check text-green-500 mt-1" />
-                        <span>{item}</span>
+      <div className="container-page grid gap-10 pb-20 md:pb-28 lg:grid-cols-[16rem_1fr] lg:gap-16">
+        {/* Table of contents */}
+        <aside className="lg:sticky lg:top-24 lg:self-start">
+          <nav aria-label="On this page" className="rounded-[2rem] border border-ink-200 bg-white p-5">
+            <p className="mb-3 text-sm font-extrabold tracking-wider text-ink-500 uppercase">On this page</p>
+            <ul className="space-y-1">
+              {DOCS.map((d) => (
+                <li key={d.id}>
+                  <a
+                    href={`#${d.id}`}
+                    aria-current={current === d.id ? "true" : undefined}
+                    className={`block rounded-xl px-3 py-2 font-bold transition ${
+                      current === d.id ? "bg-brand-400" : "hover:bg-brand-50"
+                    }`}
+                  >
+                    {d.title}
+                  </a>
+                  <ul className="mt-1 mb-2 ml-3 hidden border-l-2 border-ink-100 pl-3 lg:block">
+                    {d.sections.map((s, i) => (
+                      <li key={s.title}>
+                        <a
+                          href={`#${d.id}-${i + 1}`}
+                          className="block py-1 text-sm text-ink-600 hover:text-ink-900 hover:underline"
+                        >
+                          {s.title}
+                        </a>
                       </li>
                     ))}
                   </ul>
-                </div>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
 
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    3. Limitation of Liability
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    We are not responsible for indirect or consequential damages
-                    resulting from the use or inability to use our services. Our
-                    liability is limited to the maximum extent permitted by
-                    applicable law.
-                  </p>
-                </div>
+        <div className="space-y-20">
+          {DOCS.map((d) => (
+            <Doc key={d.id} doc={d} />
+          ))}
 
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    4. AI Features
-                  </h3>
-                  <ul className="space-y-3 text-gray-600">
-                    {[
-                      "The AI tutor, voice tutor and Image Studio are powered by Google's Gemini models through Google Firebase. What you type, say or upload to these features is sent to Google to produce a response.",
-                      "You must be 18 years of age or older to use the AI features.",
-                      "Do not share personal or sensitive information (such as passwords, ID numbers or health details) with the AI features.",
-                      "AI answers can be wrong. Check important information, and do not use the AI to cheat in exams or assessments.",
-                      "You must not use the AI features to create harmful, sexual, hateful, violent or illegal content, or to try to get around their safety filters. We may limit or suspend access for misuse.",
-                      "Use of the AI features is also subject to Google's Generative AI Prohibited Use Policy.",
-                    ].map((item) => (
-                      <li key={item} className="flex items-start gap-3">
-                        <i className="fas fa-check text-green-500 mt-1" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    5. Changes to Terms
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    We may update these Terms &amp; Conditions from time to
-                    time. Continued use of our services after any changes means
-                    you accept the updated terms.
-                  </p>
-                </div>
-              </div>
-            </section>
-
-            <div id="contact-note" className="text-center py-8 scroll-mt-28">
-              <p className="text-gray-500">
-                Still have questions about our policies?
-              </p>
-              <a
-                href="/contact"
-                className="text-purple-700 font-semibold hover:underline mt-1 inline-block"
-              >
-                Contact our Support Team →
-              </a>
-            </div>
-          </main>
+          <div className="flex flex-col items-start gap-4 rounded-[2rem] bg-ink-900 p-8 text-white sm:flex-row sm:items-center sm:justify-between">
+            <span className="flex items-center gap-3">
+              <LuMessagesSquare className="h-6 w-6 text-brand-400" aria-hidden="true" />
+              <span className="text-lg font-bold">Still have questions about our policies?</span>
+            </span>
+            <Link
+              to="/contact?topic=general"
+              className="inline-flex items-center gap-2 rounded-full bg-brand-400 px-6 py-3 font-bold text-ink-900 transition hover:-translate-y-0.5"
+            >
+              Contact our team <LuArrowRight className="h-5 w-5" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </div>
     </>

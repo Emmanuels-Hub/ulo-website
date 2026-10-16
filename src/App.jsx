@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from "./pages/Home";
 import Features from "./pages/Features";
 import About from "./pages/About";
@@ -25,6 +25,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Navigate to="/privacy#terms" replace />} />
           <Route path="/help" element={<HelpAndSupport />} />
           <Route path="/competition" element={<QuizCompetition />} />
           <Route
@@ -35,8 +36,8 @@ function App() {
           <Route path="/ngos" element={<NGOs />} />
           <Route path="/corporate-learning" element={<CorporateLearning />} />
           <Route path="/campus-ambassadors" element={<CampusAmbassadors />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
-        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

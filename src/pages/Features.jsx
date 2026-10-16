@@ -3,7 +3,7 @@ import {
   LuArrowRight,
   LuCheck,
   LuChartLine,
-  LuCloudOff,
+  LuFlame,
   LuFileText,
   LuGraduationCap,
   LuLayers,
@@ -16,51 +16,60 @@ import {
 } from "react-icons/lu";
 import Seo from "../components/Seo";
 import CtaBand from "../components/home/CtaBand";
-import { ChatMock, GeneratorMock, ProgressMock, SimulatorMock } from "../components/features/FeatureMocks";
+import { ChatMock, GeneratorMock, LeaderboardMock, ProgressMock, SimulatorMock } from "../components/features/FeatureMocks";
+import AgeTag from "../components/UI/AgeTag";
+import PageHero from "../components/UI/PageHero";
 import Reveal from "../components/UI/Reveal";
 import SectionHeading from "../components/UI/SectionHeading";
 import { EXAMS } from "../config/site";
 
 const features = [
   {
-    id: "ai-tutor",
-    icon: LuMessageCircle,
-    eyebrow: "AI Chat Tutor",
-    title: "A patient tutor who's always awake",
-    body: "Stuck at midnight before a test? Ask ULO. It breaks hard topics into small, friendly steps and keeps explaining until it clicks — no question is too basic.",
-    points: [
-      "Covers your school subjects",
-      "Step-by-step working, not just answers",
-      "Ask follow-ups in your own words",
-    ],
-    Mock: ChatMock,
-  },
-  {
-    id: "question-generator",
-    icon: LuFileText,
-    eyebrow: "Question Generator",
-    title: "Turn your notes into a personal quiz",
-    body: "Snap a photo of your notebook or upload a PDF or Word document. ULO reads it and creates exam-style questions on exactly what you studied.",
-    points: ["Photos, PDFs and Word documents", "Exam-style questions in seconds", "Check your answers instantly"],
-    Mock: GeneratorMock,
-  },
-  {
-    id: "exam-simulator",
+    id: "exam-practice",
     icon: LuTimer,
-    eyebrow: "Exam Simulator",
+    eyebrow: "Exam practice",
     title: "Rehearse the real exam before exam day",
-    body: "Practise with the format, the timer and the pressure of WAEC, JAMB and NECO. By the time you sit the real thing, it already feels familiar.",
-    points: ["Timed like the real exam", "Realistic question styles", "Practise offline once downloaded"],
+    body: "Practise with WAEC, JAMB and NECO-style questions under real conditions — the format, the timer and the pressure. By the time you sit the real thing, it already feels familiar.",
+    points: ["Timed like the real exam", "Realistic question styles", "See the right answer straight away"],
     Mock: SimulatorMock,
+  },
+  {
+    id: "competitions",
+    icon: LuTrophy,
+    eyebrow: "Quizzes & competitions",
+    title: "Learning is more fun with friends (and rivals)",
+    body: "Join ULO's quiz competitions, climb the leaderboard and earn badges as you go. Keep your daily streak alive and watch your rank rise.",
+    points: ["Monthly quiz competitions", "Leaderboards", "Badges & daily streaks"],
+    Mock: LeaderboardMock,
   },
   {
     id: "progress",
     icon: LuChartLine,
-    eyebrow: "Progress Tracker",
+    eyebrow: "Progress tracker",
     title: "Know exactly what to study next",
-    body: "ULO keeps track of every test you take, shows your strong and weak topics, and points you to where a little practice will make the biggest difference.",
-    points: ["Scores by subject and topic", "Spot weak areas at a glance", "See your improvement over time"],
+    body: "ULO keeps track of the tests you take and shows your strong and weak subjects, so you can spend your study time where it makes the biggest difference.",
+    points: ["Scores by subject", "Spot weak areas at a glance", "See your improvement over time"],
     Mock: ProgressMock,
+  },
+  {
+    id: "ai-tutor",
+    icon: LuMessageCircle,
+    eyebrow: "AI tutor",
+    adult: true,
+    title: "A patient tutor who's always awake",
+    body: "Stuck late at night? Ask ULO's AI tutor by text or voice. It breaks hard topics into small, friendly steps and keeps explaining until it clicks.",
+    points: ["Chat or talk out loud", "Step-by-step working, not just answers", "Ask follow-ups in your own words"],
+    Mock: ChatMock,
+  },
+  {
+    id: "exam-creator",
+    icon: LuFileText,
+    eyebrow: "AI exam creator",
+    adult: true,
+    title: "Turn your notes into a practice exam",
+    body: "Upload your notes or a document and ULO creates exam-style questions on exactly what you studied — then lets you test yourself straight away.",
+    points: ["Upload notes or documents", "Exam-style questions", "Practise immediately"],
+    Mock: GeneratorMock,
   },
 ];
 
@@ -71,25 +80,25 @@ const extras = [
     desc: "Everything works from the app — study on the bus, at break or at home.",
   },
   {
-    icon: LuCloudOff,
-    title: "Offline practice",
-    desc: "Download practice exams and take them without data. They sync when you're back online.",
+    icon: LuFlame,
+    title: "Badges & streaks",
+    desc: "Earn badges for milestones and keep a daily streak going to stay motivated.",
   },
   {
     icon: LuTrophy,
     title: "Monthly quiz competition",
-    desc: "Test yourself against students across Nigeria and win cash prizes.",
+    desc: "Test yourself against other students and compete for cash prizes.",
     to: "/competition",
   },
   {
     icon: LuLayers,
-    title: "Free to start",
-    desc: "Core tools are free. Upgrade to Premium for unlimited questions and deeper analytics.",
+    title: "Free to download",
+    desc: "Get started for free. Premium unlocks extra features and higher limits.",
   },
   {
     icon: LuGraduationCap,
-    title: "Every major exam",
-    desc: `${EXAMS.slice(0, 3).join(", ")}, Post-UTME and university entrance tests.`,
+    title: "Built for your exams",
+    desc: `Practice for ${EXAMS.join(", ").replace(/, ([^,]*)$/, " and $1")}.`,
   },
   {
     icon: LuSchool,
@@ -103,49 +112,41 @@ const Features = () => (
   <>
     <Seo
       title="Features"
-      description="See everything ULO AI can do: a 24/7 AI chat tutor, a question generator that turns your notes into quizzes, realistic WAEC/JAMB/NECO exam simulations and progress tracking."
+      description="See everything ULO AI can do: timed WAEC, JAMB and NECO practice exams, quiz competitions with leaderboards, progress tracking, and AI study tools for learners aged 18+."
     />
 
-    {/* Hero */}
-    <section className="relative overflow-hidden py-16 md:py-24">
-      <div
-        aria-hidden="true"
-        className="absolute -top-24 left-1/2 h-[26rem] w-[26rem] -translate-x-1/2 rounded-full bg-brand-100"
-      />
-      <div className="container-page relative text-center">
-        <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-300 bg-brand-50 px-4 py-1.5 text-sm font-semibold">
-          <LuWandSparkles className="h-4 w-4" aria-hidden="true" /> Features
-        </p>
-        <h1 className="mx-auto max-w-4xl text-[2.5rem] leading-[1.08] font-extrabold tracking-tight text-balance sm:text-6xl">
+    <PageHero
+      eyebrow="Features"
+      icon={LuWandSparkles}
+      title={
+        <>
           One app. Every tool you need to <span className="highlight">ace your exams.</span>
-        </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-600 md:text-xl">
-          Learn it, practise it, rehearse it, track it. ULO brings your tutor, your question bank and your exam hall
-          together in your pocket.
-        </p>
-
-        <nav aria-label="Jump to feature" className="mt-10 flex flex-wrap justify-center gap-3">
-          {features.map(({ id, icon: Icon, eyebrow }) => (
-            <a
-              key={id}
-              href={`#${id}`}
-              className="inline-flex items-center gap-2 rounded-full border-2 border-ink-900 bg-white px-5 py-2.5 font-bold transition hover:-translate-y-0.5 hover:bg-brand-400 hover:shadow-press"
-            >
-              <Icon className="h-5 w-5" aria-hidden="true" /> {eyebrow}
-            </a>
-          ))}
-        </nav>
-      </div>
-    </section>
+        </>
+      }
+      intro="Practise it, rehearse it, compete, track it. ULO brings your question bank, your exam hall and your study coach together in your pocket."
+    >
+      <nav aria-label="Jump to feature" className="flex flex-wrap justify-center gap-3">
+        {features.map(({ id, icon: Icon, eyebrow }) => (
+          <a
+            key={id}
+            href={`#${id}`}
+            className="inline-flex items-center gap-2 rounded-full border-2 border-ink-900 bg-white px-5 py-2.5 font-bold transition hover:-translate-y-0.5 hover:bg-brand-400 hover:shadow-press"
+          >
+            <Icon className="h-5 w-5" aria-hidden="true" /> {eyebrow}
+          </a>
+        ))}
+      </nav>
+    </PageHero>
 
     {/* Feature deep-dives */}
-    {features.map(({ id, icon: Icon, eyebrow, title, body, points, Mock }, i) => (
+    {features.map(({ id, icon: Icon, eyebrow, title, body, points, Mock, adult }, i) => (
       <section key={id} id={id} className={`scroll-mt-24 py-16 md:py-24 ${i % 2 ? "bg-white" : "bg-brand-50"}`}>
         <div className="container-page grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <Reveal className={i % 2 ? "lg:order-2" : ""}>
             <span className="mb-5 inline-flex items-center gap-2 rounded-full bg-ink-900 px-4 py-1.5 text-sm font-bold text-brand-400">
               <Icon className="h-4 w-4" aria-hidden="true" /> {eyebrow}
             </span>
+            {adult && <AgeTag className="mb-5 ml-2 align-top" />}
             <h2 className="text-3xl leading-tight font-extrabold tracking-tight text-balance md:text-[2.75rem]">
               {title}
             </h2>
@@ -160,6 +161,11 @@ const Features = () => (
                 </li>
               ))}
             </ul>
+            {adult && (
+              <p className="mt-6 text-sm text-ink-500">
+                AI features are available to users aged 18 and over, in line with our AI provider's terms.
+              </p>
+            )}
           </Reveal>
           <Reveal delay={120} className={`flex justify-center ${i % 2 ? "lg:order-1" : ""}`}>
             <Mock />

@@ -1,50 +1,65 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
+import { LuArrowLeft, LuCircleHelp, LuHouse, LuSparkles, LuTrophy } from "react-icons/lu";
+import Seo from "../components/Seo";
+import Button from "../components/UI/Button";
+
+const suggestions = [
+  { to: "/features", icon: LuSparkles, label: "See what ULO can do" },
+  { to: "/competition", icon: LuTrophy, label: "Quiz competition" },
+  { to: "/help", icon: LuCircleHelp, label: "Help centre" },
+];
 
 export default function NotFound() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md text-center">
-        
-        {/* Playful Error Icon / Text */}
-        <p className="text-base font-semibold text-yellow-600">404</p>
-        <h1 className="mt-2 text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
-          Page not found.
-        </h1>
-        <p className="mt-4 text-base text-gray-500">
-          Sorry, we couldn't find the page you're looking for. It might have been moved or deleted.
-        </p>
-
-        {/* Action Buttons */}
-        <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4 px-4 sm:px-0">
-          <button
-            onClick={() => navigate(-1)} // Goes back to the previous page in history
-            className="w-full sm:w-auto inline-flex justify-center items-center px-6 py-3 border border-gray-300 shadow-sm text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+    <>
+      <Seo title="Page not found" noindex />
+      <section className="relative overflow-hidden py-20 md:py-28">
+        <div aria-hidden="true" className="absolute -top-24 left-1/2 h-[26rem] w-[26rem] -translate-x-1/2 rounded-full bg-brand-100" />
+        <div className="container-page relative text-center">
+          <p
+            aria-hidden="true"
+            className="mx-auto mb-6 inline-flex h-28 w-48 items-center justify-center rounded-[2rem] border-2 border-ink-900 bg-brand-400 text-6xl font-extrabold shadow-press"
           >
-            &larr; Go Back
-          </button>
-          
-          <Link
-            to="/"
-            className="w-full sm:w-auto inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-bold rounded-lg shadow-sm text-gray-900 bg-yellow-400 hover:bg-yellow-500 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
-          >
-            Take me Home
-          </Link>
-        </div>
-
-        {/* Optional: Support Link */}
-        <div className="mt-10">
-          <p className="text-sm text-gray-500">
-            Think this is a mistake?{' '}
-            <Link to="/contact" className="font-medium text-yellow-600 hover:text-yellow-500 transition-colors">
-              Contact Support
-            </Link>
+            404
           </p>
-        </div>
+          <h1 className="text-4xl font-extrabold tracking-tight text-balance md:text-6xl">
+            Oops! This page skipped class. 🙈
+          </h1>
+          <p className="mx-auto mt-5 max-w-lg text-lg leading-relaxed text-ink-600">
+            We couldn't find the page you were looking for. It may have moved, or the link might be mistyped.
+          </p>
 
-      </div>
-    </div>
+          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <Button variant="outline" onClick={() => navigate(-1)}>
+              <LuArrowLeft className="h-5 w-5" aria-hidden="true" /> Go back
+            </Button>
+            <Button to="/">
+              <LuHouse className="h-5 w-5" aria-hidden="true" /> Take me home
+            </Button>
+          </div>
+
+          <div className="mx-auto mt-14 max-w-2xl">
+            <p className="mb-4 text-sm font-bold text-ink-500">Or try one of these:</p>
+            <ul className="grid gap-3 sm:grid-cols-3">
+              {suggestions.map(({ to, icon: Icon, label }) => (
+                <li key={to}>
+                  <Link
+                    to={to}
+                    className="flex h-full items-center gap-3 rounded-2xl border border-ink-200 bg-white p-4 text-left font-bold transition hover:-translate-y-0.5 hover:border-ink-900"
+                  >
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-100">
+                      <Icon className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

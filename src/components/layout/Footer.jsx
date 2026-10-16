@@ -35,6 +35,7 @@ const buildColumns = (general) => [
       { to: "/contact", label: "Contact" },
       { to: "/help", label: "Help & FAQs" },
       { to: "/privacy", label: "Privacy policy" },
+      { to: "/privacy#terms", label: "Terms of use" },
     ],
   },
 ];

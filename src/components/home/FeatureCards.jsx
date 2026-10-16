@@ -1,32 +1,34 @@
 import { Link } from "react-router-dom";
-import { LuArrowRight, LuChartLine, LuFileText, LuMessageCircle, LuTimer, LuZap } from "react-icons/lu";
+import { LuArrowRight, LuChartLine, LuSparkles, LuTimer, LuTrophy, LuZap } from "react-icons/lu";
 import Reveal from "../UI/Reveal";
 import SectionHeading from "../UI/SectionHeading";
+import AgeTag from "../UI/AgeTag";
 
 const features = [
   {
-    icon: LuMessageCircle,
-    title: "AI Chat Tutor",
-    desc: "Ask anything, any time. Get patient, step-by-step explanations that actually make sense — no judgement, no waiting for office hours.",
-    points: ["All your school subjects", "Explains like a friend", "Available 24/7"],
-  },
-  {
-    icon: LuFileText,
-    title: "Question Generator",
-    desc: "Snap your notebook or upload a PDF, and ULO turns it into exam-style questions so you can test yourself on exactly what you studied.",
-    points: ["Photos, PDFs & docs", "Objective & theory", "Instant answers"],
-  },
-  {
     icon: LuTimer,
-    title: "Exam Simulator",
-    desc: "Practise under real exam conditions — the format, the timer, the pressure — so the real thing feels familiar.",
+    title: "Exam practice",
+    desc: "Practise with WAEC, JAMB and NECO-style questions and sit timed mock exams, so the real thing already feels familiar.",
     points: ["WAEC, JAMB & NECO", "Timed like the real exam", "Builds speed & calm"],
   },
   {
+    icon: LuTrophy,
+    title: "Quizzes & competitions",
+    desc: "Join friendly quiz competitions, keep your streak going and see how you rank against other students.",
+    points: ["Monthly competitions", "Leaderboards", "Badges & streaks"],
+  },
+  {
     icon: LuChartLine,
-    title: "Progress Tracker",
+    title: "Progress tracker",
     desc: "See your strengths and weak spots at a glance, so every study session goes where it counts most.",
-    points: ["Topic-by-topic scores", "Spot weak areas", "Watch yourself improve"],
+    points: ["Scores by subject", "Spot weak areas", "Watch yourself improve"],
+  },
+  {
+    icon: LuSparkles,
+    title: "AI study tools",
+    adult: true,
+    desc: "Chat or talk with a patient AI tutor, and turn your notes or documents into practice exams in seconds.",
+    points: ["Chat & voice tutor", "Exams from your notes", "Step-by-step help"],
   },
 ];
 
@@ -41,11 +43,11 @@ const FeatureCards = () => (
             Everything you need to <span className="highlight">ace it</span>
           </>
         }
-        intro="Four simple tools that work together — like having a tutor, a question bank and an exam hall in your pocket."
+        intro="Simple tools that work together — like having a question bank, an exam hall and a study coach in your pocket."
       />
 
       <div className="grid gap-6 md:grid-cols-2">
-        {features.map(({ icon: Icon, title, desc, points }, i) => (
+        {features.map(({ icon: Icon, title, desc, points, adult }, i) => (
           <Reveal
             key={title}
             delay={i * 80}
@@ -54,7 +56,10 @@ const FeatureCards = () => (
             <span className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-400 text-ink-900 transition-transform duration-300 ease-[var(--ease-bounce)] group-hover:-rotate-6 group-hover:scale-110">
               <Icon className="h-7 w-7" aria-hidden="true" />
             </span>
-            <h3 className="text-2xl font-extrabold text-ink-900">{title}</h3>
+            <h3 className="flex flex-wrap items-center gap-2 text-2xl font-extrabold text-ink-900">
+              {title}
+              {adult && <AgeTag />}
+            </h3>
             <p className="mt-3 leading-relaxed text-ink-600">{desc}</p>
             <ul className="mt-6 flex flex-wrap gap-2">
               {points.map((p) => (

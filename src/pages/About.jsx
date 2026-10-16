@@ -1,253 +1,311 @@
-const stats = [
-  { value: "50k+", label: "Active Students" },
-  { value: "1.2M", label: "Questions Solved" },
-  { value: "95%", label: "Exam Pass Rate" },
-  { value: "24/7", label: "AI Availability" },
+import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import {
+  LuArrowRight,
+  LuEye,
+  LuHeartHandshake,
+  LuLightbulb,
+  LuRocket,
+  LuShieldCheck,
+  LuSmile,
+  LuSparkles,
+  LuUsers,
+  LuWifiOff,
+} from "react-icons/lu";
+import Seo from "../components/Seo";
+import FounderSpotlight from "../components/about/FounderSpotlight";
+import CtaBand from "../components/home/CtaBand";
+import Button from "../components/UI/Button";
+import PageHero from "../components/UI/PageHero";
+import Reveal from "../components/UI/Reveal";
+import SectionHeading from "../components/UI/SectionHeading";
+import { useSiteContent } from "../content/context";
+import { SITE } from "../config/site";
+
+const problems = [
+  {
+    title: "Private lessons are expensive",
+    desc: "Good tutors cost more than most families can afford every week.",
+  },
+  {
+    title: "Help isn't there at midnight",
+    desc: "Questions pop up when you're studying alone — not during office hours.",
+  },
+  {
+    title: "Exam day feels unfamiliar",
+    desc: "Many students sit WAEC or JAMB without ever practising under real conditions.",
+  },
 ];
 
 const values = [
   {
-    icon: "fas fa-lightbulb",
-    iconColor: "text-purple-500",
-    border: "border-purple-500",
-    title: "Innovation",
-    desc: "We constantly push the boundaries of what AI can do in education, turning sci-fi into study tools.",
+    icon: LuLightbulb,
+    title: "Curiosity first",
+    desc: "We build tools that make students want to ask “why?” — understanding beats memorising.",
   },
   {
-    icon: "fas fa-users",
-    iconColor: "text-yellow-400",
-    border: "border-yellow-400",
-    title: "Inclusivity",
-    desc: "We build for everyone. Our tools are designed to be accessible, low-data, and easy to use.",
+    icon: LuWifiOff,
+    title: "Built for everyone",
+    desc: "Affordable and simple to use, so where you live never limits how well you learn.",
   },
   {
-    icon: "fas fa-shield-alt",
-    iconColor: "text-blue-500",
-    border: "border-blue-500",
-    title: "Integrity",
-    desc: "We prioritize data privacy and academic honesty. We help students learn, not just pass.",
+    icon: LuShieldCheck,
+    title: "Honest learning",
+    desc: "We protect students' data and help them truly learn — not just chase answers.",
+  },
+  {
+    icon: LuSmile,
+    title: "Kind by default",
+    desc: "No question is too basic. ULO is patient, encouraging and always on your side.",
   },
 ];
 
-const team = [
-  {
-    name: "Emmanuel Audu",
-    role: "CEO & Founder",
-    img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-  },
-  {
-    name: "Amaka Chukwu",
-    role: "Head of Product",
-    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-  },
-];
+const initials = (name) =>
+  name
+    .split(" ")
+    .map((p) => p[0])
+    .join("")
+    .slice(0, 2);
 
-const About = () => (
-  <>
-    {/* ─── Hero ─── */}
-    <section className="relative pt-40 pb-20 bg-white overflow-hidden">
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-pulse pointer-events-none" />
-      <div className="absolute top-20 left-0 w-[400px] h-[400px] bg-yellow-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 pointer-events-none" />
+const About = () => {
+  const { about } = useSiteContent();
+  const stats = (about.stats || []).filter((s) => s.value && s.label);
+  const founder = about.founder?.name ? about.founder : null;
+  const team = (about.team || []).filter((m) => m.name && m.name !== founder?.name);
+  const showTeam = team.length > 0 || about.hiring?.enabled;
 
-      <div className="container mx-auto px-6 lg:px-12 text-center relative z-10 fade-in-up">
-        <span className="text-purple-600 font-bold tracking-wider uppercase text-sm mb-4 block">
-          Our Story
-        </span>
-        <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 mb-6 leading-tight">
-          We Are Building the <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-yellow-500">
-            Brain of Education
-          </span>
-        </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-10">
-          ULO AI is on a mission to democratize academic success by giving every
-          student a personalized AI tutor in their pocket.
-        </p>
-      </div>
-    </section>
-
-    {/* ─── Stats strip ─── */}
-    <div className="bg-gray-900 py-12 text-white">
-      <div className="container mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-700">
-          {stats.map((s) => (
-            <div key={s.label}>
-              <h3 className="text-4xl font-bold text-yellow-400">{s.value}</h3>
-              <p className="text-gray-400 text-sm mt-2">{s.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-
-    {/* ─── Mission / Vision ─── */}
-    <section className="py-24 bg-white">
-      <div className="container mx-auto px-6 lg:px-12">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div className="grid grid-cols-2 gap-4 fade-in-up">
-            <img
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-              className="rounded-2xl shadow-lg mt-8 w-full h-64 object-cover"
-              alt="Students collaborating"
-            />
-            <img
-              src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-              className="rounded-2xl shadow-lg w-full h-64 object-cover"
-              alt="Learning"
-            />
-          </div>
-
-          <div className="fade-in-up anim-delay-100">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Empowering Africa's Next Generation
-            </h2>
-
-            <div className="space-y-8">
-              <div className="flex gap-4">
-                <div className="w-12 h-12 flex-shrink-0 bg-purple-100 rounded-full flex items-center justify-center text-purple-600">
-                  <i className="fas fa-rocket text-xl" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900">
-                    Our Mission
-                  </h3>
-                  <p className="text-gray-600 mt-2">
-                    To revolutionize the learning experience by equipping
-                    students with intelligent, affordable tools that simplify
-                    complex subjects.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4">
-                <div className="w-12 h-12 flex-shrink-0 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600">
-                  <i className="fas fa-eye text-xl" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900">
-                    Our Vision
-                  </h3>
-                  <p className="text-gray-600 mt-2">
-                    To become the leading AI education platform, ensuring that
-                    geography and financial status never dictate a student's
-                    academic potential.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    {/* ─── Core Values ─── */}
-    <section className="py-24 bg-gray-50">
-      <div className="container mx-auto px-6 lg:px-12">
-        <div className="text-center mb-16 fade-in-up">
-          <h2 className="text-3xl font-bold text-gray-900">Our Core Values</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-purple-500 to-yellow-400 mx-auto mt-4 rounded-full" />
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {values.map((v, i) => (
-            <div
-              key={v.title}
-              className={`bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 border-t-4 ${v.border} fade-in-up anim-delay-${(i + 1) * 100}`}
-            >
-              <i className={`${v.icon} text-4xl ${v.iconColor} mb-6`} />
-              <h3 className="text-xl font-bold mb-3">{v.title}</h3>
-              <p className="text-gray-600">{v.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    {/* ─── Team ─── */}
-    <section className="py-24 bg-white">
-      <div className="container mx-auto px-6 lg:px-12 text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-12">
-          Meet The Minds Behind ULO
-        </h2>
-
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10 max-w-5xl mx-auto">
-          {team.map((m, i) => (
-            <div
-              key={m.name}
-              className={`group fade-in-up anim-delay-${(i + 1) * 100}`}
-            >
-              <div className="relative overflow-hidden rounded-2xl mb-4 shadow-lg">
-                <img
-                  src={m.img}
-                  alt={m.name}
-                  className="w-full h-80 object-cover transform group-hover:scale-110 transition duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end justify-center pb-6">
-                  <div className="flex space-x-4 text-white">
-                    <a href="#" className="hover:text-yellow-400">
-                      <i className="fab fa-linkedin text-xl" />
-                    </a>
-                    <a href="#" className="hover:text-yellow-400">
-                      <i className="fab fa-twitter text-xl" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <h3 className="text-xl font-bold text-gray-900">{m.name}</h3>
-              <p className="text-purple-600 font-medium">{m.role}</p>
-            </div>
-          ))}
-
-          {/* Join card */}
-          <div className="flex flex-col justify-center items-center bg-gray-50 rounded-2xl border-2 border-dashed border-gray-300 p-6 hover:border-yellow-400 transition cursor-pointer fade-in-up anim-delay-300">
-            <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 mb-4">
-              <i className="fas fa-plus text-2xl" />
-            </div>
-            <h3 className="text-lg font-bold text-gray-900">Join Our Team</h3>
-            <p className="text-sm text-gray-500 mt-2 mb-4">
-              We are hiring developers &amp; designers.
-            </p>
-            <a href="#" className="text-purple-600 font-bold hover:underline">
-              View Openings →
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    {/* ─── CTA ─── */}
-    <section className="py-20 bg-gradient-to-r from-purple-600 to-indigo-700 relative overflow-hidden">
-      <div
-        className="absolute inset-0 opacity-10 pointer-events-none"
-        style={{
-          backgroundImage:
-            "url('https://www.transparenttextures.com/patterns/cubes.png')",
+  return (
+    <>
+      <Seo
+        title="About us"
+        description="ULO AI is on a mission to help every Nigerian student prepare for exams with confidence — with practice exams, quiz competitions and study tools they can actually afford."
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          name: `About ${SITE.name}`,
+          url: `${SITE.url}/about`,
+          mainEntity: {
+            "@type": "Organization",
+            name: SITE.name,
+            url: SITE.url,
+            ...(founder && {
+              founder: {
+                "@type": "Person",
+                name: founder.name,
+                jobTitle: founder.role,
+                ...(founder.photo && { image: new URL(founder.photo, SITE.url).href }),
+                sameAs: Object.values(founder.socials || {}).filter(Boolean),
+              },
+            }),
+          },
         }}
       />
-      <div className="container mx-auto px-6 text-center relative z-10 text-white">
-        <h2 className="text-4xl font-bold mb-6">
-          Ready to Transform Your Learning?
-        </h2>
-        <p className="text-lg text-purple-100 max-w-2xl mx-auto mb-8">
-          Join thousands of students who are acing their exams with ULO AI.
-        </p>
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <a
-            href="#"
-            className="px-8 py-4 bg-yellow-400 text-gray-900 rounded-full font-bold hover:bg-yellow-300 transition shadow-lg transform hover:-translate-y-1"
-          >
-            Download App
-          </a>
-          <a
-            href="/contact"
-            className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-bold hover:bg-white hover:text-purple-600 transition"
-          >
-            Contact Sales
-          </a>
+
+      <PageHero
+        eyebrow="Our story"
+        icon={LuHeartHandshake}
+        title={
+          <>
+            We're building the study buddy we <span className="highlight">wish we had.</span>
+          </>
+        }
+        intro="ULO AI gives every student a friendly way to practise, compete and prepare for exams — so where you live or what you can afford never decides how well you do."
+      />
+
+      {/* The problem */}
+      <section className="bg-white py-20 md:py-28">
+        <div className="container-page grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+          <Reveal>
+            <h2 className="text-3xl leading-tight font-extrabold tracking-tight text-balance md:text-[2.75rem]">
+              Brilliant students shouldn't be held back by circumstance.
+            </h2>
+            <div className="mt-6 space-y-4 text-lg leading-relaxed text-ink-600">
+              <p>
+                Across Nigeria, millions of students prepare for life-changing exams like WAEC, JAMB and NECO. Many of
+                them work incredibly hard — but too often, the difference between a good result and a great one comes
+                down to who could afford extra help.
+              </p>
+              <p>
+                We started ULO to change that. By combining AI with a deep respect for how students actually learn,
+                we're making world-class study support friendly, affordable and available any time of day.
+              </p>
+            </div>
+          </Reveal>
+
+          <ul className="space-y-4">
+            {problems.map((p, i) => (
+              <Reveal
+                as="li"
+                key={p.title}
+                delay={i * 100}
+                className="flex gap-4 rounded-[2rem] border border-ink-200 bg-paper p-6"
+              >
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ink-900 text-sm font-extrabold text-brand-400">
+                  {i + 1}
+                </span>
+                <span>
+                  <span className="block text-lg font-extrabold">{p.title}</span>
+                  <span className="mt-1 block leading-relaxed text-ink-600">{p.desc}</span>
+                </span>
+              </Reveal>
+            ))}
+          </ul>
         </div>
-      </div>
-    </section>
-  </>
-);
+      </section>
+
+      {founder && <FounderSpotlight founder={founder} />}
+
+      {/* Mission & vision */}
+      <section className="bg-white py-20 md:py-28">
+        <div className="container-page grid gap-6 md:grid-cols-2">
+          <Reveal className="rounded-[2.5rem] border-2 border-ink-900 bg-brand-400 p-8 shadow-press md:p-12">
+            <span className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-ink-900 text-brand-400">
+              <LuRocket className="h-7 w-7" aria-hidden="true" />
+            </span>
+            <h2 className="text-sm font-extrabold tracking-wider uppercase">Our mission</h2>
+            <p className="mt-3 text-2xl leading-snug font-extrabold md:text-3xl">
+              To make learning simpler and exam success reachable for every student, with intelligent tools they can
+              actually afford.
+            </p>
+          </Reveal>
+          <Reveal delay={120} className="rounded-[2.5rem] bg-ink-900 p-8 text-white md:p-12">
+            <span className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-400 text-ink-900">
+              <LuEye className="h-7 w-7" aria-hidden="true" />
+            </span>
+            <h2 className="text-sm font-extrabold tracking-wider text-brand-400 uppercase">Our vision</h2>
+            <p className="mt-3 text-2xl leading-snug font-extrabold md:text-3xl">
+              An Africa where geography and income never decide a student's academic potential.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Stats — admin-managed, hidden until real numbers are added */}
+      {stats.length > 0 && (
+        <section className="border-y-2 border-ink-900 bg-brand-400 py-12">
+          <dl className="container-page grid grid-cols-2 gap-8 text-center md:grid-cols-4">
+            {stats.map((s) => (
+              <div key={s.label}>
+                <dd className="text-4xl font-extrabold tracking-tight md:text-5xl">{s.value}</dd>
+                <dt className="mt-1 font-semibold text-ink-800">{s.label}</dt>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
+
+      {/* Values */}
+      <section className="py-20 md:py-28">
+        <div className="container-page">
+          <SectionHeading eyebrow="What we believe" icon={LuSparkles} title="The values behind everything we build" />
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {values.map(({ icon: Icon, title, desc }, i) => (
+              <Reveal
+                key={title}
+                delay={i * 80}
+                className="group rounded-[2rem] border border-ink-200 bg-white p-7 transition hover:-translate-y-1 hover:border-ink-900"
+              >
+                <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-400 transition-transform group-hover:-rotate-6">
+                  <Icon className="h-6 w-6" aria-hidden="true" />
+                </span>
+                <h3 className="text-xl font-extrabold">{title}</h3>
+                <p className="mt-2 leading-relaxed text-ink-600">{desc}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Team */}
+      {showTeam && (
+        <section className="bg-brand-50 py-20 md:py-28">
+          <div className="container-page">
+            <SectionHeading
+              eyebrow="The team"
+              icon={LuUsers}
+              title="The people behind ULO"
+              intro="A small, passionate team of builders and educators who believe every student deserves great support."
+            />
+            <div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-6">
+              {team.map((m, i) => (
+                <Reveal
+                  as="figure"
+                  key={m.name}
+                  delay={i * 100}
+                  className="w-full max-w-[17rem] overflow-hidden rounded-[2rem] border-2 border-ink-900 bg-white shadow-press"
+                >
+                  {m.photo ? (
+                    <img
+                      src={m.photo}
+                      alt={`${m.name}, ${m.role}`}
+                      loading="lazy"
+                      className="aspect-[4/5] w-full object-cover object-top"
+                    />
+                  ) : (
+                    <div className="flex aspect-[4/5] w-full items-center justify-center bg-brand-400 text-6xl font-extrabold">
+                      {initials(m.name)}
+                    </div>
+                  )}
+                  <figcaption className="flex items-center justify-between gap-3 p-5">
+                    <span>
+                      <span className="block text-lg font-extrabold">{m.name}</span>
+                      <span className="block text-sm font-semibold text-ink-500">{m.role}</span>
+                    </span>
+                    <span className="flex gap-1.5">
+                      {m.linkedin && (
+                        <a
+                          href={m.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${m.name} on LinkedIn`}
+                          className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-100 hover:bg-brand-400"
+                        >
+                          <FaLinkedinIn className="h-4 w-4" aria-hidden="true" />
+                        </a>
+                      )}
+                      {m.x && (
+                        <a
+                          href={m.x}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`${m.name} on X`}
+                          className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-100 hover:bg-brand-400"
+                        >
+                          <FaXTwitter className="h-4 w-4" aria-hidden="true" />
+                        </a>
+                      )}
+                    </span>
+                  </figcaption>
+                </Reveal>
+              ))}
+
+              {about.hiring?.enabled && (
+                <Reveal
+                  delay={team.length * 100}
+                  className="flex w-full max-w-[17rem] flex-col items-start justify-center rounded-[2rem] border-2 border-dashed border-ink-300 bg-white p-7"
+                >
+                  <span className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-100">
+                    <LuSparkles className="h-7 w-7" aria-hidden="true" />
+                  </span>
+                  <h3 className="text-xl font-extrabold">Join the team</h3>
+                  <p className="mt-2 leading-relaxed text-ink-600">{about.hiring.text}</p>
+                  <Button
+                    {...(about.hiring.linkUrl ? { href: about.hiring.linkUrl } : { to: "/contact?topic=careers" })}
+                    variant="soft"
+                    size="sm"
+                    className="mt-5"
+                  >
+                    Get in touch <LuArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Button>
+                </Reveal>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <CtaBand />
+    </>
+  );
+};
 
 export default About;

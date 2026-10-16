@@ -130,3 +130,44 @@ export const ProgressMock = () => (
     </div>
   </Card>
 );
+
+export const LeaderboardMock = () => (
+  <Card label="Illustration of a quiz leaderboard with badges and a daily streak">
+    <div className="mb-5 flex items-center justify-between">
+      <div>
+        <p className="text-sm font-semibold text-ink-500">Quiz challenge</p>
+        <p className="text-xl font-extrabold">Leaderboard</p>
+      </div>
+      <span className="rounded-full bg-ink-900 px-3 py-1 text-sm font-bold text-brand-400">🔥 6-day streak</span>
+    </div>
+    <ol className="space-y-2">
+      {[
+        ["1", "Tobi A.", "980"],
+        ["2", "Ngozi E.", "940"],
+        ["3", "You", "915"],
+        ["4", "Musa K.", "870"],
+      ].map(([rank, name, pts]) => {
+        const you = name === "You";
+        return (
+          <li
+            key={rank}
+            className={`flex items-center gap-3 rounded-2xl px-4 py-2.5 ${
+              you ? "border-2 border-ink-900 bg-brand-400" : "bg-ink-50"
+            }`}
+          >
+            <span className="w-5 font-extrabold">{rank}</span>
+            <span className="flex-1 font-semibold">{name}</span>
+            <span className="text-sm font-bold">{pts} pts</span>
+          </li>
+        );
+      })}
+    </ol>
+    <div className="mt-5 flex flex-wrap gap-2 text-xs font-bold">
+      {["🏅 First quiz", "⚡ Speedy", "🎯 90% club"].map((b) => (
+        <span key={b} className="rounded-full bg-brand-100 px-3 py-1.5">
+          {b}
+        </span>
+      ))}
+    </div>
+  </Card>
+);

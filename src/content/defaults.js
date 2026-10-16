@@ -7,11 +7,15 @@
  * Firestore is unreachable or a field hasn't been filled in yet.
  * Keep the shape in sync with ulo-admin's src/types/siteContent.ts.
  */
+import { DEFAULT_HELP } from "./helpDefaults";
+
 export const DEFAULT_CONTENT = {
   general: {
     email: "support@uloai.com",
     phone: "+234 906 161 6524",
     whatsappNumber: "2349061616524",
+    supportHours: "Mon – Fri, 8am – 5pm (WAT)",
+    location: "Lagos, Nigeria (remote-first team)",
     whatsappChannel: "https://whatsapp.com/channel/0029Vb7CoKm1t90g7JR9Po2E",
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.axogenesis.ulo_ai",
     appStoreUrl: "",
@@ -88,28 +92,48 @@ export const DEFAULT_CONTENT = {
     ],
   },
 
+  about: {
+    /** Real, verifiable numbers only — the stats strip hides when empty. */
+    stats: [],
+    /** Founder spotlight — the large profile on the About page. */
+    founder: {
+      name: "Emmanuel Audu",
+      role: "Founder & CEO, ULO AI",
+      photo: "/img/emmanuel-audu.jpg",
+      bio: "Emmanuel founded ULO AI so that every Nigerian student can prepare for exams with confidence, whatever their background. He leads the product and the team building ULO's practice exams, quiz competitions and AI study tools.",
+      quote: "",
+      /** Social profiles — only filled ones are shown. */
+      socials: {
+        linkedin: "https://www.linkedin.com/in/emmanuel-audu-5410a141b",
+        x: "",
+        threads: "https://www.threads.com/@justinemmanuel_01",
+        instagram: "https://www.instagram.com/justinemmanuel_01",
+        facebook: "",
+        tiktok: "",
+        website: "",
+      },
+    },
+    /** Other team members (the founder is shown separately above). */
+    team: [],
+    hiring: {
+      enabled: false,
+      text: "We're always happy to meet talented developers, designers and educators.",
+      linkUrl: "",
+    },
+  },
+
+  help: DEFAULT_HELP,
+
   testimonials: {
     items: [],
   },
 
   faqs: {
     items: [
-      {
-        q: "Is ULO AI free to use?",
-        a: "Yes! The free plan gives you the Exam Simulator and the AI chat tutor. Premium unlocks unlimited question generation and deeper performance analytics.",
-      },
-      {
-        q: "Which exams does ULO AI help with?",
-        a: "WAEC, JAMB and NECO, plus Post-UTME and general university entrance tests. We're adding more all the time.",
-      },
-      {
-        q: "Can I use the app offline?",
-        a: "The AI features need an internet connection, but practice exams you've downloaded can be taken offline and will sync when you're back online.",
-      },
-      {
-        q: "How do I turn my notes into questions?",
-        a: "Take a photo of your notebook or upload a PDF or Word document in the app. ULO reads it and creates practice questions for you in seconds.",
-      },
+      { q: "Is ULO AI free to use?", a: "Yes, it's free to download and you can start practising straight away. Premium unlocks extra features and higher limits — see the details inside the app." },
+      { q: "Which exams does ULO AI help with?", a: "WAEC, JAMB and NECO — with timed practice tests and mock exams for each." },
+      { q: "Who can use the AI tutor?", a: "The AI features (chat and voice tutor, Image Studio and creating tests from your notes) are for users aged 18 and over, because of our AI provider's terms. Practice exams, quizzes, competitions and progress tracking are open to every student." },
+      { q: "Is ULO AI available on iPhone?", a: "ULO AI is available on Android through Google Play today. Join our WhatsApp channel to hear as soon as the iPhone version is ready." },
     ],
   },
 };

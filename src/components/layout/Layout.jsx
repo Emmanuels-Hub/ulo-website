@@ -9,11 +9,14 @@ import AnnouncementBar from "./AnnouncementBar";
  * Scrolls to top on navigation and offers a skip link for keyboard users.
  */
 const Layout = () => {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
+  /* New page → top; links with #anchor → that section */
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    const target = hash && document.getElementById(decodeURIComponent(hash.slice(1)));
+    if (target) target.scrollIntoView();
+    else window.scrollTo(0, 0);
+  }, [pathname, hash]);
 
   return (
     <>

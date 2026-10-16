@@ -1,158 +1,209 @@
 import { useState } from "react";
+import { FaWhatsapp } from "react-icons/fa6";
+import { LuArrowRight, LuCircleAlert, LuCircleCheck, LuLoaderCircle, LuMail } from "react-icons/lu";
+import { useSiteContent } from "../../content/context";
+import Button from "./Button";
+
+const inputClass =
+  "w-full rounded-2xl border-2 border-ink-200 bg-white px-4 py-3 text-ink-900 placeholder:text-ink-400 transition focus:border-ink-900 focus:outline-none aria-[invalid=true]:border-danger-600";
+
+/* Applications are delivered through the same endpoint as the Contact form,
+   with every answer included in the message body. */
+const buildPayload = (topic, fields, values) => {
+  const name =
+    values.name || values.fullName || [values.firstName, values.lastName].filter(Boolean).join(" ") || "Unknown";
+  const emailField = fields.find((f) => f.type === "email");
+  const org = values.institution || values.organization || values.company || values.university || "";
+  const lines = fields.filter((f) => values[f.name]).map((f) => `${f.label}: ${values[f.name]}`);
+  return {
+    name,
+    email: emailField ? values[emailField.name] : "",
+    subject: `[Partnership · ${topic}]${org ? ` ${org}` : ""}`,
+    message: lines.join("\n"),
+  };
+};
 
 /**
- * PartnerForm — reusable partnership application form.
- *
- * Props:
- *  sidebarTitle    – heading for the left sidebar
- *  sidebarItems    – array of { icon, text } shown in sidebar
- *  formTitle       – heading inside the form card
- *  fields          – array of { name, label, type, placeholder, required, options (for select) }
- *  submitLabel     – button label (default "Submit Application")
- *  accentClass     – Tailwind bg class for the sidebar (default 'bg-purple-900')
- *  onSubmit        – optional custom submit handler (receives formData object)
+ * PartnerForm — partnership application form.
+ *   topic        – short label used in the email subject, e.g. "Institution"
+ *   fields       – [{ name, label, type, placeholder, required, options, full }]
+ *   sidebarTitle / sidebarItems ([{ icon, text }]) – reasons to apply, shown beside the form
  */
 const PartnerForm = ({
-  sidebarTitle = "Why Partner With Us?",
+  topic = "Partner",
+  sidebarTitle = "Why partner with us?",
   sidebarItems = [],
-  formTitle = "Apply to Partner",
+  formTitle = "Tell us about you",
   fields = [],
-  submitLabel = "Submit Application",
-  accentClass = "bg-purple-900",
-  onSubmit,
+  submitLabel = "Send application",
 }) => {
-  const [values, setValues] = useState(() =>
-    Object.fromEntries(fields.map((f) => [f.name, ""])),
-  );
+  const { general } = useSiteContent();
+  const [values, setValues] = useState(() => Object.fromEntries(fields.map((f) => [f.name, ""])));
+  const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | sending | success | error
 
-  const handleChange = (e) =>
+  const update = (e) => {
     setValues((v) => ({ ...v, [e.target.name]: e.target.value }));
+    setErrors((er) => ({ ...er, [e.target.name]: undefined }));
+  };
 
-  const handleSubmit = async (e) => {
+  const validate = () => {
+    const er = {};
+    fields.forEach((f) => {
+      const v = (values[f.name] || "").trim();
+      if (f.required && !v) er[f.name] = "This field is required.";
+      else if (f.type === "email" && v && !/^\S+@\S+\.\S+$/.test(v)) er[f.name] = "Please enter a valid email.";
+    });
+    setErrors(er);
+    return Object.keys(er).length === 0;
+  };
+
+  const submit = async (e) => {
     e.preventDefault();
-    if (onSubmit) {
-      onSubmit(values);
-      return;
-    }
+    if (!validate()) return;
     setStatus("sending");
-    // Default: no-op success simulation
-    setTimeout(() => setStatus("success"), 900);
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/web/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(buildPayload(topic, fields, values)),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-6 lg:px-12">
-        <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col lg:flex-row">
-          {/* ── Sidebar ── */}
-          <aside
-            className={`${accentClass} text-white p-10 lg:w-80 flex-shrink-0`}
+    <div className="mx-auto grid max-w-6xl overflow-hidden rounded-[2.5rem] border-2 border-ink-900 bg-white shadow-press lg:grid-cols-[0.75fr_1.25fr]">
+      {/* Sidebar */}
+      <aside className="flex flex-col bg-brand-400 p-8 md:p-10">
+        <h2 className="text-3xl leading-tight font-extrabold">{sidebarTitle}</h2>
+        <ul className="mt-8 space-y-4">
+          {sidebarItems.map(({ icon: Icon, text }) => (
+            <li key={text} className="flex items-start gap-3">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white">
+                {typeof Icon === "string" ? (
+                  <i className={Icon} aria-hidden="true" />
+                ) : (
+                  Icon && <Icon className="h-5 w-5" aria-hidden="true" />
+                )}
+              </span>
+              <span className="pt-1.5 leading-snug font-semibold">{text}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-auto space-y-2 border-t border-ink-900/15 pt-6 text-sm">
+          <p className="font-bold">Prefer to talk first?</p>
+          <a href={`mailto:${general.email}`} className="flex items-center gap-2 hover:underline">
+            <LuMail className="h-4 w-4" aria-hidden="true" /> {general.email}
+          </a>
+          <a
+            href={`https://wa.me/${general.whatsappNumber}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 hover:underline"
           >
-            <h3 className="text-2xl font-extrabold mb-8">{sidebarTitle}</h3>
-            <ul className="space-y-5">
-              {sidebarItems.map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <i className={`${item.icon} mt-1 text-yellow-400`} />
-                  <span className="text-gray-100 leading-snug">
-                    {item.text}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </aside>
-
-          {/* ── Form ── */}
-          <div className="flex-1 p-10">
-            <h3 className="text-2xl font-extrabold text-gray-900 mb-8">
-              {formTitle}
-            </h3>
-
-            {status === "success" ? (
-              <div className="flex flex-col items-center justify-center py-16 text-center">
-                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
-                  <i className="fas fa-check text-green-600 text-3xl" />
-                </div>
-                <h4 className="text-xl font-bold text-gray-900 mb-2">
-                  Application Submitted!
-                </h4>
-                <p className="text-gray-500">
-                  We'll review your information and reach out soon.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                {/* render fields — auto-layout 2-col for non-textarea */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  {fields.map((f) => {
-                    const base =
-                      "w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 transition";
-                    const full = f.full ? "sm:col-span-2" : "";
-
-                    return (
-                      <div key={f.name} className={full}>
-                        <label className="block text-sm font-semibold text-gray-700 mb-1.5">
-                          {f.label}
-                          {f.required && (
-                            <span className="text-red-500 ml-0.5">*</span>
-                          )}
-                        </label>
-
-                        {f.type === "select" ? (
-                          <select
-                            name={f.name}
-                            value={values[f.name]}
-                            onChange={handleChange}
-                            required={f.required}
-                            className={base}
-                          >
-                            <option value="" disabled>
-                              Select…
-                            </option>
-                            {(f.options || []).map((o) => (
-                              <option key={o.value ?? o} value={o.value ?? o}>
-                                {o.label ?? o}
-                              </option>
-                            ))}
-                          </select>
-                        ) : f.type === "textarea" ? (
-                          <textarea
-                            name={f.name}
-                            value={values[f.name]}
-                            onChange={handleChange}
-                            placeholder={f.placeholder}
-                            required={f.required}
-                            rows={f.rows ?? 4}
-                            className={`${base} resize-none`}
-                          />
-                        ) : (
-                          <input
-                            type={f.type ?? "text"}
-                            name={f.name}
-                            value={values[f.name]}
-                            onChange={handleChange}
-                            placeholder={f.placeholder}
-                            required={f.required}
-                            className={base}
-                          />
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={status === "sending"}
-                  className="w-full bg-purple-900 text-white py-3.5 rounded-xl font-bold hover:bg-yellow-400 hover:text-purple-900 transition transform hover:-translate-y-0.5 disabled:opacity-60"
-                >
-                  {status === "sending" ? "Submitting…" : submitLabel}
-                </button>
-              </form>
-            )}
-          </div>
+            <FaWhatsapp className="h-4 w-4" aria-hidden="true" /> Chat on WhatsApp
+          </a>
         </div>
+      </aside>
+
+      {/* Form */}
+      <div className="p-8 md:p-10">
+        {status === "success" ? (
+          <div className="flex h-full flex-col items-center justify-center py-12 text-center" role="status">
+            <span className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-brand-400">
+              <LuCircleCheck className="h-10 w-10" aria-hidden="true" />
+            </span>
+            <h3 className="text-2xl font-extrabold">Thank you — we've got it! 🎉</h3>
+            <p className="mt-3 max-w-sm leading-relaxed text-ink-600">
+              Someone from our partnerships team will reply by email. We're excited to work with you.
+            </p>
+          </div>
+        ) : (
+          <form onSubmit={submit} noValidate className="space-y-5">
+            <h3 className="text-2xl font-extrabold">{formTitle}</h3>
+
+            {status === "error" && (
+              <p
+                role="alert"
+                className="flex items-start gap-2 rounded-2xl bg-danger-50 p-4 text-sm font-semibold text-danger-600"
+              >
+                <LuCircleAlert className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+                Sorry, that didn't go through. Please try again, or email us at {general.email}.
+              </p>
+            )}
+
+            <div className="grid gap-5 sm:grid-cols-2">
+              {fields.map((f) => {
+                const id = `pf-${f.name}`;
+                const common = {
+                  id,
+                  name: f.name,
+                  value: values[f.name],
+                  onChange: update,
+                  "aria-invalid": !!errors[f.name],
+                  "aria-describedby": errors[f.name] ? `${id}-error` : undefined,
+                };
+                return (
+                  <div key={f.name} className={f.full || f.type === "textarea" ? "sm:col-span-2" : ""}>
+                    <label htmlFor={id} className="mb-2 block text-sm font-bold text-ink-800">
+                      {f.label} {f.required && <span className="text-danger-600">*</span>}
+                    </label>
+                    {f.type === "select" ? (
+                      <select {...common} className={inputClass}>
+                        <option value="" disabled>
+                          Select…
+                        </option>
+                        {(f.options || []).map((o) => (
+                          <option key={o.value ?? o} value={o.value ?? o}>
+                            {o.label ?? o}
+                          </option>
+                        ))}
+                      </select>
+                    ) : f.type === "textarea" ? (
+                      <textarea
+                        {...common}
+                        rows={f.rows ?? 4}
+                        placeholder={f.placeholder}
+                        className={`${inputClass} resize-y`}
+                      />
+                    ) : (
+                      <input
+                        {...common}
+                        type={f.type ?? "text"}
+                        placeholder={f.placeholder}
+                        autoComplete={f.autoComplete}
+                        className={inputClass}
+                      />
+                    )}
+                    {errors[f.name] && (
+                      <p id={`${id}-error`} className="mt-1.5 text-sm font-semibold text-danger-600">
+                        {errors[f.name]}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
+            <Button type="submit" size="lg" className="w-full sm:w-auto" disabled={status === "sending"}>
+              {status === "sending" ? (
+                <>
+                  <LuLoaderCircle className="h-5 w-5 animate-spin" aria-hidden="true" /> Sending…
+                </>
+              ) : (
+                <>
+                  {submitLabel} <LuArrowRight className="h-5 w-5" aria-hidden="true" />
+                </>
+              )}
+            </Button>
+          </form>
+        )}
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -76,8 +76,6 @@ const HelpAndSupport = () => {
   return (
     <>
       <Seo
-        title="Help Centre"
-        description="Answers to common questions about ULO AI — accounts, Premium and billing, practice and exams, performance tracking, competitions, privacy and troubleshooting."
         jsonLd={
           allFaqs.length
             ? {

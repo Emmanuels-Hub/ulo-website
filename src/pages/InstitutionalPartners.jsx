@@ -13,11 +13,6 @@ import { SchoolDashboardMock } from "../components/partners/PartnerVisuals";
 
 const config = {
   path: "/institutional-partners",
-  seo: {
-    title: "For Schools & Universities",
-    description:
-      "Bring ULO AI to your school or university: exam practice and quiz competitions for every student, plus a portal to enrol students, set exams and quizzes, print papers and track results.",
-  },
   hero: {
     icon: LuSchool,
     eyebrow: "For schools & universities",

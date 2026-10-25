@@ -76,8 +76,6 @@ const About = () => {
   return (
     <>
       <Seo
-        title="About us"
-        description="ULO AI is on a mission to help every Nigerian student prepare for exams with confidence — with practice exams, quiz competitions and study tools they can actually afford."
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "AboutPage",

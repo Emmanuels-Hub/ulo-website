@@ -8,11 +8,6 @@ const gradYears = Array.from({ length: 6 }, (_, i) => String(thisYear + i));
 const config = {
   path: "/campus-ambassadors",
   faqTitle: "Questions applicants ask",
-  seo: {
-    title: "Campus Ambassadors",
-    description:
-      "Become a ULO AI Campus Ambassador: lead study sessions and events on your campus, grow your network and build real leadership experience.",
-  },
   hero: {
     icon: LuMegaphone,
     eyebrow: "For university students",

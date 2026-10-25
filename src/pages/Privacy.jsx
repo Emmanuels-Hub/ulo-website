@@ -5,7 +5,7 @@ import Seo from "../components/Seo";
 import PageHero from "../components/UI/PageHero";
 
 /* ⚠️ Legal text — change wording only with care, and bump LAST_UPDATED when you do. */
-const LAST_UPDATED = "January 25, 2024";
+const LAST_UPDATED = "October 16, 2026";
 
 const privacy = {
   id: "privacy",
@@ -155,10 +155,7 @@ const Privacy = () => {
 
   return (
     <>
-      <Seo
-        title="Privacy Policy & Terms"
-        description="How ULO AI collects, uses and protects your information, and the terms for using our app, website and AI features."
-      />
+      <Seo />
 
       <PageHero
         eyebrow={`Last updated: ${LAST_UPDATED}`}

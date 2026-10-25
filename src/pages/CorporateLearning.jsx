@@ -12,11 +12,6 @@ import { TeamAssessmentMock } from "../components/partners/PartnerVisuals";
 
 const config = {
   path: "/corporate-learning",
-  seo: {
-    title: "Corporate Learning",
-    description:
-      "Use ULO AI to run quizzes, assessments and friendly competitions for your team — set up in a web portal, taken on any phone, with results in one place.",
-  },
   hero: {
     icon: LuBriefcase,
     eyebrow: "For companies & teams",

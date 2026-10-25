@@ -16,7 +16,13 @@ import {
 } from "react-icons/lu";
 import Seo from "../components/Seo";
 import CtaBand from "../components/home/CtaBand";
-import { ChatMock, GeneratorMock, LeaderboardMock, ProgressMock, SimulatorMock } from "../components/features/FeatureMocks";
+import {
+  ChatMock,
+  GeneratorMock,
+  LeaderboardMock,
+  ProgressMock,
+  SimulatorMock,
+} from "../components/features/FeatureMocks";
 import AgeTag from "../components/UI/AgeTag";
 import PageHero from "../components/UI/PageHero";
 import Reveal from "../components/UI/Reveal";
@@ -110,10 +116,7 @@ const extras = [
 
 const Features = () => (
   <>
-    <Seo
-      title="Features"
-      description="See everything ULO AI can do: timed WAEC, JAMB and NECO practice exams, quiz competitions with leaderboards, progress tracking, and AI study tools for learners aged 18+."
-    />
+    <Seo />
 
     <PageHero
       eyebrow="Features"

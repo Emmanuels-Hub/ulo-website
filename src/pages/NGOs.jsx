@@ -12,11 +12,6 @@ import { ProgrammeMock } from "../components/partners/PartnerVisuals";
 
 const config = {
   path: "/ngos",
-  seo: {
-    title: "NGOs & Foundations",
-    description:
-      "Partner with ULO AI to help the young people you serve prepare for WAEC, JAMB and NECO — with practice exams, quiz competitions and progress you can report on.",
-  },
   hero: {
     icon: LuHeartHandshake,
     eyebrow: "For NGOs & foundations",

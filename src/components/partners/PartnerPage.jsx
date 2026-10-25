@@ -11,7 +11,7 @@ import SectionHeading from "../UI/SectionHeading";
 /**
  * PartnerPage — shared layout for every partner audience.
  * Pass a config object (see src/content/partners/*.js):
- *   path, seo { title, description }, hero { eyebrow, title, intro, cta, visual },
+ *   path, hero { eyebrow, title, intro, cta, visual },
  *   benefits { title, intro, items[] }, steps { title, items[] },
  *   models? { title, intro, items[] }, form { topic, title, sidebarTitle, sidebarItems, fields, submitLabel },
  *   faqs[]
@@ -23,8 +23,6 @@ const PartnerPage = ({ config: c }) => {
   return (
     <>
       <Seo
-        title={c.seo.title}
-        description={c.seo.description}
         jsonLd={
           c.faqs?.length
             ? {

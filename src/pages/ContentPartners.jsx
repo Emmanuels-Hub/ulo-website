@@ -12,11 +12,6 @@ import { ContentMock } from "../components/partners/PartnerVisuals";
 
 const config = {
   path: "/content-partners",
-  seo: {
-    title: "Content & EdTech Partners",
-    description:
-      "Publishers, authors, creators and EdTech teams: partner with ULO AI to bring your learning content to students preparing for WAEC, JAMB and NECO.",
-  },
   hero: {
     icon: LuBookOpen,
     eyebrow: "For publishers, creators & EdTech",

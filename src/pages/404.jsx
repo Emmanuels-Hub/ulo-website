@@ -16,7 +16,10 @@ export default function NotFound() {
     <>
       <Seo title="Page not found" noindex />
       <section className="relative overflow-hidden py-20 md:py-28">
-        <div aria-hidden="true" className="absolute -top-24 left-1/2 h-[26rem] w-[26rem] -translate-x-1/2 rounded-full bg-brand-100" />
+        <div
+          aria-hidden="true"
+          className="absolute -top-24 left-1/2 h-[26rem] w-[26rem] -translate-x-1/2 rounded-full bg-brand-100"
+        />
         <div className="container-page relative text-center">
           <p
             aria-hidden="true"

@@ -23,7 +23,6 @@ import {
   ProgressMock,
   SimulatorMock,
 } from "../components/features/FeatureMocks";
-import AgeTag from "../components/UI/AgeTag";
 import PageHero from "../components/UI/PageHero";
 import Reveal from "../components/UI/Reveal";
 import SectionHeading from "../components/UI/SectionHeading";
@@ -61,7 +60,6 @@ const features = [
     id: "ai-tutor",
     icon: LuMessageCircle,
     eyebrow: "AI tutor",
-    adult: true,
     title: "A patient tutor who's always awake",
     body: "Stuck late at night? Ask ULO's AI tutor by text or voice. It breaks hard topics into small, friendly steps and keeps explaining until it clicks.",
     points: ["Chat or talk out loud", "Step-by-step working, not just answers", "Ask follow-ups in your own words"],
@@ -71,7 +69,6 @@ const features = [
     id: "exam-creator",
     icon: LuFileText,
     eyebrow: "AI exam creator",
-    adult: true,
     title: "Turn your notes into a practice exam",
     body: "Upload your notes or a document and ULO creates exam-style questions on exactly what you studied — then lets you test yourself straight away.",
     points: ["Upload notes or documents", "Exam-style questions", "Practise immediately"],
@@ -142,7 +139,7 @@ const Features = () => (
     </PageHero>
 
     {/* Feature deep-dives */}
-    {features.map(({ id, icon: Icon, eyebrow, title, body, points, Mock, adult }, i) => (
+    {features.map(({ id, icon: Icon, eyebrow, title, body, points, Mock }, i) => (
       <section key={id} id={id} className={`scroll-mt-24 py-16 md:py-24 ${i % 2 ? "bg-white" : "bg-brand-50"}`}>
         <div className="container-page grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
           <Reveal className={i % 2 ? "lg:order-2" : ""}>
@@ -150,7 +147,6 @@ const Features = () => (
               <span className="inline-flex items-center gap-2 rounded-full bg-ink-900 px-4 py-1.5 text-sm font-bold text-brand-400">
                 <Icon className="h-4 w-4" aria-hidden="true" /> {eyebrow}
               </span>
-              {adult && <AgeTag className="py-1.5" />}
             </div>
             <h2 className="text-3xl leading-tight font-extrabold tracking-tight text-balance md:text-[2.75rem]">
               {title}
@@ -166,11 +162,6 @@ const Features = () => (
                 </li>
               ))}
             </ul>
-            {adult && (
-              <p className="mt-6 text-sm text-ink-500">
-                AI features are available to users aged 18 and over, in line with our AI provider's terms.
-              </p>
-            )}
           </Reveal>
           <Reveal delay={120} className={`flex justify-center ${i % 2 ? "lg:order-1" : ""}`}>
             <Mock />

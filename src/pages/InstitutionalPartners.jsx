@@ -33,7 +33,7 @@ const config = {
       {
         icon: LuGraduationCap,
         title: "Practice for every student",
-        desc: "Students practise WAEC, JAMB and NECO-style questions and sit timed mock exams on their phones. Learners aged 18+ can also use the AI tutor.",
+        desc: "Students practise WAEC, JAMB and NECO-style questions and sit timed mock exams on their phones. Learners can also use the AI tutor.",
       },
       {
         icon: LuClipboardList,

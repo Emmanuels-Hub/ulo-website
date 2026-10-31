@@ -9,7 +9,7 @@ export const SITE = {
   url: "https://uloai.org", // canonical domain — canonical URLs, sitemap & social tags
   tagline: "Your study buddy for WAEC, JAMB & NECO",
   description:
-    "ULO AI helps Nigerian students prepare for WAEC, JAMB and NECO with timed practice exams, quiz competitions and progress tracking — plus AI study tools for learners aged 18+.",
+    "ULO AI helps Nigerian students prepare for WAEC, JAMB and NECO with timed practice exams, quiz competitions and progress tracking — plus AI study tools.",
   ogImage: "/img/og-image.png",
 };
 

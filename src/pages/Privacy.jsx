@@ -61,7 +61,7 @@ const terms = {
       title: "AI Features",
       checks: [
         "The AI tutor, voice tutor and Image Studio are powered by Google's Gemini models through Google Firebase. What you type, say or upload to these features is sent to Google to produce a response.",
-        "You must be 18 years of age or older to use the AI features.",
+        "ULO AI is for adults: you must be 18 years of age or older to use it.",
         "Do not share personal or sensitive information (such as passwords, ID numbers or health details) with the AI features.",
         "AI answers can be wrong. Check important information, and do not use the AI to cheat in exams or assessments.",
         "You must not use the AI features to create harmful, sexual, hateful, violent or illegal content, or to try to get around their safety filters. We may limit or suspend access for misuse.",

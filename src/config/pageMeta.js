@@ -18,12 +18,12 @@ export const PAGE_META = {
   "/": {
     title: "",
     description:
-      "ULO AI helps Nigerian students prepare for WAEC, JAMB and NECO with timed practice exams, quiz competitions and progress tracking — plus AI study tools for learners aged 18+.",
+      "ULO AI helps Nigerian students prepare for WAEC, JAMB and NECO with timed practice exams, quiz competitions and progress tracking — plus AI study tools.",
   },
   "/features": {
     title: "Features",
     description:
-      "See everything ULO AI can do: timed WAEC, JAMB and NECO practice exams, quiz competitions with leaderboards, progress tracking, and AI study tools for learners aged 18+.",
+      "See everything ULO AI can do: timed WAEC, JAMB and NECO practice exams, quiz competitions with leaderboards, progress tracking, and AI study tools.",
   },
   "/competition": {
     title: "Quiz Competition",

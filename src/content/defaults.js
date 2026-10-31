@@ -132,7 +132,7 @@ export const DEFAULT_CONTENT = {
     items: [
       { q: "Is ULO AI free to use?", a: "Yes, it's free to download and you can start practising straight away. Premium unlocks extra features and higher limits — see the details inside the app." },
       { q: "Which exams does ULO AI help with?", a: "WAEC, JAMB and NECO — with timed practice tests and mock exams for each." },
-      { q: "Who can use the AI tutor?", a: "The AI features (chat and voice tutor, Image Studio and creating tests from your notes) are for users aged 18 and over, because of our AI provider's terms. Practice exams, quizzes, competitions and progress tracking are open to every student." },
+      { q: "Who can use the AI tutor?", a: "The AI features (chat and voice tutor, Image Studio and creating tests from your notes) are available to every signed-in ULO learner, next to practice exams, quizzes, competitions and progress tracking. AI answers can sometimes be wrong, so double-check anything important." },
       { q: "Is ULO AI available on iPhone?", a: "ULO AI is available on Android through Google Play today. Join our WhatsApp channel to hear as soon as the iPhone version is ready." },
     ],
   },

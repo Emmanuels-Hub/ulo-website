@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { LuArrowRight, LuChartLine, LuSparkles, LuTimer, LuTrophy, LuZap } from "react-icons/lu";
 import Reveal from "../UI/Reveal";
 import SectionHeading from "../UI/SectionHeading";
-import AgeTag from "../UI/AgeTag";
 
 const features = [
   {
@@ -26,7 +25,6 @@ const features = [
   {
     icon: LuSparkles,
     title: "AI study tools",
-    adult: true,
     desc: "Chat or talk with a patient AI tutor, and turn your notes or documents into practice exams in seconds.",
     points: ["Chat & voice tutor", "Exams from your notes", "Step-by-step help"],
   },
@@ -47,7 +45,7 @@ const FeatureCards = () => (
       />
 
       <div className="grid gap-6 md:grid-cols-2">
-        {features.map(({ icon: Icon, title, desc, points, adult }, i) => (
+        {features.map(({ icon: Icon, title, desc, points }, i) => (
           <Reveal
             key={title}
             delay={i * 80}
@@ -58,7 +56,6 @@ const FeatureCards = () => (
             </span>
             <h3 className="flex flex-wrap items-center gap-2 text-2xl font-extrabold text-ink-900">
               {title}
-              {adult && <AgeTag />}
             </h3>
             <p className="mt-3 leading-relaxed text-ink-600">{desc}</p>
             <ul className="mt-6 flex flex-wrap gap-2">

@@ -27,7 +27,7 @@ const HomeHero = () => (
 
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-pretty text-ink-600 md:text-xl">
           Practise WAEC, JAMB and NECO-style questions, sit timed mock exams and compete in friendly quizzes — right
-          from your phone. Learners aged 18+ also get a patient AI tutor.
+          from your phone, with a patient AI tutor when you get stuck.
         </p>
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">

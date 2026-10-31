@@ -28,7 +28,7 @@ export const DEFAULT_HELP = {
         },
         {
           q: "Who can use the AI features?",
-          a: "The AI tutor (chat and voice), Image Studio and AI exam creation are for users aged 18 and over, because of our AI provider's terms. Everything else — practice exams, quizzes, competitions and progress tracking — is open to all students.",
+          a: "The AI tutor (chat and voice), Image Studio and AI exam creation are available to every signed-in learner, next to practice exams, quizzes, competitions and progress tracking.",
         },
       ],
     },
@@ -89,11 +89,11 @@ export const DEFAULT_HELP = {
         },
         {
           q: "How does the AI tutor work?",
-          a: "Type or speak your question and the AI tutor explains it step by step. It's available to users aged 18 and over. AI answers can sometimes be wrong, so double-check anything important.",
+          a: "Type or speak your question and the AI tutor explains it step by step. AI answers can sometimes be wrong, so double-check anything important.",
         },
         {
           q: "Can ULO create a test from my notes?",
-          a: "Yes — users aged 18 and over can upload notes or a document and ULO will create practice questions from it.",
+          a: "Yes — you can upload notes or a document and ULO will create practice questions from it.",
         },
       ],
     },

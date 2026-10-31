@@ -134,7 +134,7 @@ const config = {
     },
     {
       q: "Can younger students use the AI tutor?",
-      a: "The AI features (AI tutor, Image Studio and AI test creation) are for users aged 18 and over. Practice exams, quizzes, competitions and progress tracking are open to students of every age.",
+      a: "The AI features (AI tutor, Image Studio and AI test creation) are available to signed-in learners, next to practice exams, quizzes, competitions and progress tracking.",
     },
     {
       q: "How do we measure impact?",

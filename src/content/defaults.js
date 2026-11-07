@@ -2,12 +2,13 @@
  * Fallback website content.
  *
  * The live values are edited in the admin dashboard (Website → …) and stored
- * in Firestore `site_content/{general|competition|testimonials|faqs}`.
+ * in Firestore `site_content/{general|competition|about|help|partners|testimonials|faqs}`.
  * These defaults render instantly (good for SEO) and are used whenever
  * Firestore is unreachable or a field hasn't been filled in yet.
  * Keep the shape in sync with ulo-admin's src/types/siteContent.ts.
  */
 import { DEFAULT_HELP } from "./helpDefaults";
+import { DEFAULT_PARTNERS } from "./partnersDefaults";
 
 export const DEFAULT_CONTENT = {
   general: {
@@ -123,6 +124,9 @@ export const DEFAULT_CONTENT = {
   },
 
   help: DEFAULT_HELP,
+
+  /** Partner-page text, one object per page (see partnersDefaults.js). */
+  partners: DEFAULT_PARTNERS,
 
   testimonials: {
     items: [],

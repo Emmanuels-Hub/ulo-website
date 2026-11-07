@@ -10,83 +10,18 @@ import {
 } from "react-icons/lu";
 import PartnerPage from "../components/partners/PartnerPage";
 import { SchoolDashboardMock } from "../components/partners/PartnerVisuals";
+import { useSiteContent } from "../content/context";
+import { buildPartnerConfig } from "../content/partners";
 
-const config = {
+/* Fixed structure only — all text lives in content/partnersDefaults.js (editable in the admin). */
+const structure = {
   path: "/institutional-partners",
-  hero: {
-    icon: LuSchool,
-    eyebrow: "For schools & universities",
-    title: (
-      <>
-        Better exam results for students. <span className="highlight">More time</span> for teachers.
-      </>
-    ),
-    intro:
-      "ULO AI helps your students practise and prepare for WAEC, JAMB and NECO — while your school portal makes setting exams, running quizzes and tracking results simple.",
-    cta: "Partner with us",
-    visual: SchoolDashboardMock,
-  },
-  benefits: {
-    title: "Everything your school needs in one place",
-    intro: "Tools for students, teachers and administrators — built for the way Nigerian schools work.",
-    items: [
-      {
-        icon: LuGraduationCap,
-        title: "Practice for every student",
-        desc: "Students practise WAEC, JAMB and NECO-style questions and sit timed mock exams on their phones. Learners can also use the AI tutor.",
-      },
-      {
-        icon: LuClipboardList,
-        title: "Exams & quizzes in minutes",
-        desc: "Build tests from your own questions or the ULO question bank, schedule them and let ULO do the marking.",
-      },
-      {
-        icon: LuPrinter,
-        title: "Print-ready papers",
-        desc: "Prefer paper? Export professionally formatted exam papers to print for your classrooms.",
-      },
-      {
-        icon: LuUsers,
-        title: "Students & teachers, organised",
-        desc: "Enrol students, invite teachers and manage who sees what — all from your school portal.",
-      },
-      {
-        icon: LuChartColumn,
-        title: "Clear results",
-        desc: "See performance by student, class and subject, so teachers know exactly who needs extra help.",
-      },
-      {
-        icon: LuTrophy,
-        title: "School competitions",
-        desc: "Run friendly quiz competitions that get students excited about learning.",
-      },
-    ],
-  },
-  steps: {
-    title: "Up and running in four steps",
-    items: [
-      { title: "Say hello", desc: "Tell us about your school using the form below — we'll set up a short call." },
-      {
-        title: "Set up your portal",
-        desc: "Add your school details, student numbers and the people we should contact.",
-      },
-      {
-        title: "Bring everyone in",
-        desc: "Invite your teachers and enrol your students. We help you every step of the way.",
-      },
-      { title: "Teach, test & track", desc: "Create exams and quizzes, follow results and watch confidence grow." },
-    ],
-  },
+  heroIcon: LuSchool,
+  visual: SchoolDashboardMock,
+  benefitIcons: [LuGraduationCap, LuClipboardList, LuPrinter, LuUsers, LuChartColumn, LuTrophy],
+  sidebarIcons: [LuHeadset, LuUsers, LuChartColumn],
   form: {
     topic: "Institution",
-    sidebarTitle: "Let's bring ULO to your school",
-    sidebarItems: [
-      { icon: LuHeadset, text: "A friendly onboarding call for your team" },
-      { icon: LuUsers, text: "Help enrolling teachers and students" },
-      { icon: LuChartColumn, text: "A plan that fits your school's size" },
-    ],
-    formTitle: "Tell us about your institution",
-    submitLabel: "Request a call",
     fields: [
       { name: "firstName", label: "First name", required: true, autoComplete: "given-name" },
       { name: "lastName", label: "Last name", required: true, autoComplete: "family-name" },
@@ -127,26 +62,11 @@ const config = {
       },
     ],
   },
-  faqs: [
-    {
-      q: "Do students need a computer?",
-      a: "No. Students use the ULO AI app on their phones, and teachers and administrators manage everything from the web portal.",
-    },
-    {
-      q: "Can teachers use their own questions?",
-      a: "Yes. Teachers can add their own questions, use the ULO question bank, or mix both — then run tests online or print them.",
-    },
-    {
-      q: "How much does a school partnership cost?",
-      a: "It depends on the number of students and what you need. Fill in the form and we'll put together a plan that fits your school.",
-    },
-    {
-      q: "Do you help us get started?",
-      a: "Yes. Every school gets onboarding support so teachers and administrators feel confident from day one.",
-    },
-  ],
 };
 
-const InstitutionalPartners = () => <PartnerPage config={config} />;
+const InstitutionalPartners = () => {
+  const { partners } = useSiteContent();
+  return <PartnerPage config={buildPartnerConfig(structure, partners.institutional)} />;
+};
 
 export default InstitutionalPartners;
